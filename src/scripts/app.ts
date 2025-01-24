@@ -1,3 +1,5 @@
+import showMessageBox from "./errorHandling.js";
+
 interface TestResponse {
   name: string;
   age: number;
@@ -16,3 +18,11 @@ let endpointTest = async () => {
     console.error("No <h1> element found in the document.");
   }
 };
+
+document.querySelector(".test-button")?.addEventListener("click", () => {
+  showMessageBox("This is an error message", "error");
+});
+
+document.querySelector(".test-button2")?.addEventListener("click", () => {
+  showMessageBox("This is an success message", "success");
+});

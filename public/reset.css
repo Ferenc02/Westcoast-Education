@@ -87,7 +87,7 @@ img:not([alt]) {
 
 /*Makes button more modern*/
 .button {
-  background-color: #3e68ff;
+  /* background-color: #3e68ff; */
   outline: none;
   color: #fff;
   text-decoration: none;
@@ -110,7 +110,7 @@ img:not([alt]) {
   width: 100%;
 }
 .button:hover {
-  background-color: #3c5cd1;
+  /* background-color: #3c5cd1; */
 }
 
 @media screen and (-ms-high-contrast: active) {
