@@ -527,9 +527,11 @@
   .bg-green-100 {
     background-color: var(--color-green-100);
   }
-  .bg-red-200 {
-    background-color: var(--color-red-200);
-  }
+}
+html,
+body {
+  font-family: "Poppins", serif;
+  font-weight: 400;
 }
 @keyframes spin {
   to {
