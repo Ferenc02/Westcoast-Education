@@ -7,7 +7,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "dev:styles": "postcss src/styles.css -o public/styles.css --watch --verbose",
+    "dev:styles": "postcss src/styles/app.css -o public/styles/app.css --watch --verbose",
     "dev:server": "json-server --watch endpoints/db.json",
     "dev:ts": "tsc --watch --preserveWatchOutput",
     "dev": "npm-run-all -p -l dev:*"
