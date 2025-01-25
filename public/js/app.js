@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var _a, _b;
+import { validateUser, setCookie } from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
 let endpointTest = () => __awaiter(void 0, void 0, void 0, function* () {
     let response = yield fetch("http://localhost:3000/test");
@@ -20,9 +20,19 @@ let endpointTest = () => __awaiter(void 0, void 0, void 0, function* () {
         console.error("No <h1> element found in the document.");
     }
 });
-(_a = document.querySelector(".test-button")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
-    showMessageBox("This is an error message", "error");
+let init = () => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b, _c;
+    let checkAuthToken = yield validateUser();
+    console.log(checkAuthToken);
+    (_a = document.querySelector(".test-button")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
+        showMessageBox("This is an error message", "error");
+    });
+    (_b = document.querySelector(".test-button2")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
+        showMessageBox("This is an success message", "success");
+    });
+    (_c = document.querySelector(".test-button3")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => {
+        setCookie();
+        console.log("hi?");
+    });
 });
-(_b = document.querySelector(".test-button2")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
-    showMessageBox("This is an success message", "success");
-});
+init();

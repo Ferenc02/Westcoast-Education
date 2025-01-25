@@ -1,3 +1,4 @@
+import { validateUser, setCookie } from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
 
 interface TestResponse {
@@ -19,10 +20,22 @@ let endpointTest = async () => {
   }
 };
 
-document.querySelector(".test-button")?.addEventListener("click", () => {
-  showMessageBox("This is an error message", "error");
-});
+let init = async () => {
+  let checkAuthToken = await validateUser();
 
-document.querySelector(".test-button2")?.addEventListener("click", () => {
-  showMessageBox("This is an success message", "success");
-});
+  console.log(checkAuthToken);
+
+  document.querySelector(".test-button")?.addEventListener("click", () => {
+    showMessageBox("This is an error message", "error");
+  });
+
+  document.querySelector(".test-button2")?.addEventListener("click", () => {
+    showMessageBox("This is an success message", "success");
+  });
+  document.querySelector(".test-button3")?.addEventListener("click", () => {
+    setCookie();
+    console.log("hi?");
+  });
+};
+
+init();
