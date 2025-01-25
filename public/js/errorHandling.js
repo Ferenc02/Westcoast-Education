@@ -39,12 +39,15 @@ export default function showMessageBox(message, type) {
     messageBoxText.textContent = message;
     messageBoxButton.classList.add(...selectedStyle.buttonClass);
     messageBox.classList.remove("hidden");
-    messageBoxButton === null || messageBoxButton === void 0 ? void 0 : messageBoxButton.addEventListener("click", () => {
-        messageBox.classList.add("hidden");
-        messageBoxContent.classList.remove("grow-animation");
-        messageBoxIcon.classList.remove(selectedStyle.iconClass);
-        messageBoxTitle.classList.remove(selectedStyle.titleClass);
-        messageBoxButton.classList.remove(...selectedStyle.buttonClass);
-    }, { once: true });
+    //  Event listener to close the message box
+    messageBox === null || messageBox === void 0 ? void 0 : messageBox.addEventListener("click", (event) => {
+        if (event.target === messageBox || event.target === messageBoxButton) {
+            messageBox.classList.add("hidden");
+            messageBoxContent.classList.remove("grow-animation");
+            messageBoxIcon.classList.remove(selectedStyle.iconClass);
+            messageBoxTitle.classList.remove(selectedStyle.titleClass);
+            messageBoxButton.classList.remove(...selectedStyle.buttonClass);
+        }
+    });
     messageBoxContent.classList.add("grow-animation");
 }

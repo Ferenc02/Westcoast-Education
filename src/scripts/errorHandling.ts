@@ -63,9 +63,9 @@ export default function showMessageBox(message: string, type: String) {
 
   messageBox.classList.remove("hidden");
 
-  messageBoxButton?.addEventListener(
-    "click",
-    () => {
+  //  Event listener to close the message box
+  messageBox?.addEventListener("click", (event) => {
+    if (event.target === messageBox || event.target === messageBoxButton) {
       messageBox.classList.add("hidden");
 
       messageBoxContent.classList.remove("grow-animation");
@@ -75,9 +75,8 @@ export default function showMessageBox(message: string, type: String) {
       messageBoxTitle.classList.remove(selectedStyle.titleClass);
 
       messageBoxButton.classList.remove(...selectedStyle.buttonClass);
-    },
-    { once: true }
-  );
+    }
+  });
 
   messageBoxContent.classList.add("grow-animation");
 }
