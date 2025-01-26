@@ -13,6 +13,9 @@ interface user {
   expiresAt: string;
 }
 
+// Function that checks if the user has a valid token in the cookie. If the token is valid, the user is signed in.
+// If the token is invalid, the user is signed out.
+//  This is good to implement so that the user doesn't have to sign in every time they visit the website.
 export async function validateUser(): Promise<Object> {
   let authToken = document.cookie
     .split(";")
@@ -20,34 +23,139 @@ export async function validateUser(): Promise<Object> {
     ?.split("=")[1];
 
   if (!authToken) {
-    showMessageBox("No token found", "error");
-
-    setCookie();
+    // showMessageBox("No token found", "error");
 
     return {};
   }
 
-  let response = await fetch("http://localhost:3000/users");
+  let response = await fetch("http://localhost:3001/users");
 
-  let users: user = await response.json();
+  let users: Array<user> = await response.json();
 
-  console.log(users);
+  for (const user of users) {
+    if (user.authToken === authToken) {
+      let expirationDate = new Date(user.expiresAt);
+      let currentDate = new Date();
 
-  showMessageBox("Token found :D", "success");
+      if (expirationDate < currentDate) {
+        signOutUser();
+
+        return {};
+      }
+
+      showMessageBox(user.email, "success");
+      return {};
+    }
+  }
+
+  // showMessageBox("Token found :D", "success");
   return {};
 }
 
-export let setCookie = () => {
-  let maxAge = 86400; // 1 day in seconds
+// The maxAge variable is used to set the max age of the cookie in seconds. This is set to 1 day.
+let maxAge = 86400;
 
-  document.cookie = `authToken=${createRandomUUID()}; max-age=${maxAge}; path=/; SameSite=Strict`;
+// Function that sets a cookie with the name authToken and a random UUID as value.
+export let setCookie = (uuid: string) => {
+  document.cookie = `authToken=${uuid}; max-age=${maxAge}; path=/; SameSite=Strict`;
 };
 
+// Function that signs out the user by setting the max-age of the cookie to 0.
+export let signOutUser = () => {
+  document.cookie = `authToken=; max-age=0; path=/; SameSite=Strict`;
+
+  showMessageBox("User signed out", "success");
+};
+
+// Function that signs up a user by creating a new user object and posting it to the server.
+export let signUpUser = async (formElement: HTMLFormElement) => {
+  let response = await fetch("http://localhost:3001/users");
+
+  let users: Array<user> = await response.json();
+
+  let name = (formElement.querySelector("#name") as HTMLInputElement).value;
+  let email = (formElement.querySelector("#email") as HTMLInputElement).value;
+  let unhashedPassword = (
+    formElement.querySelector("#password") as HTMLInputElement
+  ).value;
+
+  for (const user of users) {
+    if (user.email === email && user.email !== "") {
+      alert("User already exists");
+      showMessageBox("User already exists", "error");
+      return;
+    }
+  }
+
+  // Hash the password before storing it in the database.
+  let password = await hashPassword(unhashedPassword);
+
+  let uuid = createRandomUUID();
+
+  setCookie(uuid);
+
+  let newUser = {
+    id: users.length + 1,
+    name: name,
+    email: email,
+    password: password,
+    phone: "",
+    address: "",
+    courses: [],
+    role: "user",
+    authToken: uuid,
+    expiresAt: new Date(Date.now() + maxAge * 1000).toISOString(),
+  };
+
+  let options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newUser),
+  };
+
+  let postResponse = await fetch("http://localhost:3001/users", options);
+
+  let postOutput = await postResponse.json();
+
+  console.log(postOutput);
+
+  showMessageBox("User created", "success");
+};
+
+// Function that hashes a password using SHA-256 and a salt.
+// The salt is a string that is added to the end of the password before hashing.
+// This makes it harder for attackers to crack the password using a dictionary attack.
+// The salt should be unique for each user and should be stored securely. This one is not stored securely and not even unique. 😥
+
+let hashPassword = async (password: string): Promise<string> => {
+  const encoder = new TextEncoder();
+
+  let data = encoder.encode(password);
+
+  const salt = "this is my very secret and secure salt phrase";
+
+  const hashedSalt = encoder.encode(salt);
+
+  data = new Uint8Array([...data, ...hashedSalt]);
+
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+
+  let hexadecimalString = Array.from(new Uint8Array(hashBuffer))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+
+  console.log(hexadecimalString);
+
+  return hexadecimalString;
+};
 // There is a function called crypto.randomUUID that can be used but, I thought it was fun create my own version of it.
 // The chance of two UUIDs from this function colliding? So small that you’d have better odds of finding a needle in a galaxy-sized haystack.
 // The chance of having a collision is 1 in 36^36, which equals
 // 1 in 4738381338321616896029870078505969039016966697471150738910363830999392
 // or approximately 0.00000000000000000000000000000000000000134%.
+// Of course, this is not a perfect UUID generator, since it doesn't follow the UUID standard and is not guaranteed to be unique.
 
 export let createRandomUUID = (): string => {
   // Not my proudest way to get the alphabet in javascript but works

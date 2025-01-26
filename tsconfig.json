@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "lib": ["ES2016", "DOM"],
+    "lib": ["ES2017", "DOM"],
     "outDir": "./public/js",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

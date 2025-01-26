@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { validateUser, setCookie } from "./authentication.js";
+import { validateUser, signUpUser } from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
 let endpointTest = () => __awaiter(void 0, void 0, void 0, function* () {
     let response = yield fetch("http://localhost:3000/test");
@@ -21,7 +21,7 @@ let endpointTest = () => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 let init = () => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c;
+    var _a, _b, _c, _d;
     let checkAuthToken = yield validateUser();
     console.log(checkAuthToken);
     (_a = document.querySelector(".test-button")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
@@ -31,8 +31,13 @@ let init = () => __awaiter(void 0, void 0, void 0, function* () {
         showMessageBox("This is an success message", "success");
     });
     (_c = document.querySelector(".test-button3")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => {
-        setCookie();
+        // setCookie();
         console.log("hi?");
+    });
+    (_d = document
+        .querySelector(".authentication-form")) === null || _d === void 0 ? void 0 : _d.addEventListener("submit", (event) => {
+        event.preventDefault();
+        signUpUser(document.querySelector(".authentication-form"));
     });
 });
 init();

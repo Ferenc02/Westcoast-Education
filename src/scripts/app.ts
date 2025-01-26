@@ -1,4 +1,4 @@
-import { validateUser, setCookie } from "./authentication.js";
+import { validateUser, setCookie, signUpUser } from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
 
 interface TestResponse {
@@ -33,9 +33,16 @@ let init = async () => {
     showMessageBox("This is an success message", "success");
   });
   document.querySelector(".test-button3")?.addEventListener("click", () => {
-    setCookie();
+    // setCookie();
     console.log("hi?");
   });
+
+  document
+    .querySelector(".authentication-form")
+    ?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      signUpUser(document.querySelector(".authentication-form"));
+    });
 };
 
 init();
