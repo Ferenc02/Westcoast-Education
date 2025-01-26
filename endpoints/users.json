@@ -10,7 +10,7 @@
       "courses": [],
       "role": "admin",
       "authToken": "",
-      "expiresAt": ""
+      "tokenExpiresAt": ""
     }
   ]
 }

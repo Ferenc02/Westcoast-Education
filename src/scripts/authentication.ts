@@ -38,8 +38,9 @@ export async function validateUser(): Promise<Object> {
 }
 
 export let setCookie = () => {
-  createRandomUUID();
-  //   document.cookie = `authToken=`;
+  let maxAge = 86400; // 1 day in seconds
+
+  document.cookie = `authToken=${createRandomUUID()}; max-age=${maxAge}; path=/; SameSite=Strict`;
 };
 
 // There is a function called crypto.randomUUID that can be used but, I thought it was fun create my own version of it.

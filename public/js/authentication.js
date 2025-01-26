@@ -27,8 +27,8 @@ export function validateUser() {
     });
 }
 export let setCookie = () => {
-    createRandomUUID();
-    //   document.cookie = `authToken=`;
+    let maxAge = 86400; // 1 day in seconds
+    document.cookie = `authToken=${createRandomUUID()}; max-age=${maxAge}; path=/; SameSite=Strict`;
 };
 // There is a function called crypto.randomUUID that can be used but, I thought it was fun create my own version of it.
 // The chance of two UUIDs from this function colliding? So small that you’d have better odds of finding a needle in a galaxy-sized haystack.
