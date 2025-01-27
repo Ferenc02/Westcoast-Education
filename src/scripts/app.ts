@@ -12,6 +12,8 @@ import showMessageBox from "./errorHandling.js";
 
 export let authenticatedUser: Object = {};
 
+export let currentPage = window.location.pathname;
+
 function isEmpty(obj: Object) {
   return Object.keys(obj).length === 0;
 }
@@ -41,6 +43,11 @@ let init = async () => {
   authenticatedUser = await validateUser();
 
   console.log(authenticatedUser);
+
+  //  Redirect to the home page if the user is already logged in.
+  if (currentPage.includes("login.html") && !isEmpty(authenticatedUser)) {
+    location.href = "/";
+  }
 
   document.querySelector(".test-button")?.addEventListener("click", () => {
     showMessageBox("This is an error message", "error");

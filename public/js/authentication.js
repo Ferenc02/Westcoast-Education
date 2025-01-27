@@ -52,7 +52,7 @@ export let signOutUser = () => {
     document.cookie = `authToken=; max-age=0; path=/; SameSite=Strict`;
     showMessageBox("User signed out", "success");
 };
-// Function that toggles between the sign up and login page.
+// Function that toggles between the sign up and login page instead of having two separate pages.
 export let toggleSignUp = (formElement) => {
     signUpPage = !signUpPage;
     // const formGroups = Array.from(formElement.querySelectorAll(".form-group"));
@@ -70,6 +70,7 @@ export let toggleSignUp = (formElement) => {
     formElement.querySelector("#name").required =
         signUpPage;
 };
+// Function that signs in a user by checking if the user exists and if the password is correct.
 export let loginUser = (formElement) => __awaiter(void 0, void 0, void 0, function* () {
     let response = yield fetch("http://localhost:3001/users");
     let users = yield response.json();
@@ -140,7 +141,7 @@ export let signUpUser = (formElement) => __awaiter(void 0, void 0, void 0, funct
     let postResponse = yield fetch("http://localhost:3001/users", options);
     let postOutput = yield postResponse.json();
     console.log(postOutput);
-    showMessageBox("User created", "success");
+    location.href = "/";
 });
 // Function that hashes a password using SHA-256 and a salt.
 // The salt is a string that is added to the end of the password before hashing.

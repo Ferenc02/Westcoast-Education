@@ -73,7 +73,7 @@ export let signOutUser = () => {
   showMessageBox("User signed out", "success");
 };
 
-// Function that toggles between the sign up and login page.
+// Function that toggles between the sign up and login page instead of having two separate pages.
 
 export let toggleSignUp = (formElement: HTMLFormElement) => {
   signUpPage = !signUpPage;
@@ -97,6 +97,7 @@ export let toggleSignUp = (formElement: HTMLFormElement) => {
     signUpPage;
 };
 
+// Function that signs in a user by checking if the user exists and if the password is correct.
 export let loginUser = async (formElement: HTMLFormElement) => {
   let response = await fetch("http://localhost:3001/users");
 
@@ -194,7 +195,7 @@ export let signUpUser = async (formElement: HTMLFormElement) => {
 
   console.log(postOutput);
 
-  showMessageBox("User created", "success");
+  location.href = "/";
 };
 
 // Function that hashes a password using SHA-256 and a salt.
