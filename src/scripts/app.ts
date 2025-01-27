@@ -6,6 +6,7 @@ import {
   user,
   loginUser,
   toggleSignUp,
+  signOutUser,
 } from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
 
@@ -49,8 +50,7 @@ let init = async () => {
     showMessageBox("This is an success message", "success");
   });
   document.querySelector(".test-button3")?.addEventListener("click", () => {
-    // setCookie();
-    console.log("hi?");
+    signOutUser();
   });
 
   let formElement = document.querySelector(

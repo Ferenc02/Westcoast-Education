@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { validateUser, signUpUser, signUpPage, loginUser, toggleSignUp, } from "./authentication.js";
+import { validateUser, signUpUser, signUpPage, loginUser, toggleSignUp, signOutUser, } from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
 export let authenticatedUser = {};
 function isEmpty(obj) {
@@ -42,8 +42,7 @@ let init = () => __awaiter(void 0, void 0, void 0, function* () {
         showMessageBox("This is an success message", "success");
     });
     (_c = document.querySelector(".test-button3")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => {
-        // setCookie();
-        console.log("hi?");
+        signOutUser();
     });
     let formElement = document.querySelector(".authentication-form");
     formElement === null || formElement === void 0 ? void 0 : formElement.addEventListener("submit", (event) => {
