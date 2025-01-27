@@ -63,6 +63,8 @@ export default function showMessageBox(message: string, type: String) {
 
   messageBox.classList.remove("hidden");
 
+  messageBoxButton.focus();
+
   //  Event listener to close the message box
   messageBox?.addEventListener("click", (event) => {
     if (event.target === messageBox || event.target === messageBoxButton) {

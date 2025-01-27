@@ -39,6 +39,7 @@ export default function showMessageBox(message, type) {
     messageBoxText.textContent = message;
     messageBoxButton.classList.add(...selectedStyle.buttonClass);
     messageBox.classList.remove("hidden");
+    messageBoxButton.focus();
     //  Event listener to close the message box
     messageBox === null || messageBox === void 0 ? void 0 : messageBox.addEventListener("click", (event) => {
         if (event.target === messageBox || event.target === messageBoxButton) {
