@@ -21,7 +21,7 @@ let endpointTest = () => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 let init = () => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c, _d;
+    var _a, _b, _c;
     let checkAuthToken = yield validateUser();
     console.log(checkAuthToken);
     (_a = document.querySelector(".test-button")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
@@ -34,10 +34,10 @@ let init = () => __awaiter(void 0, void 0, void 0, function* () {
         // setCookie();
         console.log("hi?");
     });
-    (_d = document
-        .querySelector(".authentication-form")) === null || _d === void 0 ? void 0 : _d.addEventListener("submit", (event) => {
+    let formElement = document.querySelector(".authentication-form");
+    formElement === null || formElement === void 0 ? void 0 : formElement.addEventListener("submit", (event) => {
         event.preventDefault();
-        signUpUser(document.querySelector(".authentication-form"));
+        signUpUser(formElement);
     });
 });
 init();

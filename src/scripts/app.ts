@@ -37,12 +37,14 @@ let init = async () => {
     console.log("hi?");
   });
 
-  document
-    .querySelector(".authentication-form")
-    ?.addEventListener("submit", (event) => {
-      event.preventDefault();
-      signUpUser(document.querySelector(".authentication-form"));
-    });
+  let formElement = document.querySelector(
+    ".authentication-form"
+  ) as HTMLFormElement;
+
+  formElement?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    signUpUser(formElement);
+  });
 };
 
 init();

@@ -13,8 +13,8 @@ interface user {
   expiresAt: string;
 }
 
-// Function that checks if the user has a valid token in the cookie. If the token is valid, the user is signed in.
-// If the token is invalid, the user is signed out.
+// Function that checks if the user has a valid token in the cookie. If the token is valid, the user will be signed in.
+// If the token is invalid, the user will be signed out.
 //  This is good to implement so that the user doesn't have to sign in every time they visit the website.
 export async function validateUser(): Promise<Object> {
   let authToken = document.cookie
@@ -81,7 +81,6 @@ export let signUpUser = async (formElement: HTMLFormElement) => {
 
   for (const user of users) {
     if (user.email === email && user.email !== "") {
-      alert("User already exists");
       showMessageBox("User already exists", "error");
       return;
     }
@@ -127,7 +126,8 @@ export let signUpUser = async (formElement: HTMLFormElement) => {
 // Function that hashes a password using SHA-256 and a salt.
 // The salt is a string that is added to the end of the password before hashing.
 // This makes it harder for attackers to crack the password using a dictionary attack.
-// The salt should be unique for each user and should be stored securely. This one is not stored securely and not even unique. 😥
+// The salt should be unique for each user and should be stored securely. This one is not stored securely and not even unique for each user.
+// So if the salt is found then a hacker can still do a dictionary attack😥
 
 let hashPassword = async (password: string): Promise<string> => {
   const encoder = new TextEncoder();
