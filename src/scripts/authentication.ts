@@ -1,8 +1,9 @@
+import { updateUserInDatabase, userDetails } from "./app.js";
 import showMessageBox from "./errorHandling.js";
 
 export let signUpPage = true;
 
-interface user {
+export interface user {
   id: number;
   name: string;
   email: string;
@@ -46,6 +47,18 @@ export async function validateUser(): Promise<Object> {
       }
 
       showMessageBox(user.email, "success");
+
+      userDetails.id = user.id;
+      userDetails.name = user.name;
+      userDetails.email = user.email;
+      userDetails.password = user.password;
+      userDetails.phone = user.phone;
+      userDetails.address = user.address;
+      userDetails.courses = user.courses;
+      userDetails.role = user.role;
+      userDetails.authToken = user.authToken;
+      userDetails.expiresAt = user.expiresAt;
+
       return {};
     }
   }
@@ -104,26 +117,20 @@ export let loginUser = async (formElement: HTMLFormElement) => {
 
       if (hashedPassword === user.password) {
         // if the user is found and the password is correct, change authToken to a new random UUID and set new expiration date.
-
+        // A better implementation of this would be to store it in array so if the user logs in from multiple devices they will still be signed in on all devices.
         user.authToken = createRandomUUID();
         user.expiresAt = new Date(Date.now() + maxAge * 1000).toISOString();
 
-        let options = {
+        setCookie(user.authToken);
+
+        // updateUserInDatabase(user);
+        await fetch(`http://localhost:3001/users/${user.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(user),
-        };
-
-        let putResponse = await fetch(
-          `http://localhost:3001/users/${user.id}`,
-          options
-        );
-
-        let putOutput = await putResponse.json();
-
-        setCookie(user.authToken);
+        });
 
         showMessageBox("User signed in", "success");
 

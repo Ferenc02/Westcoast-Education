@@ -4,26 +4,35 @@ import {
   signUpUser,
   changeToLogin,
   signUpPage,
+  user,
 } from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
 
-interface TestResponse {
-  name: string;
-  age: number;
+export let userDetails: user;
+
+function isEmpty(obj: Object) {
+  return Object.keys(obj).length === 0;
 }
 
-let endpointTest = async () => {
-  let response = await fetch("http://localhost:3000/test");
+// Function that changes the user details in the database. This function uses the PUT method to update the user details.
+// The function takes in a user object as a parameter.
+export let updateUserInDatabase = async (userInformation: user) => {
+  let checkUserLoggedIn = await validateUser();
 
-  let output: TestResponse = await response.json();
-
-  let h1Element = document.querySelector("h1");
-
-  if (h1Element) {
-    h1Element.innerText = `Hello, ${output.name}! You are ${output.age} years old.`;
-  } else {
-    console.error("No <h1> element found in the document.");
+  // Added this check to make sure that no other than user can change their own details.
+  //
+  if (isEmpty(checkUserLoggedIn)) {
+    showMessageBox("User not logged in", "error");
+    return;
   }
+
+  await fetch(`http://localhost:3001/users/${userInformation.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userInformation),
+  });
 };
 
 let init = async () => {
@@ -63,3 +72,16 @@ let init = async () => {
 };
 
 init();
+
+// updateUserInDatabase({
+//   id: "2",
+//   name: "hacked :(",
+//   email: "admin@gmail.com",
+//   password: "604b6f3038b99e3e4e80259bc3fe9c38a46a2f638853e47e616841b05269eef5",
+//   phone: "",
+//   address: "",
+//   courses: [],
+//   role: "user",
+//   authToken: "j4f3p6dr-4yv8-nl19-7z7k-y61dpf3j8zus",
+//   expiresAt: "2025-01-28T12:37:18.466Z",
+// });

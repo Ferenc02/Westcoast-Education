@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "John Doe",
       "email": "",
       "password": "",
@@ -13,16 +13,16 @@
       "tokenExpiresAt": ""
     },
     {
-      "id": 2,
-      "name": "admin",
+      "id": "2",
+      "name": "hacked :(",
       "email": "admin@gmail.com",
       "password": "604b6f3038b99e3e4e80259bc3fe9c38a46a2f638853e47e616841b05269eef5",
       "phone": "",
       "address": "",
       "courses": [],
       "role": "user",
-      "authToken": "c7g273fa-hgkk-o1yo-297m-64rb1w8gpbv7",
-      "expiresAt": "2025-01-24T11:30:28.612Z"
+      "authToken": "j4f3p6dr-4yv8-nl19-7z7k-y61dpf3j8zus",
+      "expiresAt": "2025-01-28T12:37:18.466Z"
     }
   ]
 }
