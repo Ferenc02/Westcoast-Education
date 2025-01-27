@@ -1,5 +1,7 @@
 import showMessageBox from "./errorHandling.js";
 
+export let signUpPage = true;
+
 interface user {
   id: number;
   name: string;
@@ -67,8 +69,77 @@ export let signOutUser = () => {
   showMessageBox("User signed out", "success");
 };
 
+export let changeToLogin = () => {
+  signUpPage = false;
+
+  let formElement = document.querySelector(
+    ".authentication-form"
+  ) as HTMLFormElement;
+
+  formElement.querySelectorAll(".form-group")[0].remove();
+
+  formElement.addEventListener("submit", (event) => {
+    if (signUpPage) return;
+    event.preventDefault();
+    showMessageBox("Login", "success");
+    loginUser(formElement);
+  });
+
+  formElement.querySelector("button")!.textContent = "Login";
+};
+
+export let loginUser = async (formElement: HTMLFormElement) => {
+  let response = await fetch("http://localhost:3001/users");
+
+  let users: Array<user> = await response.json();
+
+  let email = (formElement.querySelector("#email") as HTMLInputElement).value;
+  let unhashedPassword = (
+    formElement.querySelector("#password") as HTMLInputElement
+  ).value;
+
+  for (const user of users) {
+    if (user.email === email) {
+      let hashedPassword = await hashPassword(unhashedPassword);
+
+      if (hashedPassword === user.password) {
+        // if the user is found and the password is correct, change authToken to a new random UUID and set new expiration date.
+
+        user.authToken = createRandomUUID();
+        user.expiresAt = new Date(Date.now() + maxAge * 1000).toISOString();
+
+        let options = {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        };
+
+        let putResponse = await fetch(
+          `http://localhost:3001/users/${user.id}`,
+          options
+        );
+
+        let putOutput = await putResponse.json();
+
+        setCookie(user.authToken);
+
+        showMessageBox("User signed in", "success");
+
+        location.href = "/";
+
+        return;
+      }
+    }
+  }
+
+  showMessageBox("Invalid email or password", "error");
+};
+
 // Function that signs up a user by creating a new user object and posting it to the server.
 export let signUpUser = async (formElement: HTMLFormElement) => {
+  alert("User created");
   let response = await fetch("http://localhost:3001/users");
 
   let users: Array<user> = await response.json();
@@ -134,6 +205,8 @@ let hashPassword = async (password: string): Promise<string> => {
 
   let data = encoder.encode(password);
 
+  //  This is a very bad way to store a salt, it should be unique for each user and stored securely.
+  // This is just an example of how a salt can be used to make the password more secure.
   const salt = "this is my very secret and secure salt phrase";
 
   const hashedSalt = encoder.encode(salt);

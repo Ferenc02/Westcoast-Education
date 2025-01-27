@@ -1,4 +1,10 @@
-import { validateUser, setCookie, signUpUser } from "./authentication.js";
+import {
+  validateUser,
+  setCookie,
+  signUpUser,
+  changeToLogin,
+  signUpPage,
+} from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
 
 interface TestResponse {
@@ -41,9 +47,18 @@ let init = async () => {
     ".authentication-form"
   ) as HTMLFormElement;
 
-  formElement?.addEventListener("submit", (event) => {
-    event.preventDefault();
-    signUpUser(formElement);
+  formElement?.addEventListener(
+    "submit",
+    (event) => {
+      if (!signUpPage) return;
+      event.preventDefault();
+      signUpUser(formElement);
+    },
+    { once: true }
+  );
+
+  document.querySelector(".login-button")?.addEventListener("click", () => {
+    changeToLogin();
   });
 };
 

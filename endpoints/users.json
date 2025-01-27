@@ -14,27 +14,15 @@
     },
     {
       "id": 2,
-      "name": "hi",
-      "email": "jdosajd@gmail.com",
-      "password": "8ffa94a8dd05a703a44a1a17c83026938de374cb411187d5a6d48d3e8325dbb6",
+      "name": "admin",
+      "email": "admin@gmail.com",
+      "password": "604b6f3038b99e3e4e80259bc3fe9c38a46a2f638853e47e616841b05269eef5",
       "phone": "",
       "address": "",
       "courses": [],
       "role": "user",
-      "authToken": "29wo1fpa-ez1h-cke7-36ob-hz37yk413q1p",
-      "expiresAt": "2025-01-25T17:38:54.622Z"
-    },
-    {
-      "id": 3,
-      "name": "name",
-      "email": "oadk@gmail.com",
-      "password": "487e0b3a143888f9ff63c307743c381d0ab2e8dcc5b326ac54032af10df0ebf3",
-      "phone": "",
-      "address": "",
-      "courses": [],
-      "role": "user",
-      "authToken": "1v83s7zr-71sd-0a2q-qb5g-z3wc967deoos",
-      "expiresAt": "2025-01-27T17:40:07.866Z"
+      "authToken": "c7g273fa-hgkk-o1yo-297m-64rb1w8gpbv7",
+      "expiresAt": "2025-01-24T11:30:28.612Z"
     }
   ]
 }

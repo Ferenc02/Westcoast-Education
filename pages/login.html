@@ -23,10 +23,10 @@
 
     <script defer src="../public/js/app.js" type="module"></script>
   </head>
-  <body class="bg-green-100">
+  <body>
     <!-- Message box -->
     <div
-      class="message-box fixed w-full h-full bg-opacity-75 bg-gray-900/65 flex justify-center items-center hidden"
+      class="message-box fixed w-full h-full bg-opacity-75 bg-gray-900/65 flex justify-center items-center hidden z-50"
     >
       <div
         class="message-box__content bg-white rounded-lg mx-auto p-4 flex flex-col items-center gap-8 shadow-lg max-w-xs min-w-xs md:max-w-sm min-w-sm"
@@ -51,43 +51,72 @@
       </div>
     </div>
     <!-- Message box end -->
-    <main>
-      <h1>Sign up</h1>
-      <form class="authentication-form">
-        <div class="form-group">
-          <label for="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            class="border-2 border-gray-400"
-            required
-          />
+    <main class="relative h-full flex justify-center items-center">
+      <form
+        class="authentication-form flex flex-col gap-4 inset-0 h-fit bg-white rounded-lg shadow-lg mx-auto p-8 w-md"
+      >
+        <div class="form-group flex flex-col gap-2">
+          <label for="name" class="text-gray-500">Name:</label>
+          <div class="relative">
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="John Doe"
+              class="w-full shadow-xs border-2 border-gray-100 bg-gray-50 hover:border-gray-200 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg indent-10 transition duration-200 outline-none text-gray-700"
+              required
+            />
+            <div
+              class="absolute inset-y-0 left-4 flex items-center text-gray-400"
+            >
+              <span class="material-symbols-outlined"> person </span>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="border-2 border-gray-400"
-            required
-          />
+        <div class="form-group flex flex-col gap-2">
+          <label for="email" class="text-gray-500">Email:</label>
+          <div class="relative">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="john@gmail.com"
+              class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg indent-10 transition duration-200 outline-none text-gray-700"
+              required
+            />
+            <div
+              class="absolute inset-y-0 left-4 flex items-center text-gray-400"
+            >
+              <span class="material-symbols-outlined"> mail </span>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="border-2 border-gray-400"
-            required
-            minlength="8"
-          />
+        <div class="form-group flex flex-col gap-2">
+          <label for="password" class="text-gray-500">Password:</label>
+          <div class="relative">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="********"
+              class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg indent-10 transition duration-200 outline-none text-gray-700"
+              required
+              minlength="8"
+            />
+            <div
+              class="absolute inset-y-0 left-4 flex items-center text-gray-400"
+            >
+              <span class="material-symbols-outlined"> lock </span>
+            </div>
+          </div>
         </div>
         <button class="button w-full bg-amber-400" type="submit">
           Sign up
         </button>
+        <p class="text-center text-gray-700 mt-4">
+          Already have an account?
+          <a href="#" class="text-blue-500 login-button">Login</a>
+        </p>
       </form>
     </main>
   </body>

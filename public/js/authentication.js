@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import showMessageBox from "./errorHandling.js";
+export let signUpPage = true;
 // Function that checks if the user has a valid token in the cookie. If the token is valid, the user will be signed in.
 // If the token is invalid, the user will be signed out.
 //  This is good to implement so that the user doesn't have to sign in every time they visit the website.
@@ -50,8 +51,52 @@ export let signOutUser = () => {
     document.cookie = `authToken=; max-age=0; path=/; SameSite=Strict`;
     showMessageBox("User signed out", "success");
 };
+export let changeToLogin = () => {
+    signUpPage = false;
+    let formElement = document.querySelector(".authentication-form");
+    formElement.querySelectorAll(".form-group")[0].remove();
+    formElement.addEventListener("submit", (event) => {
+        if (signUpPage)
+            return;
+        event.preventDefault();
+        showMessageBox("Login", "success");
+        loginUser(formElement);
+    });
+    formElement.querySelector("button").textContent = "Login";
+};
+export let loginUser = (formElement) => __awaiter(void 0, void 0, void 0, function* () {
+    let response = yield fetch("http://localhost:3001/users");
+    let users = yield response.json();
+    let email = formElement.querySelector("#email").value;
+    let unhashedPassword = formElement.querySelector("#password").value;
+    for (const user of users) {
+        if (user.email === email) {
+            let hashedPassword = yield hashPassword(unhashedPassword);
+            if (hashedPassword === user.password) {
+                // if the user is found and the password is correct, change authToken to a new random UUID and set new expiration date.
+                user.authToken = createRandomUUID();
+                user.expiresAt = new Date(Date.now() + maxAge * 1000).toISOString();
+                let options = {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(user),
+                };
+                let putResponse = yield fetch(`http://localhost:3001/users/${user.id}`, options);
+                let putOutput = yield putResponse.json();
+                setCookie(user.authToken);
+                showMessageBox("User signed in", "success");
+                location.href = "/";
+                return;
+            }
+        }
+    }
+    showMessageBox("Invalid email or password", "error");
+});
 // Function that signs up a user by creating a new user object and posting it to the server.
 export let signUpUser = (formElement) => __awaiter(void 0, void 0, void 0, function* () {
+    alert("User created");
     let response = yield fetch("http://localhost:3001/users");
     let users = yield response.json();
     let name = formElement.querySelector("#name").value;
@@ -99,6 +144,8 @@ export let signUpUser = (formElement) => __awaiter(void 0, void 0, void 0, funct
 let hashPassword = (password) => __awaiter(void 0, void 0, void 0, function* () {
     const encoder = new TextEncoder();
     let data = encoder.encode(password);
+    //  This is a very bad way to store a salt, it should be unique for each user and stored securely.
+    // This is just an example of how a salt can be used to make the password more secure.
     const salt = "this is my very secret and secure salt phrase";
     const hashedSalt = encoder.encode(salt);
     data = new Uint8Array([...data, ...hashedSalt]);
