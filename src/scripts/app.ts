@@ -2,13 +2,14 @@ import {
   validateUser,
   setCookie,
   signUpUser,
-  changeToLogin,
   signUpPage,
   user,
+  loginUser,
+  toggleSignUp,
 } from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
 
-export let userDetails: user;
+export let authenticatedUser: Object = {};
 
 function isEmpty(obj: Object) {
   return Object.keys(obj).length === 0;
@@ -36,9 +37,9 @@ export let updateUserInDatabase = async (userInformation: user) => {
 };
 
 let init = async () => {
-  let checkAuthToken = await validateUser();
+  authenticatedUser = await validateUser();
 
-  console.log(checkAuthToken);
+  console.log(authenticatedUser);
 
   document.querySelector(".test-button")?.addEventListener("click", () => {
     showMessageBox("This is an error message", "error");
@@ -56,18 +57,18 @@ let init = async () => {
     ".authentication-form"
   ) as HTMLFormElement;
 
-  formElement?.addEventListener(
-    "submit",
-    (event) => {
-      if (!signUpPage) return;
-      event.preventDefault();
+  formElement?.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (signUpPage) {
       signUpUser(formElement);
-    },
-    { once: true }
-  );
+    } else {
+      loginUser(formElement);
+    }
+  });
 
   document.querySelector(".login-button")?.addEventListener("click", () => {
-    changeToLogin();
+    toggleSignUp(formElement);
   });
 };
 

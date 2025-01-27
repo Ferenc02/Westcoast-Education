@@ -7,9 +7,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { validateUser, signUpUser, changeToLogin, signUpPage, } from "./authentication.js";
+import { validateUser, signUpUser, signUpPage, loginUser, toggleSignUp, } from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
-export let userDetails;
+export let authenticatedUser = {};
 function isEmpty(obj) {
     return Object.keys(obj).length === 0;
 }
@@ -33,8 +33,8 @@ export let updateUserInDatabase = (userInformation) => __awaiter(void 0, void 0,
 });
 let init = () => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c, _d;
-    let checkAuthToken = yield validateUser();
-    console.log(checkAuthToken);
+    authenticatedUser = yield validateUser();
+    console.log(authenticatedUser);
     (_a = document.querySelector(".test-button")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
         showMessageBox("This is an error message", "error");
     });
@@ -47,13 +47,16 @@ let init = () => __awaiter(void 0, void 0, void 0, function* () {
     });
     let formElement = document.querySelector(".authentication-form");
     formElement === null || formElement === void 0 ? void 0 : formElement.addEventListener("submit", (event) => {
-        if (!signUpPage)
-            return;
         event.preventDefault();
-        signUpUser(formElement);
-    }, { once: true });
+        if (signUpPage) {
+            signUpUser(formElement);
+        }
+        else {
+            loginUser(formElement);
+        }
+    });
     (_d = document.querySelector(".login-button")) === null || _d === void 0 ? void 0 : _d.addEventListener("click", () => {
-        changeToLogin();
+        toggleSignUp(formElement);
     });
 });
 init();

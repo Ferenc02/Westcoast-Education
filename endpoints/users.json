@@ -14,15 +14,15 @@
     },
     {
       "id": "2",
-      "name": "hacked :(",
+      "name": "admin",
       "email": "admin@gmail.com",
       "password": "604b6f3038b99e3e4e80259bc3fe9c38a46a2f638853e47e616841b05269eef5",
       "phone": "",
       "address": "",
       "courses": [],
       "role": "user",
-      "authToken": "j4f3p6dr-4yv8-nl19-7z7k-y61dpf3j8zus",
-      "expiresAt": "2025-01-28T12:37:18.466Z"
+      "authToken": "8dr16bm8-u588-rdme-u7ue-jnkon4370ge9",
+      "expiresAt": "2025-01-28T13:34:18.680Z"
     }
   ]
 }

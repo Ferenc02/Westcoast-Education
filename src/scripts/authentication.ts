@@ -1,7 +1,9 @@
-import { updateUserInDatabase, userDetails } from "./app.js";
+import { authenticatedUser, updateUserInDatabase } from "./app.js";
 import showMessageBox from "./errorHandling.js";
 
 export let signUpPage = true;
+
+let nameField: Element;
 
 export interface user {
   id: number;
@@ -48,18 +50,7 @@ export async function validateUser(): Promise<Object> {
 
       showMessageBox(user.email, "success");
 
-      userDetails.id = user.id;
-      userDetails.name = user.name;
-      userDetails.email = user.email;
-      userDetails.password = user.password;
-      userDetails.phone = user.phone;
-      userDetails.address = user.address;
-      userDetails.courses = user.courses;
-      userDetails.role = user.role;
-      userDetails.authToken = user.authToken;
-      userDetails.expiresAt = user.expiresAt;
-
-      return {};
+      return { user };
     }
   }
 
@@ -82,23 +73,28 @@ export let signOutUser = () => {
   showMessageBox("User signed out", "success");
 };
 
-export let changeToLogin = () => {
-  signUpPage = false;
+// Function that toggles between the sign up and login page.
 
-  let formElement = document.querySelector(
-    ".authentication-form"
-  ) as HTMLFormElement;
+export let toggleSignUp = (formElement: HTMLFormElement) => {
+  signUpPage = !signUpPage;
 
-  formElement.querySelectorAll(".form-group")[0].remove();
+  // const formGroups = Array.from(formElement.querySelectorAll(".form-group"));
+  // formGroups.unshift(nameField);
 
-  formElement.addEventListener("submit", (event) => {
-    if (signUpPage) return;
-    event.preventDefault();
-    showMessageBox("Login", "success");
-    loginUser(formElement);
-  });
+  formElement.querySelector("button")!.textContent = signUpPage
+    ? "Sign up"
+    : "Login";
 
-  formElement.querySelector("button")!.textContent = "Login";
+  formElement.querySelector("p")!.textContent = signUpPage
+    ? "Already have an account?"
+    : "Don't have an account?";
+  formElement.querySelector("a")!.textContent = signUpPage
+    ? "Login"
+    : "Sign up";
+
+  formElement.querySelectorAll(".form-group")[0].classList.toggle("hidden");
+  (formElement.querySelector("#name") as HTMLInputElement).required =
+    signUpPage;
 };
 
 export let loginUser = async (formElement: HTMLFormElement) => {
@@ -123,7 +119,7 @@ export let loginUser = async (formElement: HTMLFormElement) => {
 
         setCookie(user.authToken);
 
-        // updateUserInDatabase(user);
+        //  Had to update manually since the user object is not updated in the database.
         await fetch(`http://localhost:3001/users/${user.id}`, {
           method: "PUT",
           headers: {
@@ -132,7 +128,7 @@ export let loginUser = async (formElement: HTMLFormElement) => {
           body: JSON.stringify(user),
         });
 
-        showMessageBox("User signed in", "success");
+        // showMessageBox("User signed in", "success");
 
         location.href = "/";
 
