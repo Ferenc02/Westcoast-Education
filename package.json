@@ -8,7 +8,8 @@
   "main": "index.js",
   "scripts": {
     "dev:styles": "postcss src/styles/app.css -o public/styles/app.css --watch --verbose",
-    "dev:server": "json-server --watch endpoints/db.json",
+    "dev:server1": "json-server --watch endpoints/db.json",
+    "dev:server2": "json-server --watch endpoints/users.json --port 3001",
     "dev:ts": "tsc --watch --preserveWatchOutput",
     "dev": "npm-run-all -p -l dev:*"
   },

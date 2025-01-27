@@ -1,28 +1,95 @@
+import {
+  validateUser,
+  setCookie,
+  signUpUser,
+  signUpPage,
+  user,
+  loginUser,
+  toggleSignUp,
+  signOutUser,
+} from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
 
-interface TestResponse {
-  name: string;
-  age: number;
+export let authenticatedUser: Object = {};
+
+export let currentPage = window.location.pathname;
+
+function isEmpty(obj: Object) {
+  return Object.keys(obj).length === 0;
 }
 
-let endpointTest = async () => {
-  let response = await fetch("http://localhost:3000/test");
+// Function that changes the user details in the database. This function uses the PUT method to update the user details.
+// The function takes in a user object as a parameter.
+export let updateUserInDatabase = async (userInformation: user) => {
+  let checkUserLoggedIn = await validateUser();
 
-  let output: TestResponse = await response.json();
-
-  let h1Element = document.querySelector("h1");
-
-  if (h1Element) {
-    h1Element.innerText = `Hello, ${output.name}! You are ${output.age} years old.`;
-  } else {
-    console.error("No <h1> element found in the document.");
+  // Added this check to make sure that no other than user can change their own details.
+  //
+  if (isEmpty(checkUserLoggedIn)) {
+    showMessageBox("User not logged in", "error");
+    return;
   }
+
+  await fetch(`http://localhost:3001/users/${userInformation.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userInformation),
+  });
 };
 
-document.querySelector(".test-button")?.addEventListener("click", () => {
-  showMessageBox("This is an error message", "error");
-});
+let init = async () => {
+  authenticatedUser = await validateUser();
 
-document.querySelector(".test-button2")?.addEventListener("click", () => {
-  showMessageBox("This is an success message", "success");
-});
+  console.log(authenticatedUser);
+
+  //  Redirect to the home page if the user is already logged in.
+  if (currentPage.includes("login.html") && !isEmpty(authenticatedUser)) {
+    location.href = "/";
+  }
+
+  document.querySelector(".test-button")?.addEventListener("click", () => {
+    showMessageBox("This is an error message", "error");
+  });
+
+  document.querySelector(".test-button2")?.addEventListener("click", () => {
+    showMessageBox("This is an success message", "success");
+  });
+  document.querySelector(".test-button3")?.addEventListener("click", () => {
+    signOutUser();
+  });
+
+  let formElement = document.querySelector(
+    ".authentication-form"
+  ) as HTMLFormElement;
+
+  formElement?.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (signUpPage) {
+      signUpUser(formElement);
+    } else {
+      loginUser(formElement);
+    }
+  });
+
+  document.querySelector(".login-button")?.addEventListener("click", () => {
+    toggleSignUp(formElement);
+  });
+};
+
+init();
+
+// updateUserInDatabase({
+//   id: "2",
+//   name: "hacked :(",
+//   email: "admin@gmail.com",
+//   password: "604b6f3038b99e3e4e80259bc3fe9c38a46a2f638853e47e616841b05269eef5",
+//   phone: "",
+//   address: "",
+//   courses: [],
+//   role: "user",
+//   authToken: "j4f3p6dr-4yv8-nl19-7z7k-y61dpf3j8zus",
+//   expiresAt: "2025-01-28T12:37:18.466Z",
+// });
