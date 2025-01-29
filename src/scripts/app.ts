@@ -77,6 +77,10 @@ let init = async () => {
   document.querySelector(".login-button")?.addEventListener("click", () => {
     toggleSignUp(formElement);
   });
+
+  document.querySelector("#navbar-toggle")?.addEventListener("click", () => {
+    document.querySelector("#navbar-default")?.classList.toggle("hidden");
+  });
 };
 
 init();
