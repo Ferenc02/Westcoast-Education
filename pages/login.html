@@ -52,9 +52,9 @@
     <!-- Message box end -->
 
     <!-- Main part -->
-    <main class="relative h-full flex justify-center items-center">
+    <main class="relative h-full flex justify-center items-center homepage">
       <form
-        class="authentication-form flex flex-col gap-4 inset-0 h-fit bg-white rounded-lg shadow-lg mx-auto p-8 w-md"
+        class="authentication-form flex flex-col gap-4 inset-0 h-fit bg-white rounded-lg shadow-lg mx-auto p-8 w-md fade-in"
       >
         <div class="form-group flex flex-col gap-2">
           <label for="name" class="text-gray-500">Name:</label>
@@ -111,7 +111,10 @@
             </div>
           </div>
         </div>
-        <button class="button w-full bg-amber-400" type="submit">
+        <button
+          class="button w-full bg-amber-500 hover:bg-amber-600 mt-2"
+          type="submit"
+        >
           Sign up
         </button>
         <span
