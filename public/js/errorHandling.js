@@ -1,10 +1,6 @@
 // Function to show a message box with a message and an icon
 export default function showMessageBox(message, type) {
     let messageBox = document.querySelector(".message-box");
-    if (!messageBox) {
-        console.log("Message box not found");
-        return;
-    }
     if (type !== "error" && type !== "success") {
         showMessageBox(`Invalid message type. The type should be either 'error' or 'success', showMessageBox("This is an error message", "error")`, "error");
         return;
@@ -31,6 +27,7 @@ export default function showMessageBox(message, type) {
             buttonClass: ["bg-green-500", "hover:bg-green-600"],
         },
     };
+    messageBox.ariaHidden = "false";
     const selectedStyle = styles[type.toLowerCase()];
     messageBoxIcon.classList.add(selectedStyle.iconClass);
     messageBoxIcon.textContent = selectedStyle.icon;
@@ -48,6 +45,7 @@ export default function showMessageBox(message, type) {
             messageBoxIcon.classList.remove(selectedStyle.iconClass);
             messageBoxTitle.classList.remove(selectedStyle.titleClass);
             messageBoxButton.classList.remove(...selectedStyle.buttonClass);
+            messageBox.ariaHidden = "true";
         }
     });
     messageBoxContent.classList.add("grow-animation");
