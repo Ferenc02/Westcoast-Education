@@ -721,14 +721,8 @@
   .p-8 {
     padding: calc(var(--spacing) * 8);
   }
-  .\!px-2 {
-    padding-inline: calc(var(--spacing) * 2) !important;
-  }
   .\!px-4 {
     padding-inline: calc(var(--spacing) * 4) !important;
-  }
-  .px-2 {
-    padding-inline: calc(var(--spacing) * 2);
   }
   .px-8 {
     padding-inline: calc(var(--spacing) * 8);
@@ -946,11 +940,6 @@
       gap: calc(var(--spacing) * 2);
     }
   }
-  .lg\:gap-4 {
-    @media (width >= 64rem) {
-      gap: calc(var(--spacing) * 4);
-    }
-  }
   .lg\:gap-6 {
     @media (width >= 64rem) {
       gap: calc(var(--spacing) * 6);
@@ -1029,6 +1018,9 @@ body {
 }
 .hero-image {
   width: 32rem;
+}
+.message-box {
+  z-index: 1000;
 }
 .bungee-regular {
   font-family: "Bungee", serif;

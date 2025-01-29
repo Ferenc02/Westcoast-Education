@@ -33,7 +33,7 @@ export let updateUserInDatabase = (userInformation) => __awaiter(void 0, void 0,
     });
 });
 let init = () => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c, _d, _e, _f;
     authenticatedUser = yield validateUser();
     console.log(authenticatedUser);
     //  Redirect to the home page if the user is already logged in.
@@ -66,6 +66,9 @@ let init = () => __awaiter(void 0, void 0, void 0, function* () {
         var _a;
         (_a = document.querySelector("#navbar-default")) === null || _a === void 0 ? void 0 : _a.classList.toggle("hidden");
     });
+    if (location.hash === "#login") {
+        (_f = document.querySelector(".login-button")) === null || _f === void 0 ? void 0 : _f.click();
+    }
 });
 init();
 // updateUserInDatabase({

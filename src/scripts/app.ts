@@ -81,6 +81,10 @@ let init = async () => {
   document.querySelector("#navbar-toggle")?.addEventListener("click", () => {
     document.querySelector("#navbar-default")?.classList.toggle("hidden");
   });
+
+  if (location.hash === "#login") {
+    (document.querySelector(".login-button") as HTMLButtonElement)?.click();
+  }
 };
 
 init();

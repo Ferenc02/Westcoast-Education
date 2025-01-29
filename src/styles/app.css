@@ -25,6 +25,10 @@ body {
   width: 32rem;
 }
 
+.message-box {
+  z-index: 1000;
+}
+
 .bungee-regular {
   font-family: "Bungee", serif;
   font-weight: 400;
