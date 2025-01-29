@@ -9,6 +9,12 @@
 ul[class],
 ol[class] {
   padding: 0;
+  margin: 0;
+}
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 html,
