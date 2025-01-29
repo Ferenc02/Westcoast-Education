@@ -60,20 +60,20 @@
     <!-- Message box end -->
 
     <!-- Main Part -->
-    <main class="flex flex-col h-full homepage text-white">
+    <main class="flex flex-col min-h-full lg:h-full homepage text-white">
       <header>
         <nav>
           <div
-            class="mx-auto flex justify-between items-center py-4 px-8 flex-wrap fade-in"
+            class="mx-auto flex justify-between items-center py-4 lg:px-8 flex-wrap fade-in"
           >
             <a
               href="#"
-              class="logo flex items-center gap-2 space-x-3 rtl:space-x-reverse"
+              class="logo flex items-center gap-2 space-x-3 rtl:space-x-reverse px-4"
             >
               <img
-                src="public/images/logo.webp"
+                src="public/images/new_icon.svg"
                 alt="Westcoast Education"
-                class="w-16"
+                class="w-10"
               />
               <span
                 class="self-center whitespace-nowrap bungee-regular lg:text-xl text-sm"
@@ -83,7 +83,7 @@
             <button
               data-collapse-toggle="navbar-default"
               type="button"
-              class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm cursor-pointer lg:hidden"
+              class="inline-flex items-center p-2 w-10 h-10 mr-4 justify-center text-sm cursor-pointer lg:hidden"
               aria-controls="navbar-default"
               aria-expanded="false"
               id="navbar-toggle"
@@ -106,7 +106,7 @@
               </svg>
             </button>
             <div
-              class="nav-links rounded-md flex gap-4 items-center hidden w-full mx-4 shadow-lg lg:flex lg:w-auto lg:shadow-none"
+              class="nav-links rounded-md gap-4 items-center h-[0px] lg:h-auto overflow-hidden w-full lg:mx-4 shadow-lg lg:flex lg:w-auto lg:shadow-none"
               id="navbar-default"
             >
               <ul
@@ -155,12 +155,12 @@
       </header>
 
       <section
-        class="flex flex-col items-center justify-between h-full mx-16 fade-in"
+        class="flex flex-col items-center justify-between lg:h-full fade-in"
       >
         <div
-          class="flex flex-col items-center justify-between h-full lg:flex-row mx-16"
+          class="flex flex-col items-center justify-between lg:h-full lg:flex-row lg:mx-16"
         >
-          <div class="left-section w-1/2">
+          <div class="left-section p-4 lg:w-1/2">
             <h1 class="lg:text-6xl font-bold capitalize text-4xl">
               Learn from anywhere and anytime
             </h1>
@@ -175,7 +175,7 @@
             >
           </div>
           <div
-            class="right-section flex items-center justify-center w-1/2 h-fit"
+            class="right-section items-center justify-center w-1/2 h-fit hidden lg:flex"
           >
             <img
               src="public/images/Illustration.svg"
@@ -184,9 +184,11 @@
             />
           </div>
         </div>
-        <div class="cards flex flex-row gap-4 mb-6">
+        <div
+          class="cards flex flex-row gap-4 mb-6 flex-wrap mt-8 mx-4 lg:mt-0 lg:mx-0"
+        >
           <div
-            class="card bg-gray-100 rounded-2xl p-6 flex items-center gap-6 shadow-md max-w-sm hover:scale-[100.5%] transition-transform transition-duraction-200 cursor-pointer"
+            class="w-full lg:w-sm card bg-gray-100 rounded-2xl p-6 flex items-center gap-6 shadow-md lg:hover:scale-[100.5%] transition-transform transition-duraction-200 cursor-pointer"
           >
             <div class="flex h-full items-center justify-center">
               <span class="material-symbols-outlined homepage-icons !text-5xl"
@@ -203,7 +205,7 @@
             </div>
           </div>
           <div
-            class="card bg-gray-100 rounded-2xl p-6 flex items-center gap-4 shadow-md max-w-sm hover:scale-[100.5%] transition-transform transition-duraction-200 cursor-pointer"
+            class="w-full lg:w-sm card bg-gray-100 rounded-2xl p-6 flex items-center gap-4 shadow-md lg:hover:scale-[100.5%] transition-transform transition-duraction-200 cursor-pointer"
           >
             <div class="flex">
               <span class="material-symbols-outlined homepage-icons !text-5xl"
@@ -220,7 +222,7 @@
             </div>
           </div>
           <div
-            class="card bg-gray-100 rounded-2xl p-6 flex items-center gap-4 shadow-md max-w-sm hover:scale-[100.5%] transition-transform transition-duraction-200 cursor-pointer"
+            class="w-full lg:w-sm card bg-gray-100 rounded-2xl p-6 flex items-center gap-4 shadow-md lg:hover:scale-[100.5%] transition-transform transition-duraction-200 cursor-pointer"
           >
             <div class="flex">
               <span class="material-symbols-outlined homepage-icons !text-5xl"

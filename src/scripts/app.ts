@@ -79,7 +79,9 @@ let init = async () => {
   });
 
   document.querySelector("#navbar-toggle")?.addEventListener("click", () => {
-    document.querySelector("#navbar-default")?.classList.toggle("hidden");
+    document
+      .querySelector("#navbar-default")
+      ?.classList.toggle("show-mobile-nav");
   });
 
   if (location.hash === "#login") {

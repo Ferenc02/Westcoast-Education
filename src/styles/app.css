@@ -25,6 +25,11 @@ body {
   background-attachment: fixed;
 }
 
+.show-mobile-nav {
+  height: 312px;
+  transition: height 0.3s ease-in-out;
+}
+
 .homepage-icons {
   background: -webkit-linear-gradient(270deg, #6074ff 0%, #ed6cff 100%);
   background-clip: text;
@@ -72,4 +77,29 @@ body {
   to {
     opacity: 1;
   }
+}
+
+/* Scrollbar stuff. */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  background: #d8d8d8;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #919fff 0%, #f4a1ff 100%);
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #6074ff 0%, #ed6cff 100%);
 }

@@ -64,7 +64,8 @@ let init = () => __awaiter(void 0, void 0, void 0, function* () {
     });
     (_e = document.querySelector("#navbar-toggle")) === null || _e === void 0 ? void 0 : _e.addEventListener("click", () => {
         var _a;
-        (_a = document.querySelector("#navbar-default")) === null || _a === void 0 ? void 0 : _a.classList.toggle("hidden");
+        (_a = document
+            .querySelector("#navbar-default")) === null || _a === void 0 ? void 0 : _a.classList.toggle("show-mobile-nav");
     });
     if (location.hash === "#login") {
         (_f = document.querySelector(".login-button")) === null || _f === void 0 ? void 0 : _f.click();
