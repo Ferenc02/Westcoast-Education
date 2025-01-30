@@ -128,7 +128,7 @@ export let signUpUser = (formElement) => __awaiter(void 0, void 0, void 0, funct
         phone: "",
         address: "",
         courses: [],
-        role: "user",
+        role: "admin",
         authToken: uuid,
         expiresAt: new Date(Date.now() + maxAge * 1000).toISOString(),
     };

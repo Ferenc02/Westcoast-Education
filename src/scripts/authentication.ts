@@ -177,7 +177,7 @@ export let signUpUser = async (formElement: HTMLFormElement) => {
     phone: "",
     address: "",
     courses: [],
-    role: "user",
+    role: "admin",
     authToken: uuid,
     expiresAt: new Date(Date.now() + maxAge * 1000).toISOString(),
   };
