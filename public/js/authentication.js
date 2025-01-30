@@ -33,7 +33,8 @@ export function validateUser() {
                     signOutUser();
                     return {};
                 }
-                showMessageBox(user.email, "success");
+                // Successful
+                // showMessageBox(user.email, "success");
                 return { user };
             }
         }

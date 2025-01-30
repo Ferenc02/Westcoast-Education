@@ -14,6 +14,11 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
+    <!-- Bungee font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee&display=swap"
+      rel="stylesheet"
+    />
     <!-- Material icon -->
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
@@ -52,8 +57,44 @@
     <!-- Message box end -->
 
     <!-- Main part -->
-    <main class="relative h-full flex justify-center items-center homepage">
-      <h1>Home</h1>
+    <main class="relative h-full flex flex-col items-center">
+      <section class="flex w-full flex-col h-1/4 homepage shadow-md">
+        <div class="flex text-gray-100 items-center justify-between mx-6 mt-6">
+          <button
+            id="home-navbar-button"
+            class="scale-100 lg:scale-125 cursor-pointer rounded-full w-10 h-10 flex justify-center items-center lg:hover:scale-[130%] transition-transform"
+          >
+            <span class="material-symbols-outlined"> menu </span>
+          </button>
+          <a
+            href="/pages/home.html"
+            class="logo flex items-center gap-2 space-x-3 rtl:space-x-reverse px-4"
+          >
+            <span class="self-center whitespace-nowrap bungee-regular"
+              >Westcoast Education</span
+            >
+          </a>
+          <a href="/pages/home.html">
+            <img
+              src="../public/images/new_icon.svg"
+              alt="Westcoast Education"
+              class="w-6 lg:w-8"
+            />
+          </a>
+        </div>
+        <div
+          class="flex flex-col text-gray-100 items-center justify-center h-full text-center"
+        >
+          <h1 class="lg:text-4xl font-bold capitalize text-2xl">Welcome,</h1>
+          <p class="text-lg mt-4">
+            All available courses and programs are designed to help you achieve
+            your educational goals.
+          </p>
+        </div>
+      </section>
+      <section class="flex flex-col w-full lg:p-8 bg-gray-100">
+        <p>Main Content</p>
+      </section>
     </main>
   </body>
 </html>
