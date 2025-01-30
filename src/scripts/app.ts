@@ -10,6 +10,8 @@ import {
 } from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
 
+import { initializeHome } from "./home.js";
+
 export let authenticatedUser: Object = {};
 
 export let currentPage = window.location.pathname;
@@ -39,7 +41,7 @@ export let updateUserInDatabase = async (userInformation: user) => {
   });
 };
 
-let init = async () => {
+let initializeApp = async () => {
   authenticatedUser = await validateUser();
 
   console.log(authenticatedUser);
@@ -91,9 +93,11 @@ let init = async () => {
   if (location.hash === "#login") {
     (document.querySelector(".login-button") as HTMLButtonElement)?.click();
   }
+
+  initializeHome();
 };
 
-init();
+initializeApp();
 
 // updateUserInDatabase({
 //   id: "2",

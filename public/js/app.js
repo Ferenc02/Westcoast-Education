@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { validateUser, signUpUser, signUpPage, loginUser, toggleSignUp, signOutUser, } from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
+import { initializeHome } from "./home.js";
 export let authenticatedUser = {};
 export let currentPage = window.location.pathname;
 function isEmpty(obj) {
@@ -32,7 +33,7 @@ export let updateUserInDatabase = (userInformation) => __awaiter(void 0, void 0,
         body: JSON.stringify(userInformation),
     });
 });
-let init = () => __awaiter(void 0, void 0, void 0, function* () {
+let initializeApp = () => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c, _d, _e, _f;
     authenticatedUser = yield validateUser();
     console.log(authenticatedUser);
@@ -73,8 +74,9 @@ let init = () => __awaiter(void 0, void 0, void 0, function* () {
     if (location.hash === "#login") {
         (_f = document.querySelector(".login-button")) === null || _f === void 0 ? void 0 : _f.click();
     }
+    initializeHome();
 });
-init();
+initializeApp();
 // updateUserInDatabase({
 //   id: "2",
 //   name: "hacked :(",
