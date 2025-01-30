@@ -56,6 +56,60 @@
     </div>
     <!-- Message box end -->
 
+    <!-- Header part -->
+
+    <header>
+      <nav
+        class="navbar fixed top-0 left-0 w-48 text-gray-400 bg-white z-50 flex flex-col items-center justify-center shadow-md"
+      >
+        <div class="profile-parent py-4">
+          <p class="profile-name font-medium text-xl text-gray-900">no_name</p>
+          <p class="profile-type">User</p>
+        </div>
+        <div class="font-semibold capitalize w-full flex flex-col items-center">
+          <div>
+            <a href="/pages/home.html" class="hover:underline block py-2"
+              >dashboard</a
+            >
+            <a
+              href="/pages/home.html#addCourse"
+              class="hover:underline block py-2"
+              >add course</a
+            >
+            <a
+              href="/pages/home.html#myCourses"
+              class="hover:underline block py-2"
+              >my courses</a
+            >
+            <a
+              href="/pages/home.html#support"
+              class="hover:underline block py-2"
+              >support</a
+            >
+            <a
+              href="/pages/home.html#profile"
+              class="hover:underline block py-2"
+              >profile</a
+            >
+          </div>
+        </div>
+        <div class="line w-32 bg-gray-300 h-[2px]"></div>
+
+        <div class="current-courses font-semibold text-gray-900 capitalize">
+          <a href="#" class="hover:underline block py-2">Course 1</a>
+          <a href="#" class="hover:underline block py-2">Course 2</a>
+          <a href="#" class="hover:underline block py-2">Course 3</a>
+        </div>
+
+        <button
+          id="logout-button"
+          class="logout-button w-full bg-red-500 text-white py-2 px-4 mt-4 cursor-pointer hover:bg-red-600 transition-colors"
+        >
+          Sign Out
+        </button>
+      </nav>
+    </header>
+
     <!-- Main part -->
     <main class="relative h-full flex flex-col items-center">
       <section class="flex w-full flex-col h-1/4 homepage shadow-md">
