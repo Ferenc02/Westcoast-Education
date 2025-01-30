@@ -49,6 +49,10 @@ let init = async () => {
     location.href = "/pages/home.html";
   }
 
+  if (currentPage.includes("home.html") && isEmpty(authenticatedUser)) {
+    location.href = "/pages/login.html#login";
+  }
+
   document.querySelector(".test-button")?.addEventListener("click", () => {
     showMessageBox("This is an error message", "error");
   });
@@ -56,7 +60,7 @@ let init = async () => {
   document.querySelector(".test-button2")?.addEventListener("click", () => {
     showMessageBox("This is an success message", "success");
   });
-  document.querySelector(".test-button3")?.addEventListener("click", () => {
+  document.querySelector("#logout-button")?.addEventListener("click", () => {
     signOutUser();
   });
 

@@ -40,13 +40,16 @@ let init = () => __awaiter(void 0, void 0, void 0, function* () {
     if (currentPage.includes("login.html") && !isEmpty(authenticatedUser)) {
         location.href = "/pages/home.html";
     }
+    if (currentPage.includes("home.html") && isEmpty(authenticatedUser)) {
+        location.href = "/pages/login.html#login";
+    }
     (_a = document.querySelector(".test-button")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
         showMessageBox("This is an error message", "error");
     });
     (_b = document.querySelector(".test-button2")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
         showMessageBox("This is an success message", "success");
     });
-    (_c = document.querySelector(".test-button3")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => {
+    (_c = document.querySelector("#logout-button")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => {
         signOutUser();
     });
     let formElement = document.querySelector(".authentication-form");
