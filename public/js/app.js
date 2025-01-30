@@ -38,7 +38,7 @@ let init = () => __awaiter(void 0, void 0, void 0, function* () {
     console.log(authenticatedUser);
     //  Redirect to the home page if the user is already logged in.
     if (currentPage.includes("login.html") && !isEmpty(authenticatedUser)) {
-        location.href = "/";
+        location.href = "/pages/home.html";
     }
     (_a = document.querySelector(".test-button")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
         showMessageBox("This is an error message", "error");

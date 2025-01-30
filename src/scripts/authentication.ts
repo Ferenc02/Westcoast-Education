@@ -131,7 +131,7 @@ export let loginUser = async (formElement: HTMLFormElement) => {
 
         // showMessageBox("User signed in", "success");
 
-        location.href = "/";
+        location.href = "/pages/home.html";
 
         return;
       }
@@ -195,7 +195,7 @@ export let signUpUser = async (formElement: HTMLFormElement) => {
 
   console.log(postOutput);
 
-  location.href = "/";
+  location.href = "/pages/home.html";
 };
 
 // Function that hashes a password using SHA-256 and a salt.

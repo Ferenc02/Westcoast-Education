@@ -46,7 +46,7 @@ let init = async () => {
 
   //  Redirect to the home page if the user is already logged in.
   if (currentPage.includes("login.html") && !isEmpty(authenticatedUser)) {
-    location.href = "/";
+    location.href = "/pages/home.html";
   }
 
   document.querySelector(".test-button")?.addEventListener("click", () => {
