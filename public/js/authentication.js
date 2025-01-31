@@ -35,7 +35,7 @@ export function validateUser() {
                 }
                 // Successful
                 // showMessageBox(user.email, "success");
-                return { user };
+                return user;
             }
         }
         // showMessageBox("Token found :D", "success");

@@ -7,10 +7,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { validateUser, signUpUser, signUpPage, loginUser, toggleSignUp, signOutUser, } from "./authentication.js";
+import { validateUser, signUpUser, signUpPage, loginUser, toggleSignUp, } from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
 import { initializeHome } from "./home.js";
-export let authenticatedUser = {};
+export let authenticatedUser;
 export let currentPage = window.location.pathname;
 function isEmpty(obj) {
     return Object.keys(obj).length === 0;
@@ -34,8 +34,8 @@ export let updateUserInDatabase = (userInformation) => __awaiter(void 0, void 0,
     });
 });
 let initializeApp = () => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c, _d, _e, _f;
-    authenticatedUser = yield validateUser();
+    var _a, _b, _c;
+    authenticatedUser = (yield validateUser());
     console.log(authenticatedUser);
     //  Redirect to the home page if the user is already logged in.
     if (currentPage.includes("login.html") && !isEmpty(authenticatedUser)) {
@@ -44,15 +44,6 @@ let initializeApp = () => __awaiter(void 0, void 0, void 0, function* () {
     if (currentPage.includes("home.html") && isEmpty(authenticatedUser)) {
         location.href = "/pages/login.html#login";
     }
-    (_a = document.querySelector(".test-button")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
-        showMessageBox("This is an error message", "error");
-    });
-    (_b = document.querySelector(".test-button2")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
-        showMessageBox("This is an success message", "success");
-    });
-    (_c = document.querySelector("#logout-button")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => {
-        signOutUser();
-    });
     let formElement = document.querySelector(".authentication-form");
     formElement === null || formElement === void 0 ? void 0 : formElement.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -63,16 +54,16 @@ let initializeApp = () => __awaiter(void 0, void 0, void 0, function* () {
             loginUser(formElement);
         }
     });
-    (_d = document.querySelector(".login-button")) === null || _d === void 0 ? void 0 : _d.addEventListener("click", () => {
+    (_a = document.querySelector(".login-button")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
         toggleSignUp(formElement);
     });
-    (_e = document.querySelector("#navbar-toggle")) === null || _e === void 0 ? void 0 : _e.addEventListener("click", () => {
+    (_b = document.querySelector("#navbar-toggle")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
         var _a;
         (_a = document
             .querySelector("#navbar-default")) === null || _a === void 0 ? void 0 : _a.classList.toggle("show-mobile-nav");
     });
     if (location.hash === "#login") {
-        (_f = document.querySelector(".login-button")) === null || _f === void 0 ? void 0 : _f.click();
+        (_c = document.querySelector(".login-button")) === null || _c === void 0 ? void 0 : _c.click();
     }
     initializeHome();
 });

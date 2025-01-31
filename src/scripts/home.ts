@@ -1,6 +1,18 @@
+import { signOutUser } from "./authentication.js";
+import { authenticatedUser } from "./app.js";
+import showMessageBox from "./errorHandling.js";
+
 let header = document.querySelector("header") as HTMLElement;
 let navbar = document.querySelector("nav") as HTMLElement;
 let navbarButton = document.querySelector("#home-navbar-button");
+
+let profileName = navbar.querySelector(".profile-name") as HTMLElement;
+let profileRole = navbar.querySelector(".profile-role") as HTMLElement;
+let homeTitle = document.querySelector(".home-title") as HTMLElement;
+
+let logoutButton = document.querySelector(
+  "#logout-button"
+) as HTMLButtonElement;
 
 let navbarActive = false;
 
@@ -10,11 +22,16 @@ export const initializeHome = () => {
     toggleNavbar();
   });
 
+  logoutButton.addEventListener("click", () => {
+    signOutUser();
+    location.href = "/pages/login.html#login";
+  });
+
   document.body.addEventListener("mousemove", (event) => {
     if (navbarActive) {
       let x = event.clientX;
 
-      console.log(event);
+      // console.log(event);
       // console.log(x, y);
 
       // mouseOutsideNavbar = x > navbar.offsetWidth ? true : false;
@@ -24,6 +41,17 @@ export const initializeHome = () => {
       }
     }
   });
+
+  updateText();
+};
+
+// Function that uupdates all the text in the site to the authenticated user's name and role. This will always be authenticated since the user has to be authenticated to access the home page.
+const updateText = () => {
+  profileName.textContent = authenticatedUser.name;
+  profileRole.textContent =
+    authenticatedUser.role === "admin" ? "administrator" : "User";
+
+  homeTitle.textContent = `Welcome, ${authenticatedUser.name}!`;
 };
 
 const toggleNavbar = () => {

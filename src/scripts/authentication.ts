@@ -21,7 +21,7 @@ export interface user {
 // Function that checks if the user has a valid token in the cookie. If the token is valid, the user will be signed in.
 // If the token is invalid, the user will be signed out.
 //  This is good to implement so that the user doesn't have to sign in every time they visit the website.
-export async function validateUser(): Promise<Object> {
+export async function validateUser(): Promise<user | {}> {
   let authToken = document.cookie
     .split(";")
     .find((row) => row.startsWith("authToken="))
@@ -51,7 +51,7 @@ export async function validateUser(): Promise<Object> {
       // Successful
       // showMessageBox(user.email, "success");
 
-      return { user };
+      return user;
     }
   }
 

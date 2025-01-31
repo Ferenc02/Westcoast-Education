@@ -12,7 +12,7 @@ import showMessageBox from "./errorHandling.js";
 
 import { initializeHome } from "./home.js";
 
-export let authenticatedUser: Object = {};
+export let authenticatedUser: user;
 
 export let currentPage = window.location.pathname;
 
@@ -42,7 +42,7 @@ export let updateUserInDatabase = async (userInformation: user) => {
 };
 
 let initializeApp = async () => {
-  authenticatedUser = await validateUser();
+  authenticatedUser = (await validateUser()) as user;
 
   console.log(authenticatedUser);
 
@@ -54,17 +54,6 @@ let initializeApp = async () => {
   if (currentPage.includes("home.html") && isEmpty(authenticatedUser)) {
     location.href = "/pages/login.html#login";
   }
-
-  document.querySelector(".test-button")?.addEventListener("click", () => {
-    showMessageBox("This is an error message", "error");
-  });
-
-  document.querySelector(".test-button2")?.addEventListener("click", () => {
-    showMessageBox("This is an success message", "success");
-  });
-  document.querySelector("#logout-button")?.addEventListener("click", () => {
-    signOutUser();
-  });
 
   let formElement = document.querySelector(
     ".authentication-form"
