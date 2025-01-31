@@ -144,7 +144,6 @@ export let loginUser = async (formElement: HTMLFormElement) => {
 
 // Function that signs up a user by creating a new user object and posting it to the server.
 export let signUpUser = async (formElement: HTMLFormElement) => {
-  alert("User created");
   let response = await fetch("http://localhost:3001/users");
 
   let users: Array<user> = await response.json();

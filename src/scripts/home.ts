@@ -1,4 +1,5 @@
-let header = document.querySelector("header");
+let header = document.querySelector("header") as HTMLElement;
+let navbar = document.querySelector("nav") as HTMLElement;
 let navbarButton = document.querySelector("#home-navbar-button");
 
 let navbarActive = false;
@@ -10,7 +11,44 @@ export const initializeHome = () => {
   });
 };
 
-let toggleNavbar = () => {
-  header?.classList.toggle("hidden");
+const toggleNavbar = () => {
+  // header?.classList.toggle("hidden");
+
+  if (!navbarActive) {
+    navbar.classList.add("slide-in");
+    navbar.classList.remove("slide-out");
+
+    header.classList.remove("hidden");
+  } else {
+    navbar.classList.add("slide-out");
+    navbar.classList.remove("slide-in");
+
+    setTimeout(() => {
+      header.classList.add("hidden");
+    }, 300);
+  }
+
   navbarActive = !navbarActive;
 };
+
+document.body.addEventListener("mousemove", (event) => {
+  if (navbarActive) {
+    let x = event.clientX;
+
+    console.log(event);
+    // console.log(x, y);
+
+    // mouseOutsideNavbar = x > navbar.offsetWidth ? true : false;
+
+    if (x > navbar.offsetWidth) {
+      toggleNavbar();
+    }
+  }
+});
+
+// document.body.addEventListener("click", (event) => {
+//   if (navbarActive && mouseOutsideNavbar) {
+//     console.log(mouseOutsideNavbar);
+//     toggleNavbar();
+//   }
+// });
