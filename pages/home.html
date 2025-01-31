@@ -174,7 +174,7 @@
           <h1 class="lg:text-4xl font-bold capitalize text-2xl home-title">
             Welcome,
           </h1>
-          <p class="text-lg mt-4">
+          <p class="text-lg mt-4 home-description">
             All available courses and programs are designed to help you achieve
             your educational goals.
           </p>
@@ -184,11 +184,99 @@
         class="fade-in flex flex-col w-full lg:p-8 bg-gray-100"
         id="main-content"
       >
-        <h2 class="text-xl font-bold text-gray-900 mt-2">Available Courses:</h2>
+        <h2 class="text-xl font-bold text-gray-900 mt-2 main-content-title">
+          Available Courses:
+        </h2>
 
-        <div
+        <!-- Courses/Dashboard Section -->
+        <section
           class="fade-in grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 lg:gap-8 mt-4 lg:mt-8 p-2 cards-container"
-        ></div>
+        ></section>
+
+        <!-- Add Course Section -->
+        <section class="fade-in add-course-container hidden flex gap-2">
+          <form
+            class="flex flex-col w-1/2 p-4 bg-white h-full shadow-lg gap-4 add-course-form"
+          >
+            <h2 class="font-medium text-gray-900">Course name:</h2>
+            <input
+              type="text"
+              class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg indent-2 transition duration-200 outline-none text-gray-700"
+              placeholder="Enter course name"
+            />
+            <h2 class="font-medium text-gray-900">Course description:</h2>
+            <textarea
+              class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg indent-2 transition duration-200 outline-none text-gray-700"
+              placeholder="Enter course description"
+            ></textarea>
+
+            <h2 class="font-medium text-gray-900">Course image:</h2>
+            <div class="flex items-center gap-2">
+              <input
+                type="text"
+                class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg indent-2 transition duration-200 outline-none text-gray-700"
+                placeholder="https://example.com/image.jpg"
+              />
+              <input
+                type="checkbox"
+                id="image-checkbox"
+                class="cursor-pointer"
+              />
+              <label
+                for="image-checkbox"
+                class="cursor-pointer text-nowrap capitalize select-none"
+                >random image</label
+              >
+            </div>
+
+            <div class="flex items-center gap-4">
+              <div>
+                <h2 class="font-medium text-gray-900 my-4">Instructor</h2>
+                <input
+                  type="text"
+                  class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg indent-2 transition duration-200 outline-none text-gray-700"
+                  placeholder="Enter instructor name"
+                />
+              </div>
+              <div>
+                <h2 class="font-medium text-gray-900 my-4">Course price:</h2>
+                <input
+                  type="number"
+                  class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg indent-2 transition duration-200 outline-none text-gray-700"
+                  placeholder="Enter course price"
+                />
+              </div>
+              <div>
+                <h2 class="font-medium text-gray-900 my-4">Start Date:</h2>
+                <input
+                  type="date"
+                  class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg indent-2 transition duration-200 outline-none text-gray-700"
+                  placeholder="Enter start date"
+                />
+              </div>
+
+              <div>
+                <h2 class="font-medium text-gray-900 my-4">End Date:</h2>
+                <input
+                  type="date"
+                  class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg indent-2 transition duration-200 outline-none text-gray-700"
+                  placeholder="Enter end date"
+                />
+              </div>
+            </div>
+
+            <button
+              class="button w-full bg-amber-500 hover:bg-amber-600"
+              type="submit"
+            >
+              Add Course
+            </button>
+          </form>
+
+          <aside class="w-1/2 p-4 bg-white h-full shadow-lg preview-container">
+            <p>Other side</p>
+          </aside>
+        </section>
       </section>
     </main>
   </body>
