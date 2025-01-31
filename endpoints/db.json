@@ -1,6 +1,16 @@
 {
-  "test": {
-    "name": "John Doe",
-    "age": 20
-  }
+  "courses": [
+    {
+      "id": 1,
+      "name": "Course 1",
+      "description": "This is course 1",
+      "location": "Location 1",
+      "instructor": "Instructor 1",
+      "startDate": "2022-01-01",
+      "endDate": "2022-01-31",
+      "students": [],
+      "image": "https://picsum.photos/id/237/200/300",
+      "price": 100
+    }
+  ]
 }

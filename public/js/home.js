@@ -1,5 +1,6 @@
 import { signOutUser } from "./authentication.js";
 import { authenticatedUser } from "./app.js";
+import { initializeCourses } from "./courses.js";
 let header;
 let navbar;
 let navbarButton;
@@ -35,6 +36,10 @@ export const initializeHome = () => {
         }
     });
     updateText();
+    if (location.hash === "") {
+        initializeCourses();
+    }
+    window.addEventListener("hashchange", hashChange);
 };
 // Function that uupdates all the text in the site to the authenticated user's name and role. This will always be authenticated since the user has to be authenticated to access the home page.
 const updateText = () => {
@@ -58,4 +63,9 @@ const toggleNavbar = () => {
         }, 300);
     }
     navbarActive = !navbarActive;
+};
+const hashChange = () => {
+    if (location.hash === "") {
+        initializeCourses();
+    }
 };

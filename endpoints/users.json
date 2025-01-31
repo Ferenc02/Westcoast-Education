@@ -21,8 +21,8 @@
       "address": "",
       "courses": [],
       "role": "admin",
-      "authToken": "wmlb7329-rv3i-k38z-81qq-ux634k1tfcwe",
-      "expiresAt": "2025-02-01T13:21:24.133Z"
+      "authToken": "7n86jc63-u7c1-s3n0-gq34-uq33gdtinjkm",
+      "expiresAt": "2025-02-01T14:29:23.640Z"
     },
     {
       "id": "3",
@@ -35,6 +35,18 @@
       "role": "user",
       "authToken": "9moddm2h-u17j-9h4y-17f6-say29rl93lib",
       "expiresAt": "2025-01-28T15:43:44.200Z"
+    },
+    {
+      "id": 4,
+      "name": "Frank",
+      "email": "frank@gmail.com",
+      "password": "604b6f3038b99e3e4e80259bc3fe9c38a46a2f638853e47e616841b05269eef5",
+      "phone": "",
+      "address": "",
+      "courses": [],
+      "role": "admin",
+      "authToken": "pvtt9l8g-e77y-3hv1-44az-o4j33nl32mlb",
+      "expiresAt": "2025-02-01T14:29:02.494Z"
     }
   ]
 }
