@@ -44,28 +44,34 @@ let initializeApp = () => __awaiter(void 0, void 0, void 0, function* () {
     if (currentPage.includes("home.html") && isEmpty(authenticatedUser)) {
         location.href = "/pages/login.html#login";
     }
-    let formElement = document.querySelector(".authentication-form");
-    formElement === null || formElement === void 0 ? void 0 : formElement.addEventListener("submit", (event) => {
-        event.preventDefault();
-        if (signUpPage) {
-            signUpUser(formElement);
-        }
-        else {
-            loginUser(formElement);
-        }
-    });
-    (_a = document.querySelector(".login-button")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
-        toggleSignUp(formElement);
-    });
-    (_b = document.querySelector("#navbar-toggle")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
-        var _a;
-        (_a = document
-            .querySelector("#navbar-default")) === null || _a === void 0 ? void 0 : _a.classList.toggle("show-mobile-nav");
-    });
+    if (currentPage.includes("login.html")) {
+        let formElement = document.querySelector(".authentication-form");
+        formElement === null || formElement === void 0 ? void 0 : formElement.addEventListener("submit", (event) => {
+            event.preventDefault();
+            if (signUpPage) {
+                signUpUser(formElement);
+            }
+            else {
+                loginUser(formElement);
+            }
+        });
+        (_a = document.querySelector(".login-button")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
+            toggleSignUp(formElement);
+        });
+    }
+    if (location.pathname == "/") {
+        (_b = document.querySelector("#navbar-toggle")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
+            var _a;
+            (_a = document
+                .querySelector("#navbar-default")) === null || _a === void 0 ? void 0 : _a.classList.toggle("show-mobile-nav");
+        });
+    }
     if (location.hash === "#login") {
         (_c = document.querySelector(".login-button")) === null || _c === void 0 ? void 0 : _c.click();
     }
-    initializeHome();
+    if (location.href.includes("home.html")) {
+        initializeHome();
+    }
 });
 initializeApp();
 // updateUserInDatabase({

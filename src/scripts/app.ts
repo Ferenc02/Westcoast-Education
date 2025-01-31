@@ -55,35 +55,41 @@ let initializeApp = async () => {
     location.href = "/pages/login.html#login";
   }
 
-  let formElement = document.querySelector(
-    ".authentication-form"
-  ) as HTMLFormElement;
+  if (currentPage.includes("login.html")) {
+    let formElement = document.querySelector(
+      ".authentication-form"
+    ) as HTMLFormElement;
 
-  formElement?.addEventListener("submit", (event) => {
-    event.preventDefault();
+    formElement?.addEventListener("submit", (event) => {
+      event.preventDefault();
 
-    if (signUpPage) {
-      signUpUser(formElement);
-    } else {
-      loginUser(formElement);
-    }
-  });
+      if (signUpPage) {
+        signUpUser(formElement);
+      } else {
+        loginUser(formElement);
+      }
+    });
 
-  document.querySelector(".login-button")?.addEventListener("click", () => {
-    toggleSignUp(formElement);
-  });
+    document.querySelector(".login-button")?.addEventListener("click", () => {
+      toggleSignUp(formElement);
+    });
+  }
 
-  document.querySelector("#navbar-toggle")?.addEventListener("click", () => {
-    document
-      .querySelector("#navbar-default")
-      ?.classList.toggle("show-mobile-nav");
-  });
+  if (location.pathname == "/") {
+    document.querySelector("#navbar-toggle")?.addEventListener("click", () => {
+      document
+        .querySelector("#navbar-default")
+        ?.classList.toggle("show-mobile-nav");
+    });
+  }
 
   if (location.hash === "#login") {
     (document.querySelector(".login-button") as HTMLButtonElement)?.click();
   }
 
-  initializeHome();
+  if (location.href.includes("home.html")) {
+    initializeHome();
+  }
 };
 
 initializeApp();

@@ -1,15 +1,21 @@
 import { signOutUser } from "./authentication.js";
 import { authenticatedUser } from "./app.js";
-let header = document.querySelector("header");
-let navbar = document.querySelector("nav");
-let navbarButton = document.querySelector("#home-navbar-button");
-let profileName = navbar.querySelector(".profile-name");
-let profileRole = navbar.querySelector(".profile-role");
-let homeTitle = document.querySelector(".home-title");
+let header;
+let navbar;
+let navbarButton;
+let profileName;
+let profileRole;
+let homeTitle;
 let logoutButton = document.querySelector("#logout-button");
 let navbarActive = false;
 // Function to initialize the home page. This function will be called when the home page is loaded in app.ts.
 export const initializeHome = () => {
+    header = document.querySelector("header");
+    navbar = document.querySelector("nav");
+    navbarButton = document.querySelector("#home-navbar-button");
+    profileName = navbar.querySelector(".profile-name");
+    profileRole = navbar.querySelector(".profile-role");
+    homeTitle = document.querySelector(".home-title");
     navbarButton === null || navbarButton === void 0 ? void 0 : navbarButton.addEventListener("click", () => {
         toggleNavbar();
     });
