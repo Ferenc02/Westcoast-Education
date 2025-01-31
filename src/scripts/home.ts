@@ -9,6 +9,21 @@ export const initializeHome = () => {
   navbarButton?.addEventListener("click", () => {
     toggleNavbar();
   });
+
+  document.body.addEventListener("mousemove", (event) => {
+    if (navbarActive) {
+      let x = event.clientX;
+
+      console.log(event);
+      // console.log(x, y);
+
+      // mouseOutsideNavbar = x > navbar.offsetWidth ? true : false;
+
+      if (x > navbar.offsetWidth) {
+        toggleNavbar();
+      }
+    }
+  });
 };
 
 const toggleNavbar = () => {
@@ -30,25 +45,3 @@ const toggleNavbar = () => {
 
   navbarActive = !navbarActive;
 };
-
-document.body.addEventListener("mousemove", (event) => {
-  if (navbarActive) {
-    let x = event.clientX;
-
-    console.log(event);
-    // console.log(x, y);
-
-    // mouseOutsideNavbar = x > navbar.offsetWidth ? true : false;
-
-    if (x > navbar.offsetWidth) {
-      toggleNavbar();
-    }
-  }
-});
-
-// document.body.addEventListener("click", (event) => {
-//   if (navbarActive && mouseOutsideNavbar) {
-//     console.log(mouseOutsideNavbar);
-//     toggleNavbar();
-//   }
-// });

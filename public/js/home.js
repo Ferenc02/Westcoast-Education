@@ -7,6 +7,17 @@ export const initializeHome = () => {
     navbarButton === null || navbarButton === void 0 ? void 0 : navbarButton.addEventListener("click", () => {
         toggleNavbar();
     });
+    document.body.addEventListener("mousemove", (event) => {
+        if (navbarActive) {
+            let x = event.clientX;
+            console.log(event);
+            // console.log(x, y);
+            // mouseOutsideNavbar = x > navbar.offsetWidth ? true : false;
+            if (x > navbar.offsetWidth) {
+                toggleNavbar();
+            }
+        }
+    });
 };
 const toggleNavbar = () => {
     // header?.classList.toggle("hidden");
@@ -24,20 +35,3 @@ const toggleNavbar = () => {
     }
     navbarActive = !navbarActive;
 };
-document.body.addEventListener("mousemove", (event) => {
-    if (navbarActive) {
-        let x = event.clientX;
-        console.log(event);
-        // console.log(x, y);
-        // mouseOutsideNavbar = x > navbar.offsetWidth ? true : false;
-        if (x > navbar.offsetWidth) {
-            toggleNavbar();
-        }
-    }
-});
-// document.body.addEventListener("click", (event) => {
-//   if (navbarActive && mouseOutsideNavbar) {
-//     console.log(mouseOutsideNavbar);
-//     toggleNavbar();
-//   }
-// });
