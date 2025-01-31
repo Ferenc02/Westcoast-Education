@@ -32,8 +32,17 @@ export const generateCourseCard = (course: course) => {
             <p class="text-gray-700 mt-2">
                 ${course.description}
             </p>
+            <div class="flex justify-between items-center mt-4">
+              <p class="text-gray-600 font-medium">$${course.price}</p>
+              <div class="flex gap-2 text-gray-600">
+              <span class="material-symbols-outlined">
+              groups
+              </span>
+              <p class=" font-medium">${course.instructor}</p>
+              </div>
+            </div>
             <button
-              class="button w-full mt-4 bg-green-500 text-white hover:bg-green-600 transition-colors"
+              class="button w-full  bg-green-500 text-white hover:bg-green-600 transition-colors"
             >
               Enroll
             </button>
