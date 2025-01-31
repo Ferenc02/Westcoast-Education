@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { validateUser, signUpUser, signUpPage, loginUser, toggleSignUp, signOutUser, } from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
+import { initializeHome } from "./home.js";
 export let authenticatedUser = {};
 export let currentPage = window.location.pathname;
 function isEmpty(obj) {
@@ -32,13 +33,16 @@ export let updateUserInDatabase = (userInformation) => __awaiter(void 0, void 0,
         body: JSON.stringify(userInformation),
     });
 });
-let init = () => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c, _d;
+let initializeApp = () => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b, _c, _d, _e, _f;
     authenticatedUser = yield validateUser();
     console.log(authenticatedUser);
     //  Redirect to the home page if the user is already logged in.
     if (currentPage.includes("login.html") && !isEmpty(authenticatedUser)) {
-        location.href = "/";
+        location.href = "/pages/home.html";
+    }
+    if (currentPage.includes("home.html") && isEmpty(authenticatedUser)) {
+        location.href = "/pages/login.html#login";
     }
     (_a = document.querySelector(".test-button")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
         showMessageBox("This is an error message", "error");
@@ -46,7 +50,7 @@ let init = () => __awaiter(void 0, void 0, void 0, function* () {
     (_b = document.querySelector(".test-button2")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
         showMessageBox("This is an success message", "success");
     });
-    (_c = document.querySelector(".test-button3")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => {
+    (_c = document.querySelector("#logout-button")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => {
         signOutUser();
     });
     let formElement = document.querySelector(".authentication-form");
@@ -62,8 +66,17 @@ let init = () => __awaiter(void 0, void 0, void 0, function* () {
     (_d = document.querySelector(".login-button")) === null || _d === void 0 ? void 0 : _d.addEventListener("click", () => {
         toggleSignUp(formElement);
     });
+    (_e = document.querySelector("#navbar-toggle")) === null || _e === void 0 ? void 0 : _e.addEventListener("click", () => {
+        var _a;
+        (_a = document
+            .querySelector("#navbar-default")) === null || _a === void 0 ? void 0 : _a.classList.toggle("show-mobile-nav");
+    });
+    if (location.hash === "#login") {
+        (_f = document.querySelector(".login-button")) === null || _f === void 0 ? void 0 : _f.click();
+    }
+    initializeHome();
 });
-init();
+initializeApp();
 // updateUserInDatabase({
 //   id: "2",
 //   name: "hacked :(",

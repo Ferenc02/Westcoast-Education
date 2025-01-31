@@ -10,6 +10,8 @@ import {
 } from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
 
+import { initializeHome } from "./home.js";
+
 export let authenticatedUser: Object = {};
 
 export let currentPage = window.location.pathname;
@@ -39,14 +41,18 @@ export let updateUserInDatabase = async (userInformation: user) => {
   });
 };
 
-let init = async () => {
+let initializeApp = async () => {
   authenticatedUser = await validateUser();
 
   console.log(authenticatedUser);
 
   //  Redirect to the home page if the user is already logged in.
   if (currentPage.includes("login.html") && !isEmpty(authenticatedUser)) {
-    location.href = "/";
+    location.href = "/pages/home.html";
+  }
+
+  if (currentPage.includes("home.html") && isEmpty(authenticatedUser)) {
+    location.href = "/pages/login.html#login";
   }
 
   document.querySelector(".test-button")?.addEventListener("click", () => {
@@ -56,7 +62,7 @@ let init = async () => {
   document.querySelector(".test-button2")?.addEventListener("click", () => {
     showMessageBox("This is an success message", "success");
   });
-  document.querySelector(".test-button3")?.addEventListener("click", () => {
+  document.querySelector("#logout-button")?.addEventListener("click", () => {
     signOutUser();
   });
 
@@ -77,9 +83,21 @@ let init = async () => {
   document.querySelector(".login-button")?.addEventListener("click", () => {
     toggleSignUp(formElement);
   });
+
+  document.querySelector("#navbar-toggle")?.addEventListener("click", () => {
+    document
+      .querySelector("#navbar-default")
+      ?.classList.toggle("show-mobile-nav");
+  });
+
+  if (location.hash === "#login") {
+    (document.querySelector(".login-button") as HTMLButtonElement)?.click();
+  }
+
+  initializeHome();
 };
 
-init();
+initializeApp();
 
 // updateUserInDatabase({
 //   id: "2",

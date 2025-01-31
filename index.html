@@ -15,6 +15,11 @@
       rel="stylesheet"
     />
 
+    <!-- Bungee font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee&display=swap"
+      rel="stylesheet"
+    />
     <!-- Material icon -->
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
@@ -31,7 +36,7 @@
       aria-hidden="true"
     >
       <div
-        class="message-box__content bg-white rounded-lg mx-auto p-4 flex flex-col items-center gap-8 shadow-lg max-w-xs min-w-xs md:max-w-sm min-w-sm"
+        class="message-box__content bg-white rounded-lg mx-auto p-4 flex flex-col items-center gap-8 shadow-lg max-w-xs min-w-xs lg:max-w-sm min-w-sm"
       >
         <span
           class="message-box__icon material-symbols-outlined text-green-500 !text-8xl mt-4"
@@ -53,6 +58,188 @@
       </div>
     </div>
     <!-- Message box end -->
-    <main class="flex flex-col h-full"></main>
+
+    <!-- Main Part -->
+    <main class="flex flex-col min-h-full lg:h-full homepage text-white">
+      <header>
+        <nav>
+          <div
+            class="mx-auto flex justify-between items-center py-4 lg:px-8 flex-wrap fade-in"
+          >
+            <a
+              href="/"
+              class="logo flex items-center gap-2 space-x-3 rtl:space-x-reverse px-4"
+            >
+              <img
+                src="public/images/new_icon.svg"
+                alt="Westcoast Education"
+                class="w-10"
+              />
+              <span
+                class="self-center whitespace-nowrap bungee-regular lg:text-xl text-sm"
+                >Westcoast Education</span
+              >
+            </a>
+            <button
+              data-collapse-toggle="navbar-default"
+              type="button"
+              class="inline-flex items-center p-2 w-10 h-10 mr-4 justify-center text-sm cursor-pointer lg:hidden"
+              aria-controls="navbar-default"
+              aria-expanded="false"
+              id="navbar-toggle"
+            >
+              <span class="sr-only">Open main menu</span>
+              <svg
+                class="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
+              </svg>
+            </button>
+            <div
+              class="nav-links rounded-md gap-4 items-center h-[0px] lg:h-auto overflow-hidden w-full lg:mx-4 shadow-lg lg:flex lg:w-auto lg:shadow-none"
+              id="navbar-default"
+            >
+              <ul
+                class="font-medium rounded-md text-center flex flex-col justify-center items-center w-full bg-gray-100 text-gray-800 lg:p-0 mt-4 lg:flex-row lg:space-x-8 rtl:space-x-reverse lg:bg-transparent lg:mt-0 lg:border-0 lg:text-white lg:gap-6"
+              >
+                <li class="w-full text-center flex items-center justify-center">
+                  <a
+                    href="/"
+                    aria-current="page"
+                    class="block py-4 hover:underline w-full"
+                  >
+                    Home
+                  </a>
+                </li>
+                <li class="block w-full text-center">
+                  <a href="#" class="block py-4 hover:underline"> About </a>
+                </li>
+                <li class="block w-full text-center">
+                  <a href="#" class="block py-4 hover:underline"> Services </a>
+                </li>
+                <li class="block w-full text-center">
+                  <a href="#" class="block py-4 hover:underline"> Contact </a>
+                </li>
+                <div
+                  class="nav-buttons flex w-full flex-col lg:flex-row lg:gap-2"
+                >
+                  <li class="block w-full text-center">
+                    <a
+                      href="pages/login.html"
+                      class="py-2 w-full flex border-2 border-amber-500 justify-center items-center lg:rounded-lg text-white bg-amber-500 lg:w-28 hover:bg-amber-600 hover:border-amber-600 transition-colors"
+                      >Join</a
+                    >
+                  </li>
+                  <li class="block w-full text-center">
+                    <a
+                      href="pages/login.html#login"
+                      class="border-2 w-full bg-blue-500 border-blue-500 lg:bg-none lg:border-gray-200 py-2 flex justify-center items-center lg:rounded-lg text-white lg:w-28 hover:border-gray-400 transition-colors"
+                      >Log in</a
+                    >
+                  </li>
+                </div>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <section
+        class="flex flex-col items-center justify-between lg:h-full fade-in"
+      >
+        <div
+          class="flex flex-col items-center justify-between lg:h-full lg:flex-row lg:mx-16"
+        >
+          <div class="left-section p-4 lg:w-1/2">
+            <h1 class="lg:text-6xl font-bold capitalize text-4xl">
+              Learn from anywhere and anytime
+            </h1>
+            <p class="text-lg mt-4">
+              Build skills with courses, certificates, and degrees online from
+              home or on campus.
+            </p>
+            <a
+              href="pages/login.html"
+              class="button mt-4 bg-amber-500 hover:bg-amber-600 transition-colors text-xl !py-4 !px-4"
+              >Join Us</a
+            >
+          </div>
+          <div
+            class="right-section items-center justify-center w-1/2 h-fit hidden lg:flex"
+          >
+            <img
+              src="public/images/Illustration.svg"
+              alt="Hero image"
+              class="hero-image object-cover scale-x-[-1]"
+            />
+          </div>
+        </div>
+        <div
+          class="cards flex flex-row gap-4 mb-6 flex-wrap mt-8 mx-4 lg:mt-0 lg:mx-0"
+        >
+          <div
+            class="w-full lg:w-sm card bg-gray-100 rounded-2xl p-6 flex items-center gap-6 shadow-md lg:hover:scale-[100.5%] transition-transform transition-duraction-200 cursor-pointer"
+          >
+            <div class="flex h-full items-center justify-center">
+              <span class="material-symbols-outlined homepage-icons !text-5xl"
+                >library_books</span
+              >
+            </div>
+            <div class="flex flex-col">
+              <h2 class="text-xl font-semibold text-indigo-600 opacity-80">
+                100+ Courses
+              </h2>
+              <p class="text-gray-600 mt-2">
+                Choose from 100+ courses in various fields.
+              </p>
+            </div>
+          </div>
+          <div
+            class="w-full lg:w-sm card bg-gray-100 rounded-2xl p-6 flex items-center gap-4 shadow-md lg:hover:scale-[100.5%] transition-transform transition-duraction-200 cursor-pointer"
+          >
+            <div class="flex">
+              <span class="material-symbols-outlined homepage-icons !text-5xl"
+                >school</span
+              >
+            </div>
+            <div class="flex flex-col">
+              <h2 class="text-xl font-semibold text-indigo-600 opacity-80">
+                Expert Mentors
+              </h2>
+              <p class="text-gray-700 mt-2">
+                Learn from the best mentors in the industry.
+              </p>
+            </div>
+          </div>
+          <div
+            class="w-full lg:w-sm card bg-gray-100 rounded-2xl p-6 flex items-center gap-4 shadow-md lg:hover:scale-[100.5%] transition-transform transition-duraction-200 cursor-pointer"
+          >
+            <div class="flex">
+              <span class="material-symbols-outlined homepage-icons !text-5xl"
+                >cloud</span
+              >
+            </div>
+            <div class="flex flex-col">
+              <h2 class="text-xl font-semibold text-indigo-600 opacity-80">
+                Online & Campus
+              </h2>
+              <p class="text-gray-700 mt-2">
+                Learn both online and on-campus with us.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   </body>
 </html>

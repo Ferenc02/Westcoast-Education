@@ -48,7 +48,8 @@ export async function validateUser(): Promise<Object> {
         return {};
       }
 
-      showMessageBox(user.email, "success");
+      // Successful
+      // showMessageBox(user.email, "success");
 
       return { user };
     }
@@ -131,7 +132,7 @@ export let loginUser = async (formElement: HTMLFormElement) => {
 
         // showMessageBox("User signed in", "success");
 
-        location.href = "/";
+        location.href = "/pages/home.html";
 
         return;
       }
@@ -143,7 +144,6 @@ export let loginUser = async (formElement: HTMLFormElement) => {
 
 // Function that signs up a user by creating a new user object and posting it to the server.
 export let signUpUser = async (formElement: HTMLFormElement) => {
-  alert("User created");
   let response = await fetch("http://localhost:3001/users");
 
   let users: Array<user> = await response.json();
@@ -176,7 +176,7 @@ export let signUpUser = async (formElement: HTMLFormElement) => {
     phone: "",
     address: "",
     courses: [],
-    role: "user",
+    role: "admin",
     authToken: uuid,
     expiresAt: new Date(Date.now() + maxAge * 1000).toISOString(),
   };
@@ -195,7 +195,7 @@ export let signUpUser = async (formElement: HTMLFormElement) => {
 
   console.log(postOutput);
 
-  location.href = "/";
+  location.href = "/pages/home.html";
 };
 
 // Function that hashes a password using SHA-256 and a salt.

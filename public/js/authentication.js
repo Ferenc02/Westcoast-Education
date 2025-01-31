@@ -33,7 +33,8 @@ export function validateUser() {
                     signOutUser();
                     return {};
                 }
-                showMessageBox(user.email, "success");
+                // Successful
+                // showMessageBox(user.email, "success");
                 return { user };
             }
         }
@@ -94,7 +95,7 @@ export let loginUser = (formElement) => __awaiter(void 0, void 0, void 0, functi
                     body: JSON.stringify(user),
                 });
                 // showMessageBox("User signed in", "success");
-                location.href = "/";
+                location.href = "/pages/home.html";
                 return;
             }
         }
@@ -103,7 +104,6 @@ export let loginUser = (formElement) => __awaiter(void 0, void 0, void 0, functi
 });
 // Function that signs up a user by creating a new user object and posting it to the server.
 export let signUpUser = (formElement) => __awaiter(void 0, void 0, void 0, function* () {
-    alert("User created");
     let response = yield fetch("http://localhost:3001/users");
     let users = yield response.json();
     let name = formElement.querySelector("#name").value;
@@ -127,7 +127,7 @@ export let signUpUser = (formElement) => __awaiter(void 0, void 0, void 0, funct
         phone: "",
         address: "",
         courses: [],
-        role: "user",
+        role: "admin",
         authToken: uuid,
         expiresAt: new Date(Date.now() + maxAge * 1000).toISOString(),
     };
@@ -141,7 +141,7 @@ export let signUpUser = (formElement) => __awaiter(void 0, void 0, void 0, funct
     let postResponse = yield fetch("http://localhost:3001/users", options);
     let postOutput = yield postResponse.json();
     console.log(postOutput);
-    location.href = "/";
+    location.href = "/pages/home.html";
 });
 // Function that hashes a password using SHA-256 and a salt.
 // The salt is a string that is added to the end of the password before hashing.

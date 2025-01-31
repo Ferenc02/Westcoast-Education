@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Westcoast Education</title>
+    <link rel="stylesheet" href="../public/styles/reset.css" />
+    <link rel="stylesheet" href="../public/styles/app.css" />
+
+    <!-- Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bungee font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Material icon -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+
+    <script defer src="../public/js/app.js" type="module"></script>
+  </head>
+  <body>
+    <!-- Message box -->
+    <div
+      class="message-box fixed w-full h-full bg-opacity-75 bg-gray-900/65 flex justify-center items-center hidden z-50"
+    >
+      <div
+        class="message-box__content bg-white rounded-lg mx-auto p-4 flex flex-col items-center gap-8 shadow-lg max-w-xs min-w-xs md:max-w-sm min-w-sm"
+      >
+        <span
+          class="message-box__icon material-symbols-outlined text-green-500 !text-8xl mt-4"
+        >
+          check_circle
+        </span>
+        <h2
+          class="message-box__title text-center text-2xl font-bold text-gray-800"
+        >
+          Message
+        </h2>
+        <p class="message-box__text text-gray-700">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit
+          incidunt recusandae iure, quia quis officiis culpa soluta rerum nulla
+          odit explicabo molestiae illo qui quaerat aspernatur quasi laboriosam,
+          ut quidem.
+        </p>
+        <button class="message-box__button button w-full">Close</button>
+      </div>
+    </div>
+    <!-- Message box end -->
+
+    <!-- Header part -->
+
+    <header class="hidden">
+      <nav
+        class="slide-in navbar fixed top-0 left-0 w-64 h-full text-gray-400 bg-white z-50 flex flex-col items-center justify-between shadow-md"
+      >
+        <div
+          class="flex flex-col items-center w-full py-4 justify-around h-1/2"
+        >
+          <div class="profile-parent py-2 lg:py-4 flex gap-3 items-center">
+            <img
+              src="../public/images/profile.webp"
+              alt="profile"
+              class="profile-image w-12 h-12 shadow-md rounded-full"
+            />
+            <div>
+              <p class="profile-name font-medium lg:text-xl text-gray-900">
+                no_name
+              </p>
+              <p class="profile-type">User</p>
+            </div>
+          </div>
+          <div
+            class="font-semibold capitalize w-full flex flex-col items-center pr-8"
+          >
+            <div>
+              <a
+                href="/pages/home.html"
+                class="hover:underline block py-4 lg:py-6"
+                >dashboard</a
+              >
+              <a
+                href="/pages/home.html#addCourse"
+                class="hover:underline block py-4 lg:py-6"
+                >add course</a
+              >
+              <a
+                href="/pages/home.html#myCourses"
+                class="hover:underline block py-4 lg:py-6"
+                >my courses</a
+              >
+              <a
+                href="/pages/home.html#support"
+                class="hover:underline block py-4 lg:py-6"
+                >support</a
+              >
+              <a
+                href="/pages/home.html#profile"
+                class="hover:underline block py-4 lg:py-6"
+                >profile</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="line w-[60%] bg-gray-300 h-[2px]"></div>
+
+        <div class="w-full flex flex-col items-center h-full justify-between">
+          <div
+            class="current-courses font-semibold text-gray-900 capitalize mt-4 px-4"
+          >
+            <a href="#" class="hover:underline block py-4 lg:py-6 px-8"
+              >Blockchain for dummies
+            </a>
+            <a href="#" class="hover:underline block py-4 lg:py-6 px-8"
+              >Course 2</a
+            >
+            <a href="#" class="hover:underline block py-4 lg:py-6 px-8"
+              >Course 3</a
+            >
+          </div>
+
+          <button
+            id="logout-button"
+            class="logout-button w-full bg-red-500 text-white py-4 px-4 mt-4 cursor-pointer hover:bg-red-600 transition-colors"
+          >
+            Sign Out
+          </button>
+        </div>
+      </nav>
+      <div class="outside w-svw"></div>
+    </header>
+
+    <!-- Main part -->
+    <main class="relative h-full flex flex-col items-center">
+      <section class="flex w-full flex-col h-1/4 homepage shadow-md">
+        <div
+          class="fade-in flex text-gray-100 items-center justify-between mx-6 mt-6"
+        >
+          <button
+            id="home-navbar-button"
+            class="scale-100 lg:scale-125 cursor-pointer rounded-full w-10 h-10 flex justify-center items-center lg:hover:scale-[130%] transition-transform"
+          >
+            <span class="material-symbols-outlined"> menu </span>
+          </button>
+          <a
+            href="/pages/home.html"
+            class="logo flex items-center gap-2 space-x-3 rtl:space-x-reverse px-4"
+          >
+            <span class="self-center whitespace-nowrap bungee-regular"
+              >Westcoast Education</span
+            >
+          </a>
+          <a href="/pages/home.html">
+            <img
+              src="../public/images/new_icon.svg"
+              alt="Westcoast Education"
+              class="w-6 lg:w-8"
+            />
+          </a>
+        </div>
+        <div
+          class="fade-in flex flex-col text-gray-100 items-center justify-center h-full text-center"
+        >
+          <h1 class="lg:text-4xl font-bold capitalize text-2xl">Welcome,</h1>
+          <p class="text-lg mt-4">
+            All available courses and programs are designed to help you achieve
+            your educational goals.
+          </p>
+        </div>
+      </section>
+      <section
+        class="fade-in flex flex-col w-full lg:p-8 bg-gray-100"
+        id="main-content"
+      >
+        <h2 class="text-xl font-bold text-gray-900 mt-2">Available Courses:</h2>
+      </section>
+    </main>
+  </body>
+</html>

@@ -50,9 +50,11 @@
       </div>
     </div>
     <!-- Message box end -->
-    <main class="relative h-full flex justify-center items-center">
+
+    <!-- Main part -->
+    <main class="relative h-full flex justify-center items-center homepage">
       <form
-        class="authentication-form flex flex-col gap-4 inset-0 h-fit bg-white rounded-lg shadow-lg mx-auto p-8 w-md"
+        class="scale-90 lg:scale-100 authentication-form flex flex-col gap-4 inset-0 h-fit bg-white rounded-lg shadow-lg mx-auto p-8 w-md fade-in"
       >
         <div class="form-group flex flex-col gap-2">
           <label for="name" class="text-gray-500">Name:</label>
@@ -109,13 +111,16 @@
             </div>
           </div>
         </div>
-        <button class="button w-full bg-amber-400" type="submit">
+        <button
+          class="button w-full bg-amber-500 hover:bg-amber-600 mt-2"
+          type="submit"
+        >
           Sign up
         </button>
         <span
-          class="flex flex-row items-center gap-2 text-center justify-center"
+          class="flex flex-row items-center gap-2 text-center justify-center mt-4"
         >
-          <p class="text-center text-gray-700 mt-4">Already have an account?</p>
+          <p class="text-center text-gray-700">Already have an account?</p>
           <a href="#" class="text-blue-500 login-button">Login</a>
         </span>
       </form>
