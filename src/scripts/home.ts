@@ -325,9 +325,12 @@ const updatePreviewCard = (
     return;
   }
 
-  if (id === "course-checkbox-1" || id === "course-checkbox-2") {
-    const selectedLocations = [addCourseFormLocation1, addCourseFormLocation2]
-      .filter((checkbox) => checkbox.checked)
+  if (id.startsWith("course-checkbox")) {
+    const selectedLocations = Array.from(
+      document.querySelectorAll<HTMLInputElement>(
+        'input[id^="course-checkbox"]:checked'
+      )
+    )
       .map((checkbox) => {
         const label = document.querySelector(`label[for="${checkbox.id}"]`);
         return label ? label.textContent : checkbox.value;
