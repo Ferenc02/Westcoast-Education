@@ -21,8 +21,8 @@
       "address": "",
       "courses": [],
       "role": "admin",
-      "authToken": "7n86jc63-u7c1-s3n0-gq34-uq33gdtinjkm",
-      "expiresAt": "2025-02-01T14:29:23.640Z"
+      "authToken": "1t31wbz7-fn67-gosm-7ug8-6bexjl3ds508",
+      "expiresAt": "2025-02-03T17:36:20.636Z"
     },
     {
       "id": "3",
@@ -37,7 +37,7 @@
       "expiresAt": "2025-01-28T15:43:44.200Z"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Frank",
       "email": "frank@gmail.com",
       "password": "604b6f3038b99e3e4e80259bc3fe9c38a46a2f638853e47e616841b05269eef5",
