@@ -194,9 +194,11 @@
         ></section>
 
         <!-- Add Course Section -->
-        <section class="fade-in add-course-container hidden flex gap-2">
+        <section
+          class="fade-in add-course-container hidden flex gap-2 flex-wrap lg:flex-nowrap w-full mt-4 lg:mt-0"
+        >
           <form
-            class="flex flex-col w-1/2 p-4 bg-white h-full shadow-lg gap-4 add-course-form"
+            class="flex flex-col w-full lg:w-1/2 p-4 bg-white lg:h-full shadow-lg gap-4 add-course-form"
           >
             <h2 class="font-medium text-gray-900">Course name:</h2>
             <input
@@ -255,7 +257,7 @@
               >
             </div>
 
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-4 flex-wrap lg:flex-nowrap">
               <div>
                 <h2 class="font-medium text-gray-900 my-4">Instructor</h2>
                 <input
@@ -303,7 +305,9 @@
             </button>
           </form>
 
-          <aside class="w-1/2 p-4 bg-white h-full shadow-lg preview-container">
+          <aside
+            class="w-full lg:w-1/2 p-4 bg-white h-full shadow-lg preview-container"
+          >
             <div
               class="fade-in flex flex-col w-full bg-white rounded-lg shadow-md p-4 gap-4 h-full"
             >
