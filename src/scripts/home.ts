@@ -1,7 +1,7 @@
 import { signOutUser } from "./authentication.js";
 import { authenticatedUser } from "./app.js";
 import showMessageBox from "./errorHandling.js";
-import { initializeCourses } from "./courses.js";
+import { addCourse, course, initializeCourses } from "./courses.js";
 
 let header: HTMLElement;
 let navbar: HTMLElement;
@@ -11,7 +11,7 @@ let profileName: HTMLElement;
 let profileRole: HTMLElement;
 let homeTitle: HTMLElement;
 let homeDescription: HTMLElement;
-let addCourseForm: HTMLElement;
+let addCourseForm: HTMLFormElement;
 
 let addCourseFormName: HTMLInputElement;
 let addCourseFormDescription: HTMLTextAreaElement;
@@ -39,6 +39,19 @@ let logoutButton = document.querySelector(
 ) as HTMLButtonElement;
 
 let navbarActive = false;
+
+let enteredCourseData: course = {
+  id: 0,
+  name: "",
+  description: "",
+  location: "",
+  instructor: "",
+  startDate: "",
+  endDate: "",
+  students: [],
+  image: "",
+  price: 0,
+};
 
 // Function to initialize the home page. This function will be called when the home page is loaded in app.ts.
 export const initializeHome = () => {
@@ -115,14 +128,13 @@ const toggleNavbar = () => {
   navbarActive = !navbarActive;
 };
 
-const hashChange = () => {
+const hashChange = async () => {
   if (location.hash === "") {
     initializeCourses();
   }
 
   if (location.hash === "#addCourse") {
     // Add course form elements *left side*
-
     addCourseFormName = addCourseForm.querySelector(
       "#course-name-input"
     ) as HTMLInputElement;
@@ -159,6 +171,7 @@ const hashChange = () => {
       "#course-checkbox-2"
     ) as HTMLInputElement;
 
+    // Add event listeners to the form elements to update the preview card when the user types in the form.
     addCourseFormName.addEventListener("input", () => {
       updatePreviewCard(addCourseFormName, coursePreviewName);
     });
@@ -195,7 +208,7 @@ const hashChange = () => {
       updatePreviewCard(addCourseFormLocation2, coursePreviewLocation);
     });
 
-    //  Preview card elements
+    //  Preview card elements *right side*
     previewContainer = document.querySelector(
       ".preview-container"
     ) as HTMLElement;
@@ -228,18 +241,21 @@ const hashChange = () => {
       ".course-preview-location"
     ) as HTMLElement;
 
+    // Set the text content of the page elements.
     setTextContent(homeTitle, "Add Course");
     setTextContent(
       homeDescription,
       "Fill in the details of the course below and click the 'Add Course' button to add the course to the list of courses."
     );
 
+    // Hide the cards container and show the add course form.
     cardsContainer.classList.add("hidden");
     document.querySelector(".add-course-container")!.classList.remove("hidden");
     document.querySelector(".main-content-title")!.classList.add("hidden");
 
     setRandomImage(); // Set a random image when the page is loaded.
 
+    // Add event listener to the image checkbox to enable or disable the image input.
     const imageCheckbox = addCourseForm.querySelector(
       "#image-checkbox"
     ) as HTMLInputElement;
@@ -254,6 +270,45 @@ const hashChange = () => {
       courseImageInput.classList.toggle("bg-gray-100", isChecked);
 
       if (isChecked) setRandomImage();
+    });
+
+    // Add event listener to the add course form to submit the form.
+
+    addCourseForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      // // Check if one of the locations is selected.
+      // if (
+      //   addCourseFormLocation1.checked === false &&
+      //   addCourseFormLocation2.checked === false
+      // ) {
+      //   showMessageBox("Please select at least one location.", "error");
+      //   return;
+      // }
+
+      const locations = [];
+      let enteredLocations = "";
+      if (addCourseFormLocation1.checked) locations.push("Campus");
+      if (addCourseFormLocation2.checked) locations.push("Online");
+      enteredLocations = locations.join(" & ");
+
+      enteredCourseData.name = addCourseFormName.value;
+      enteredCourseData.description = addCourseFormDescription.value;
+      enteredCourseData.location = enteredLocations;
+      enteredCourseData.instructor = addCourseFormInstructor.value;
+      enteredCourseData.startDate = addCourseFormStartDate.value;
+      enteredCourseData.endDate = addCourseFormEndDate.value;
+      enteredCourseData.students = [];
+      enteredCourseData.image = addCourseFormImage.value;
+      enteredCourseData.price = parseFloat(addCourseFormPrice.value);
+
+      await addCourse(enteredCourseData);
+
+      showMessageBox("Course added successfully", "success");
+
+      addCourseForm.reset();
+
+      setRandomImage();
     });
   }
 };
@@ -355,56 +410,4 @@ const updatePreviewCard = (
   // previewElement.textContent = element.value;
 
   setTextContent(previewElement, element.value);
-
-  // // Checkboxes
-  // const checkboxes = [
-  //   { id: "#location-checkbox-1", label: "Campus" },
-  //   { id: "#location-checkbox-2", label: "Online" },
-  // ];
-
-  // const selectedLocations = checkboxes
-  //   .filter(
-  //     ({ id }) => (addCourseForm.querySelector(id) as HTMLInputElement).checked
-  //   )
-  //   .map(({ label }) => label)
-  //   .join(" & ");
-
-  // previewContainer.querySelector("#course-location")!.textContent =
-  //   selectedLocations;
-
-  // // Image
-  // const imageInput = addCourseForm.querySelector(
-  //   "#course-image-input"
-  // ) as HTMLInputElement;
-
-  // const image = imageInput.value;
-
-  // try {
-  //   new URL(image);
-  //   previewContainer.querySelector("#course-image")!.setAttribute("src", image);
-  // } catch (error) {}
-
-  // // Instructor
-  // previewContainer.querySelector("#course-instructor")!.textContent = (
-  //   addCourseForm.querySelector("#course-instructor-input") as HTMLInputElement
-  // )?.value;
-
-  // // Price
-  // previewContainer.querySelector("#course-price")!.textContent =
-  //   "$" +
-  //   (addCourseForm.querySelector("#course-price-input") as HTMLInputElement)
-  //     ?.value;
-
-  // // Date
-
-  // const startDate = (
-  //   addCourseForm.querySelector("#course-start-date-input") as HTMLInputElement
-  // )?.value;
-
-  // const endDate = (
-  //   addCourseForm.querySelector("#course-end-date-input") as HTMLInputElement
-  // )?.value;
-
-  // previewContainer.querySelector("#course-date")!.textContent =
-  //   startDate + " - " + endDate;
 };

@@ -198,7 +198,7 @@
           class="fade-in add-course-container hidden flex gap-2 flex-wrap lg:flex-nowrap w-full mt-4 lg:mt-0"
         >
           <form
-            class="flex flex-col w-full lg:w-1/2 p-4 bg-white lg:h-full shadow-lg gap-4 add-course-form"
+            class="flex flex-col w-full lg:w-1/2 p-4 bg-white lg:h-full shadow-lg gap-4 add-course-form overflow-hidden"
           >
             <h2 class="font-medium text-gray-900">Course name:</h2>
             <input
@@ -206,12 +206,14 @@
               class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg indent-2 transition duration-200 outline-none text-gray-700"
               placeholder="Javascript for beginners"
               id="course-name-input"
+              required
             />
             <h2 class="font-medium text-gray-900">Course description:</h2>
             <textarea
               class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg pl-2 transition duration-200 outline-none text-gray-700"
               placeholder="Javascript is a high-level, interpreted programming language that conforms to the ECMAScript specification. It is a language that is also characterized as dynamic, weakly typed, prototype-based, and multi-paradigm."
               id="course-description-input"
+              required
             ></textarea>
             <h2 class="font-medium text-gray-900">Course location:</h2>
             <div class="flex gap-2">
@@ -219,6 +221,7 @@
                 type="checkbox"
                 id="course-checkbox-1"
                 class="cursor-pointer"
+                name="course-location"
               />
               <label
                 for="course-checkbox-1"
@@ -229,6 +232,7 @@
                 type="checkbox"
                 id="course-checkbox-2"
                 class="cursor-pointer"
+                name="course-location"
               />
               <label
                 for="course-checkbox-2"
@@ -243,6 +247,7 @@
                 class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg indent-2 transition duration-200 outline-none text-gray-700"
                 placeholder="https://example.com/image.jpg"
                 id="course-image-input"
+                required
               />
               <input
                 type="checkbox"
@@ -257,7 +262,7 @@
               >
             </div>
 
-            <div class="flex items-center gap-4 flex-wrap lg:flex-nowrap">
+            <div class="flex items-end gap-4 flex-wrap">
               <div>
                 <h2 class="font-medium text-gray-900 my-4">Instructor</h2>
                 <input
@@ -265,6 +270,7 @@
                   class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg indent-2 transition duration-200 outline-none text-gray-700"
                   placeholder="John Doe"
                   id="course-instructor-input"
+                  required
                 />
               </div>
               <div>
@@ -274,6 +280,7 @@
                   class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg indent-2 transition duration-200 outline-none text-gray-700"
                   placeholder="$0.00"
                   id="course-price-input"
+                  required
                 />
               </div>
               <div>
@@ -283,6 +290,7 @@
                   class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg indent-2 transition duration-200 outline-none text-gray-700"
                   placeholder="Enter start date"
                   id="course-start-date-input"
+                  required
                 />
               </div>
 
@@ -293,6 +301,7 @@
                   class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg indent-2 transition duration-200 outline-none text-gray-700"
                   placeholder="Enter end date"
                   id="course-end-date-input"
+                  required
                 />
               </div>
             </div>

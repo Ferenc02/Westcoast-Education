@@ -1,7 +1,7 @@
 import { authenticatedUser } from "./app.js";
 import showMessageBox from "./errorHandling.js";
 
-interface course {
+export interface course {
   id: number;
   name: string;
   description: string;
@@ -58,7 +58,7 @@ export const generateCourseCard = (course: course) => {
 };
 
 // Function that fetches the courses from the server.
-const fetchCourses = async (): Promise<Array<course>> => {
+export const fetchCourses = async (): Promise<Array<course>> => {
   let response = await fetch("http://localhost:3000/courses");
 
   let courses: Array<course> = await response.json();
@@ -66,7 +66,7 @@ const fetchCourses = async (): Promise<Array<course>> => {
   return courses;
 };
 //  Function that fetches a single course from the server.
-const fetchCourse = async (id: number): Promise<course> => {
+export const fetchCourse = async (id: number): Promise<course> => {
   let response = await fetch(`http://localhost:3000/courses/${id}`);
 
   let course: course = await response.json();
@@ -74,7 +74,7 @@ const fetchCourse = async (id: number): Promise<course> => {
   return course;
 };
 // Function that updates a course on the server.
-const updateCourse = async (course: course) => {
+export const updateCourse = async (course: course) => {
   if (authenticatedUser.role !== "admin") {
     showMessageBox("You are not authorized to update courses", "error");
     return;
@@ -90,7 +90,7 @@ const updateCourse = async (course: course) => {
 };
 
 // Function that creates a course and posts it to the server.
-const addCourse = async (course: course) => {
+export const addCourse = async (course: course) => {
   if (authenticatedUser.role !== "admin") {
     showMessageBox("You are not authorized to add courses", "error");
     return;
@@ -99,6 +99,7 @@ const addCourse = async (course: course) => {
   let coursesLength = (await fetchCourses()).length;
 
   course.id = coursesLength + 1;
+
   await fetch(`http://localhost:3000/courses`, {
     method: "POST",
     headers: {

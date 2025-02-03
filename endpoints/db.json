@@ -1,7 +1,7 @@
 {
   "courses": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Course 1",
       "description": "This is course 1",
       "location": "Location 1",
@@ -11,6 +11,174 @@
       "students": [],
       "image": "https://picsum.photos/id/237/200/300",
       "price": 100
+    },
+    {
+      "id": 2,
+      "name": "Javascript for beginners",
+      "description": "Javascript is fun!",
+      "location": "Campus",
+      "instructor": "John Doe",
+      "startDate": "2025-02-01",
+      "endDate": "2025-02-12",
+      "students": [],
+      "image": "https://picsum.photos/id/109/600/600",
+      "price": 65
+    },
+    {
+      "id": 3,
+      "name": "Java is also very fun",
+      "description": "Java is an interesting programming language to learn",
+      "location": "on",
+      "instructor": "Frank",
+      "startDate": "2025-01-28",
+      "endDate": "2025-02-20",
+      "students": [],
+      "image": "https://picsum.photos/id/572/600/600",
+      "price": 589
+    },
+    {
+      "id": 4,
+      "name": "Test",
+      "description": "test 54",
+      "location": "on & on",
+      "instructor": "sssss",
+      "startDate": "2025-02-13",
+      "endDate": "2025-02-20",
+      "students": [],
+      "image": "https://picsum.photos/id/513/600/600",
+      "price": 44554
+    },
+    {
+      "id": 5,
+      "name": "last test",
+      "description": "testttttttt",
+      "location": "Campus & Online",
+      "instructor": "sadssadasd",
+      "startDate": "2025-01-30",
+      "endDate": "2025-02-28",
+      "students": [],
+      "image": "https://picsum.photos/id/292/600/600",
+      "price": 85
+    },
+    {
+      "id": 6,
+      "name": "ffghghfhfg",
+      "description": "ghfhfghfg",
+      "location": "Campus & Online",
+      "instructor": "hgfhfgh",
+      "startDate": "2025-02-06",
+      "endDate": "2025-02-22",
+      "students": [],
+      "image": "https://picsum.photos/id/181/600/600",
+      "price": 44
+    },
+    {
+      "id": 7,
+      "name": "dgfgdgdfgdfg",
+      "description": "fgdgfdgfdgdfg",
+      "location": "Online",
+      "instructor": "dfggfdgfd",
+      "startDate": "2025-01-29",
+      "endDate": "2025-02-20",
+      "students": [],
+      "image": "https://picsum.photos/id/320/600/600",
+      "price": 1112121
+    },
+    {
+      "id": 8,
+      "name": "dsadasdasdasd",
+      "description": "asddasda",
+      "location": "Online",
+      "instructor": "dsadasd",
+      "startDate": "2025-02-07",
+      "endDate": "2025-02-21",
+      "students": [],
+      "image": "https://picsum.photos/id/535/600/600",
+      "price": 54
+    },
+    {
+      "id": 9,
+      "name": "dsadasdad",
+      "description": "gfdgdgfgd",
+      "location": "Campus",
+      "instructor": "gfdsgdgg",
+      "startDate": "2025-02-13",
+      "endDate": "2025-02-26",
+      "students": [],
+      "image": "https://picsum.photos/id/444/600/600",
+      "price": 5454
+    },
+    {
+      "id": 10,
+      "name": "asdadas",
+      "description": "fsdfsfdsfs",
+      "location": "Campus",
+      "instructor": "fdsfsd",
+      "startDate": "2025-01-31",
+      "endDate": "2025-02-26",
+      "students": [],
+      "image": "https://picsum.photos/id/444/600/600",
+      "price": 5
+    },
+    {
+      "id": 11,
+      "name": "hiiiiiiiasi",
+      "description": "addasdasd",
+      "location": "Campus & Online",
+      "instructor": "fdsfsdffsddfs",
+      "startDate": "2025-01-31",
+      "endDate": "2025-02-26",
+      "students": [],
+      "image": "https://picsum.photos/id/588/600/600",
+      "price": 44
+    },
+    {
+      "id": 12,
+      "name": "asdsadas",
+      "description": "sdadasd",
+      "location": "Campus",
+      "instructor": "dsadad",
+      "startDate": "2025-01-30",
+      "endDate": "2025-02-26",
+      "students": [],
+      "image": "https://picsum.photos/id/367/600/600",
+      "price": 545241
+    },
+    {
+      "id": 13,
+      "name": "dasdas",
+      "description": "dsadsa",
+      "location": "Online",
+      "instructor": "adsds",
+      "startDate": "2025-01-29",
+      "endDate": "2025-02-26",
+      "students": [],
+      "image": "https://picsum.photos/id/241/600/600",
+      "price": 11
+    },
+    {
+      "id": 14,
+      "name": "fgdgfdgf",
+      "description": "gfdggfd",
+      "location": "Campus",
+      "instructor": "gfdgg",
+      "startDate": "2025-02-06",
+      "endDate": "2025-02-19",
+      "students": [],
+      "image": "https://picsum.photos/id/385/600/600",
+      "price": 5
+    },
+    {
+      "id": 15,
+      "name": "fdsfdsf",
+      "description": "dfsdfdsf",
+      "location": "Campus",
+      "instructor": "fdsfsf",
+      "startDate": "2025-02-14",
+      "endDate": "2025-02-22",
+      "students": [],
+      "image": "https://picsum.photos/id/291/600/600",
+      "price": 85588
     }
   ]
 }

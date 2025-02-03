@@ -50,19 +50,19 @@ export const generateCourseCard = (course) => {
     cardsContainer.innerHTML += cardElement;
 };
 // Function that fetches the courses from the server.
-const fetchCourses = () => __awaiter(void 0, void 0, void 0, function* () {
+export const fetchCourses = () => __awaiter(void 0, void 0, void 0, function* () {
     let response = yield fetch("http://localhost:3000/courses");
     let courses = yield response.json();
     return courses;
 });
 //  Function that fetches a single course from the server.
-const fetchCourse = (id) => __awaiter(void 0, void 0, void 0, function* () {
+export const fetchCourse = (id) => __awaiter(void 0, void 0, void 0, function* () {
     let response = yield fetch(`http://localhost:3000/courses/${id}`);
     let course = yield response.json();
     return course;
 });
 // Function that updates a course on the server.
-const updateCourse = (course) => __awaiter(void 0, void 0, void 0, function* () {
+export const updateCourse = (course) => __awaiter(void 0, void 0, void 0, function* () {
     if (authenticatedUser.role !== "admin") {
         showMessageBox("You are not authorized to update courses", "error");
         return;
@@ -76,7 +76,7 @@ const updateCourse = (course) => __awaiter(void 0, void 0, void 0, function* () 
     });
 });
 // Function that creates a course and posts it to the server.
-const addCourse = (course) => __awaiter(void 0, void 0, void 0, function* () {
+export const addCourse = (course) => __awaiter(void 0, void 0, void 0, function* () {
     if (authenticatedUser.role !== "admin") {
         showMessageBox("You are not authorized to add courses", "error");
         return;
