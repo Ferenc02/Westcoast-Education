@@ -37,6 +37,9 @@ let coursePreviewInstructor;
 let coursePreviewPrice;
 let coursePreviewDate;
 let coursePreviewLocation;
+let studentsInformationParent = document.querySelector(".course-students");
+let studentsInformationTitle = studentsInformationParent.querySelector(".course-students-title");
+let studentsInformationList = studentsInformationParent.querySelector(".course-students-list");
 let logoutButton = document.querySelector("#logout-button");
 let navbarActive = false;
 let enteredCourseData = {
@@ -289,4 +292,11 @@ const updatePreviewCard = (element, previewElement) => {
     }
     // previewElement.textContent = element.value;
     setTextContent(previewElement, element.value);
+};
+// Function that shows the enrolled students in a course.
+export const showEnrolledStudents = (students, course) => {
+    let studentsList = students.join(", ");
+    console.log(studentsInformationParent);
+    studentsInformationParent.classList.remove("hidden");
+    studentsInformationTitle.textContent = `Enrolled Students in ${course.name}`;
 };

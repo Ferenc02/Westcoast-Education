@@ -1,5 +1,7 @@
 import { authenticatedUser, updateUserInDatabase } from "./app.js";
+import { fetchUser } from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
+import { showEnrolledStudents } from "./home.js";
 
 export interface course {
   id: string;
@@ -109,11 +111,6 @@ export const fetchCourse = async (id: number): Promise<course> => {
 };
 // Function that updates a course on the server.
 export const updateCourse = async (course: course) => {
-  if (authenticatedUser.role !== "admin") {
-    showMessageBox("You are not authorized to update courses", "error");
-    return;
-  }
-
   await fetch(`http://localhost:3000/courses/${course.id}`, {
     method: "PUT",
     headers: {
@@ -189,6 +186,27 @@ export const initializeCourses = async () => {
     if (target.classList.contains("admin-panel-edit-button")) {
       // let courseId = target.closest(".course-card")?.getAttribute("course-id");
       // location.href = `/pages/edit-course.html?id=${courseId}`;
+    }
+
+    if (target.classList.contains("admin-panel-students-button")) {
+      let courseId = target.closest(".course-card")?.getAttribute("course-id");
+
+      let course = await fetchCourse(Number(courseId));
+
+      let students = course.students;
+
+      let studentNames: string[] = [];
+
+      await Promise.all(
+        students.map(async (student) => {
+          let user = await fetchUser(Number(student.userId));
+          studentNames.push(user.name);
+        })
+      );
+
+      console.log(studentNames);
+
+      showEnrolledStudents(studentNames, course);
     }
 
     // Check if the clicked element is an admin-panel-delete-button

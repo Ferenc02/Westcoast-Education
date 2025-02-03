@@ -102,6 +102,11 @@ export let loginUser = (formElement) => __awaiter(void 0, void 0, void 0, functi
     }
     showMessageBox("Invalid email or password", "error");
 });
+export let fetchUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    let response = yield fetch(`http://localhost:3001/users/${id}`);
+    let user = yield response.json();
+    return user;
+});
 // Function that signs up a user by creating a new user object and posting it to the server.
 export let signUpUser = (formElement) => __awaiter(void 0, void 0, void 0, function* () {
     let response = yield fetch("http://localhost:3001/users");

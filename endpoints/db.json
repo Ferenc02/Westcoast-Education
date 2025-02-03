@@ -8,7 +8,16 @@
       "instructor": "Instructor 1",
       "startDate": "2022-01-01",
       "endDate": "2022-01-31",
-      "students": [],
+      "students": [
+        {
+          "userId": "2",
+          "userChoice": "enrolled"
+        },
+        {
+          "userId": "5",
+          "userChoice": "enrolled"
+        }
+      ],
       "image": "https://picsum.photos/id/237/200/300",
       "price": 100
     },
@@ -20,7 +29,16 @@
       "instructor": "John Doe",
       "startDate": "2025-02-01",
       "endDate": "2025-02-12",
-      "students": [],
+      "students": [
+        {
+          "userId": "2",
+          "userChoice": "enrolled"
+        },
+        {
+          "userId": "5",
+          "userChoice": "enrolled"
+        }
+      ],
       "image": "https://picsum.photos/id/109/600/600",
       "price": 65
     },

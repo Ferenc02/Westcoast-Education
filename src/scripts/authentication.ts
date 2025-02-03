@@ -142,6 +142,14 @@ export let loginUser = async (formElement: HTMLFormElement) => {
   showMessageBox("Invalid email or password", "error");
 };
 
+export let fetchUser = async (id: number): Promise<user> => {
+  let response = await fetch(`http://localhost:3001/users/${id}`);
+
+  let user: user = await response.json();
+
+  return user;
+};
+
 // Function that signs up a user by creating a new user object and posting it to the server.
 export let signUpUser = async (formElement: HTMLFormElement) => {
   let response = await fetch("http://localhost:3001/users");

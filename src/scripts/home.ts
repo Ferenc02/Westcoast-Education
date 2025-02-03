@@ -34,6 +34,16 @@ let coursePreviewPrice: HTMLElement;
 let coursePreviewDate: HTMLElement;
 let coursePreviewLocation: HTMLElement;
 
+let studentsInformationParent = document.querySelector(
+  ".course-students"
+) as HTMLElement;
+let studentsInformationTitle = studentsInformationParent.querySelector(
+  ".course-students-title"
+) as HTMLElement;
+let studentsInformationList = studentsInformationParent.querySelector(
+  ".course-students-list"
+) as HTMLElement;
+
 let logoutButton = document.querySelector(
   "#logout-button"
 ) as HTMLButtonElement;
@@ -412,4 +422,15 @@ const updatePreviewCard = (
   // previewElement.textContent = element.value;
 
   setTextContent(previewElement, element.value);
+};
+
+// Function that shows the enrolled students in a course.
+
+export const showEnrolledStudents = (students: string[], course: course) => {
+  let studentsList = students.join(", ");
+
+  console.log(studentsInformationParent);
+
+  studentsInformationParent.classList.remove("hidden");
+  studentsInformationTitle.textContent = `Enrolled Students in ${course.name}`;
 };

@@ -19,10 +19,13 @@
       "password": "604b6f3038b99e3e4e80259bc3fe9c38a46a2f638853e47e616841b05269eef5",
       "phone": "",
       "address": "",
-      "courses": [],
+      "courses": [
+        "1",
+        "2"
+      ],
       "role": "admin",
-      "authToken": "1d2xw31j-38gf-6s0x-ht4k-j1e78r8aesyo",
-      "expiresAt": "2025-02-04T17:36:51.883Z"
+      "authToken": "k8in3e1w-0h9c-3cz0-b4zw-iqp67hpk8k51",
+      "expiresAt": "2025-02-04T18:05:01.834Z"
     },
     {
       "id": "3",
@@ -47,6 +50,21 @@
       "role": "admin",
       "authToken": "pvtt9l8g-e77y-3hv1-44az-o4j33nl32mlb",
       "expiresAt": "2025-02-01T14:29:02.494Z"
+    },
+    {
+      "id": "5",
+      "name": "Joe Smith",
+      "email": "joe@gmail.com",
+      "password": "604b6f3038b99e3e4e80259bc3fe9c38a46a2f638853e47e616841b05269eef5",
+      "phone": "",
+      "address": "",
+      "courses": [
+        "1",
+        "2"
+      ],
+      "role": "admin",
+      "authToken": "dzqo878t-8yk3-dl71-4ry2-65xijyw0qnu0",
+      "expiresAt": "2025-02-04T18:02:08.049Z"
     }
   ]
 }

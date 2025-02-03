@@ -371,5 +371,63 @@
         </section>
       </section>
     </main>
+
+    <!-- Main Part end -->
+
+    <!-- Students information -->
+    <div
+      class="course-students fixed w-full h-full bg-opacity-75 bg-gray-900/65 flex justify-center items-center top-0 hidden"
+      rel="nofollow"
+      aria-hidden="true"
+    >
+      <div
+        class="w-[90%] h-[70%] course-students-content bg-white rounded-lg mx-auto p-4 flex flex-col items-center gap-8 shadow-lg"
+      >
+        <h2
+          class="course-students-title text-center text-2xl font-bold text-gray-800"
+        >
+          Current Students in [course name]
+        </h2>
+        <div class="course-students-text text-gray-700 h-full w-full px-4">
+          <table class="w-full table-auto text-left">
+            <thead
+              class="border-b-[1px] border-gray-200 text-xs text-gray-700 uppercase bg-gray-50"
+            >
+              <tr>
+                <th class="text-left py-3">Name</th>
+                <th class="text-left">Email</th>
+                <th class="text-left">Phone</th>
+                <th class="address">Address</th>
+                <th class="remove">Remove</th>
+              </tr>
+            </thead>
+            <tbody class="course-students-list">
+              <tr class="border-b-[1px] border-gray-200 bg-white">
+                <td class="py-2">[name protected]</td>
+                <td>
+                  <a href="mailto:  [email protected]"> [email protected]</a>
+                </td>
+                <td>[protected phone number]</td>
+                <td>[protected address]</td>
+                <td>
+                  <button
+                    class="course-students__remove-button cursor-pointer hover:scale-105 transition-transform"
+                  >
+                    ❌
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button
+          class="course-students__button button w-full bg-green-500 hover:bg-green-600 transition-colors"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+
+    <!-- Students information end -->
   </body>
 </html>
