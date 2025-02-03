@@ -655,8 +655,17 @@
   .h-full {
     height: 100%;
   }
+  .max-h-36 {
+    max-height: calc(var(--spacing) * 36);
+  }
+  .max-h-48 {
+    max-height: calc(var(--spacing) * 48);
+  }
   .max-h-60 {
     max-height: calc(var(--spacing) * 60);
+  }
+  .max-h-96 {
+    max-height: calc(var(--spacing) * 96);
   }
   .min-h-full {
     min-height: 100%;
@@ -937,6 +946,9 @@
   }
   .text-nowrap {
     text-wrap: nowrap;
+  }
+  .overflow-ellipsis {
+    text-overflow: ellipsis;
   }
   .whitespace-nowrap {
     white-space: nowrap;

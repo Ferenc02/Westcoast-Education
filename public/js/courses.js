@@ -13,7 +13,7 @@ let cardsContainer = document.querySelector(".cards-container");
 // Function that generates a course card with the course information and appends it to the cards container.
 export const generateCourseCard = (course) => {
     let cardElement = `<div
-            class="fade-in flex flex-col w-full bg-white rounded-lg shadow-md p-4 gap-4 hover:scale-[100.5%] transition-transform"
+            class="fade-in flex flex-col w-full bg-white rounded-lg shadow-md p-4 gap-4 hover:scale-[100.5%] transition-transform "
           >
             <img
               src="${course.image}"
@@ -23,7 +23,7 @@ export const generateCourseCard = (course) => {
             <h3 class="text-lg font-semibold text-gray-900 capitalize">
               ${course.name}
             </h3>
-            <p class="text-gray-700 mt-2">
+            <p class="text-gray-700 mt-2 h-full overflow-hidden max-h-36 ">
                 ${course.description}
             </p>
             <div class="flex justify-between items-center mt-4">
