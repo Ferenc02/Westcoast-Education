@@ -66,7 +66,9 @@ body {
 .grow-animation {
   animation: grow 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
-
+.course-card:hover {
+  transition: transform 0.3s ease-in-out;
+}
 @keyframes grow {
   from {
     transform: scale(0.8);

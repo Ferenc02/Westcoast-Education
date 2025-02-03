@@ -41,7 +41,7 @@ let logoutButton = document.querySelector(
 let navbarActive = false;
 
 let enteredCourseData: course = {
-  id: 0,
+  id: "0",
   name: "",
   description: "",
   location: "",
@@ -91,10 +91,6 @@ export const initializeHome = () => {
 
   updateText();
 
-  if (location.hash === "") {
-    initializeCourses();
-  }
-
   hashChange();
   window.addEventListener("hashchange", hashChange);
 };
@@ -134,6 +130,12 @@ const hashChange = async () => {
   }
 
   if (location.hash === "#addCourse") {
+    if (authenticatedUser.role !== "admin") {
+      alert("You are not authorized to add courses");
+      location.href = "/pages/home.html";
+      return;
+    }
+
     // Add course form elements *left side*
     addCourseFormName = addCourseForm.querySelector(
       "#course-name-input"

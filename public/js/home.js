@@ -40,7 +40,7 @@ let coursePreviewLocation;
 let logoutButton = document.querySelector("#logout-button");
 let navbarActive = false;
 let enteredCourseData = {
-    id: 0,
+    id: "0",
     name: "",
     description: "",
     location: "",
@@ -81,9 +81,6 @@ export const initializeHome = () => {
         }
     });
     updateText();
-    if (location.hash === "") {
-        initializeCourses();
-    }
     hashChange();
     window.addEventListener("hashchange", hashChange);
 };
@@ -115,6 +112,11 @@ const hashChange = () => __awaiter(void 0, void 0, void 0, function* () {
         initializeCourses();
     }
     if (location.hash === "#addCourse") {
+        if (authenticatedUser.role !== "admin") {
+            alert("You are not authorized to add courses");
+            location.href = "/pages/home.html";
+            return;
+        }
         // Add course form elements *left side*
         addCourseFormName = addCourseForm.querySelector("#course-name-input");
         addCourseFormDescription = addCourseForm.querySelector("#course-description-input");

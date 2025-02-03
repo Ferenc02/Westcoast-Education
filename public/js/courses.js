@@ -10,20 +10,41 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { authenticatedUser } from "./app.js";
 import showMessageBox from "./errorHandling.js";
 let cardsContainer = document.querySelector(".cards-container");
+let testFunction = () => {
+    alert("test");
+};
 // Function that generates a course card with the course information and appends it to the cards container.
 export const generateCourseCard = (course) => {
-    let cardElement = `<div
-            class="fade-in flex flex-col w-full bg-white rounded-lg shadow-md p-4 gap-4 hover:scale-[100.5%] transition-transform "
+    let adminPanel = `
+  
+  <div class="flex flex-col justify-end items-end bg-white  !text-gray-800">
+  
+ 
+  <button  class="admin-panel-button material-symbols-outlined !text-gray-600 cursor-pointer hover:bg-gray-200 rounded-full p-2 ">more_vert</button>
+  
+  <div class="admin-panel-buttons hidden flex flex-col absolute top-0 right-0 mt-[4.25rem] w-full bg-white rounded-lg shadow-md !text-gray-800 fade-in">
+
+  <button class="admin-panel-students-button button !justify-start !text-gray-800 bg-white hover:bg-gray-100 !border-[1px]  !border-gray-200 transition-colors !rounded-none">
+👥 View Students</button> 
+  <button class="admin-panel-edit-button button !justify-start bg-white !text-gray-800 hover:bg-gray-100 !border-b-[1px] !border-x-[1px] !border-gray-200 transition-colors !rounded-none">✏️ Edit Course</button>
+  <button class="admin-panel-delete-button button !justify-start bg-red-500 text-white hover:bg-red-600 transition-colors !border-b-[1px] !border-x-[1px] !border-red-500 !rounded-none !rounded-b-lg">❌ Delete Course</button>
+  
+  </div>
+  </div>
+  `;
+    let cardElement = `<div course-id="${course.id}"
+            class="course-card fade-in flex flex-col w-full bg-white rounded-lg shadow-md p-4 gap-4  transition-transform relative"
           >
+            ${authenticatedUser.role === "admin" ? adminPanel : ""}
             <img
               src="${course.image}"
               alt="course 1"
               class="max-h-60 object-cover rounded-lg object-center"
             />
-            <h3 class="text-lg font-semibold text-gray-900 capitalize">
+            <h3 class="text-lg font-semibold text-gray-900 capitalize subpixel-antialiased">
               ${course.name}
             </h3>
-            <p class="text-gray-700 mt-2 h-full overflow-hidden max-h-36 ">
+            <p class="text-gray-700 mt-2 h-full overflow-hidden max-h-36 subpixel-antialiased">
                 ${course.description}
             </p>
             <div class="flex justify-between items-center mt-4">
@@ -48,6 +69,7 @@ export const generateCourseCard = (course) => {
             </div>
           </div>`;
     cardsContainer.innerHTML += cardElement;
+    // document.querySelector(".course-card:last-child")?.prepend(adminPanelElement);
 };
 // Function that fetches the courses from the server.
 export const fetchCourses = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -82,7 +104,7 @@ export const addCourse = (course) => __awaiter(void 0, void 0, void 0, function*
         return;
     }
     let coursesLength = (yield fetchCourses()).length;
-    course.id = coursesLength + 1;
+    course.id = (coursesLength + 1).toString();
     yield fetch(`http://localhost:3000/courses`, {
         method: "POST",
         headers: {
@@ -118,4 +140,24 @@ export const initializeCourses = () => __awaiter(void 0, void 0, void 0, functio
     courses.forEach((course) => {
         generateCourseCard(course);
     });
+    // Add event listeners to the admin panel buttons
+    cardsContainer.addEventListener("click", (event) => __awaiter(void 0, void 0, void 0, function* () {
+        var _a, _b;
+        const target = event.target;
+        // Check if the clicked element is an admin-panel-button
+        if (target.classList.contains("admin-panel-button")) {
+            (_a = target.nextElementSibling) === null || _a === void 0 ? void 0 : _a.classList.toggle("hidden");
+        }
+        // Check if the clicked element is an admin-panel-edit-button
+        if (target.classList.contains("admin-panel-edit-button")) {
+            // let courseId = target.closest(".course-card")?.getAttribute("course-id");
+            // location.href = `/pages/edit-course.html?id=${courseId}`;
+        }
+        // Check if the clicked element is an admin-panel-delete-button
+        if (target.classList.contains("admin-panel-delete-button")) {
+            let courseId = (_b = target.closest(".course-card")) === null || _b === void 0 ? void 0 : _b.getAttribute("course-id");
+            yield deleteCourse(Number(courseId));
+            alert("Course deleted successfully");
+        }
+    }));
 });
