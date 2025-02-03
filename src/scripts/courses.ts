@@ -1,4 +1,4 @@
-import { authenticatedUser } from "./app.js";
+import { authenticatedUser, updateUserInDatabase } from "./app.js";
 import showMessageBox from "./errorHandling.js";
 
 export interface course {
@@ -40,6 +40,8 @@ export const generateCourseCard = (course: course) => {
   </div>
   `;
 
+  let userEnrolled = authenticatedUser.courses.includes(course.id);
+
   let cardElement = `<div course-id="${course.id}"
             class="course-card fade-in flex flex-col w-full bg-white rounded-lg shadow-md p-4 gap-4  transition-transform relative"
           >
@@ -65,12 +67,17 @@ export const generateCourseCard = (course: course) => {
               </div>
             </div>
             <button
-              class="button w-full  bg-green-500 text-white hover:bg-green-600 transition-colors"
+              class="button w-full   text-white  transition-colors enroll-button ${
+                userEnrolled
+                  ? "!bg-red-500  hover:bg-red-600"
+                  : "bg-green-500 hover:bg-green-600"
+              }"
             >
-              Enroll
+              ${userEnrolled ? "Cancel Enrollment" : "Enroll Now"}
             </button>
             <div
               class="course-info flex w-full justify-between px-2 text-sm text-gray-600 font-medium"
+              
             >
               <p class="course-date">${course.startDate} - ${
     course.endDate
@@ -191,6 +198,52 @@ export const initializeCourses = async () => {
       await deleteCourse(Number(courseId));
 
       alert("Course deleted successfully");
+    }
+
+    if (target.classList.contains("enroll-button")) {
+      let courseId = target.closest(".course-card")?.getAttribute("course-id");
+
+      let course = await fetchCourse(Number(courseId));
+
+      let enrollOption = target.textContent?.trim();
+
+      if (enrollOption === "Cancel Enrollment") {
+        course.students = course.students.filter(
+          (student) => student.userId !== authenticatedUser.id.toString()
+        );
+
+        authenticatedUser.courses = authenticatedUser.courses.filter(
+          (course) => course !== courseId
+        );
+
+        await updateUserInDatabase(authenticatedUser);
+
+        await updateCourse(course);
+
+        alert("You have successfully canceled your enrollment");
+      } else {
+        if (
+          course.students.find(
+            (student) => student.userId === authenticatedUser.id.toString()
+          )
+        ) {
+          showMessageBox("You are already enrolled in this course", "error");
+          return;
+        }
+
+        course.students.push({
+          userId: authenticatedUser.id.toString(),
+          userChoice: "enrolled",
+        });
+
+        authenticatedUser.courses.push(course.id);
+
+        await updateUserInDatabase(authenticatedUser);
+
+        await updateCourse(course);
+
+        alert("You have successfully enrolled in the course");
+      }
     }
   });
 };

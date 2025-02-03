@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { authenticatedUser } from "./app.js";
+import { authenticatedUser, updateUserInDatabase } from "./app.js";
 import showMessageBox from "./errorHandling.js";
 let cardsContainer = document.querySelector(".cards-container");
 let testFunction = () => {
@@ -32,6 +32,7 @@ export const generateCourseCard = (course) => {
   </div>
   </div>
   `;
+    let userEnrolled = authenticatedUser.courses.includes(course.id);
     let cardElement = `<div course-id="${course.id}"
             class="course-card fade-in flex flex-col w-full bg-white rounded-lg shadow-md p-4 gap-4  transition-transform relative"
           >
@@ -57,12 +58,15 @@ export const generateCourseCard = (course) => {
               </div>
             </div>
             <button
-              class="button w-full  bg-green-500 text-white hover:bg-green-600 transition-colors"
+              class="button w-full   text-white  transition-colors enroll-button ${userEnrolled
+        ? "!bg-red-500  hover:bg-red-600"
+        : "bg-green-500 hover:bg-green-600"}"
             >
-              Enroll
+              ${userEnrolled ? "Cancel Enrollment" : "Enroll Now"}
             </button>
             <div
               class="course-info flex w-full justify-between px-2 text-sm text-gray-600 font-medium"
+              
             >
               <p class="course-date">${course.startDate} - ${course.endDate} </p>
               <p class="course-location">${course.location}</p>
@@ -142,7 +146,7 @@ export const initializeCourses = () => __awaiter(void 0, void 0, void 0, functio
     });
     // Add event listeners to the admin panel buttons
     cardsContainer.addEventListener("click", (event) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a, _b;
+        var _a, _b, _c, _d;
         const target = event.target;
         // Check if the clicked element is an admin-panel-button
         if (target.classList.contains("admin-panel-button")) {
@@ -158,6 +162,32 @@ export const initializeCourses = () => __awaiter(void 0, void 0, void 0, functio
             let courseId = (_b = target.closest(".course-card")) === null || _b === void 0 ? void 0 : _b.getAttribute("course-id");
             yield deleteCourse(Number(courseId));
             alert("Course deleted successfully");
+        }
+        if (target.classList.contains("enroll-button")) {
+            let courseId = (_c = target.closest(".course-card")) === null || _c === void 0 ? void 0 : _c.getAttribute("course-id");
+            let course = yield fetchCourse(Number(courseId));
+            let enrollOption = (_d = target.textContent) === null || _d === void 0 ? void 0 : _d.trim();
+            if (enrollOption === "Cancel Enrollment") {
+                course.students = course.students.filter((student) => student.userId !== authenticatedUser.id.toString());
+                authenticatedUser.courses = authenticatedUser.courses.filter((course) => course !== courseId);
+                yield updateUserInDatabase(authenticatedUser);
+                yield updateCourse(course);
+                alert("You have successfully canceled your enrollment");
+            }
+            else {
+                if (course.students.find((student) => student.userId === authenticatedUser.id.toString())) {
+                    showMessageBox("You are already enrolled in this course", "error");
+                    return;
+                }
+                course.students.push({
+                    userId: authenticatedUser.id.toString(),
+                    userChoice: "enrolled",
+                });
+                authenticatedUser.courses.push(course.id);
+                yield updateUserInDatabase(authenticatedUser);
+                yield updateCourse(course);
+                alert("You have successfully enrolled in the course");
+            }
         }
     }));
 });
