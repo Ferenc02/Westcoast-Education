@@ -181,7 +181,7 @@
         </div>
       </section>
       <section
-        class="fade-in flex flex-col w-full lg:p-8 bg-gray-100"
+        class="fade-in flex flex-col w-full lg:p-4 bg-gray-100"
         id="main-content"
       >
         <h2 class="text-xl font-bold text-gray-900 mt-2 main-content-title">
@@ -189,14 +189,15 @@
         </h2>
 
         <!-- Courses/Dashboard Section -->
-        <section
-          class="fade-in grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 lg:gap-8 mt-4 lg:mt-8 p-2 cards-container"
-        ></section>
-
-        <!-- Add Course Section -->
-        <section
-          class="fade-in add-course-container hidden flex gap-2 flex-wrap lg:flex-nowrap w-full mt-4 lg:mt-0"
-        >
+        <div
+          class="fade-in grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 mt-4 p-2 cards-container"
+        ></div>
+      </section>
+      <!-- Add Course Section -->
+      <section
+        class="fade-in add-course-container hidden flex gap-2 flex-wrap lg:flex-nowrap w-full mt-4 lg:mt-8 h-full"
+      >
+        <div class="h-full w-full flex gap-2 p-4 flex-wrap lg:flex-nowrap">
           <form
             class="flex flex-col w-full lg:w-1/2 p-4 bg-white lg:h-full shadow-lg gap-4 add-course-form overflow-hidden"
           >
@@ -368,8 +369,112 @@
               </div>
             </div>
           </aside>
-        </section>
+        </div>
       </section>
+      <!-- Profile settings-->
+      <section
+        class="fade-in flex flex-col w-full lg:p-8 bg-gray-100 rounded-lg shadow-md hidden profile-settings-container"
+      >
+        <h2 class="text-xl font-bold text-gray-900 mb-4">Profile Details:</h2>
+        <form class="bg-white p-6 rounded-lg shadow-lg profile-settings-form">
+          <div class="form-group mb-4">
+            <label for="name" class="block text-gray-700 font-medium mb-2"
+              >Name:</label
+            >
+            <input
+              type="text"
+              name="name"
+              class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg transition duration-200 outline-none text-gray-700"
+              required
+              id="profile-name-input"
+            />
+          </div>
+          <div class="form-group mb-4">
+            <label for="email" class="block text-gray-700 font-medium mb-2"
+              >Email:</label
+            >
+            <input
+              type="email"
+              name="email"
+              class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg transition duration-200 outline-none text-gray-700"
+              required
+              id="profile-email-input"
+            />
+          </div>
+          <div class="form-group mb-4">
+            <label for="password" class="block text-gray-700 font-medium mb-2"
+              >Password:</label
+            >
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-100 bg-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg transition duration-200 outline-none text-gray-700 cursor-not-allowed"
+              disabled
+              placeholder="Password cannot be changed because of security reasons"
+            />
+          </div>
+          <div class="form-group mb-4">
+            <label
+              for="confirm-password"
+              class="block text-gray-700 font-medium mb-2"
+              >Confirm Password:</label
+            >
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirm-password"
+              class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-100 bg-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg transition duration-200 outline-none text-gray-700 cursor-not-allowed"
+              disabled
+              placeholder="Password cannot be changed because of security reasons"
+            />
+          </div>
+          <div class="form-group mb-4">
+            <label for="phone" class="block text-gray-700 font-medium mb-2"
+              >Phone:</label
+            >
+            <input
+              type="tel"
+              name="phone"
+              class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg transition duration-200 outline-none text-gray-700"
+              required
+              id="profile-phone-input"
+            />
+          </div>
+          <div class="form-group mb-4">
+            <label for="address" class="block text-gray-700 font-medium mb-2"
+              >Address:</label
+            >
+            <input
+              name="address"
+              class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg transition duration-200 outline-none text-gray-700"
+              id="profile-address-input"
+              required
+            />
+          </div>
+          <div class="form-group mb-4">
+            <label for="role" class="block text-gray-700 font-medium mb-2"
+              >Role:</label
+            >
+            <select
+              name="role"
+              class="w-full shadow-xs border-2 border-gray-100 hover:border-gray-200 bg-gray-50 focus:border-blue-500 focus:ring focus:ring-blue-200 p-3 rounded-lg transition duration-200 outline-none text-gray-700"
+              id="profile-role-input"
+              required
+            >
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="button w-full bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 rounded-lg transition-colors"
+          >
+            Submit
+          </button>
+        </form>
+      </section>
+      <!-- Profile Settings End -->
     </main>
 
     <!-- Main Part end -->

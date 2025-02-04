@@ -113,71 +113,19 @@ const toggleNavbar = () => {
     navbarActive = !navbarActive;
 };
 const hashChange = () => __awaiter(void 0, void 0, void 0, function* () {
+    document
+        .querySelector("main")
+        .querySelectorAll("section")
+        .forEach((section, index) => {
+        if (index !== 0) {
+            section.classList.add("hidden");
+        }
+        else {
+            section.classList.remove("hidden");
+        }
+    });
     if (location.hash === "") {
-        // Add event listeners to the admin panel buttons
-        cardsContainer.addEventListener("click", (event) => __awaiter(void 0, void 0, void 0, function* () {
-            var _a, _b, _c, _d, _e;
-            const target = event.target;
-            // Check if the clicked element is an admin-panel-button
-            if (target.classList.contains("admin-panel-button")) {
-                (_a = target.nextElementSibling) === null || _a === void 0 ? void 0 : _a.classList.toggle("hidden");
-            }
-            // Check if the clicked element is an admin-panel-edit-button
-            if (target.classList.contains("admin-panel-edit-button")) {
-                // let courseId = target.closest(".course-card")?.getAttribute("course-id");
-                // location.href = `/pages/edit-course.html?id=${courseId}`;
-            }
-            if (target.classList.contains("admin-panel-students-button")) {
-                let courseId = (_b = target
-                    .closest(".course-card")) === null || _b === void 0 ? void 0 : _b.getAttribute("course-id");
-                let course = yield fetchCourse(Number(courseId));
-                let students = course.students;
-                let enrolledStudents = [];
-                yield Promise.all(students.map((student) => __awaiter(void 0, void 0, void 0, function* () {
-                    let user = yield fetchUser(Number(student.userId));
-                    enrolledStudents.push(user);
-                })));
-                // console.log(studentNames);
-                showEnrolledStudents(enrolledStudents, course);
-            }
-            // Check if the clicked element is an admin-panel-delete-button
-            if (target.classList.contains("admin-panel-delete-button")) {
-                let courseId = (_c = target
-                    .closest(".course-card")) === null || _c === void 0 ? void 0 : _c.getAttribute("course-id");
-                yield deleteCourse(Number(courseId));
-                showMessageBox("Course deleted successfully", "success");
-                initializeCourses();
-            }
-            if (target.classList.contains("enroll-button")) {
-                let courseId = (_d = target
-                    .closest(".course-card")) === null || _d === void 0 ? void 0 : _d.getAttribute("course-id");
-                let course = yield fetchCourse(Number(courseId));
-                let enrollOption = (_e = target.textContent) === null || _e === void 0 ? void 0 : _e.trim();
-                if (enrollOption === "Cancel Enrollment") {
-                    course.students = course.students.filter((student) => student.userId !== authenticatedUser.id.toString());
-                    authenticatedUser.courses = authenticatedUser.courses.filter((course) => course !== courseId);
-                    yield updateUserInDatabase(authenticatedUser);
-                    yield updateCourse(course);
-                    showMessageBox("You have successfully canceled your enrollment", "success");
-                }
-                else {
-                    if (course.students.find((student) => student.userId === authenticatedUser.id.toString())) {
-                        showMessageBox("You are already enrolled in this course", "error");
-                        return;
-                    }
-                    course.students.push({
-                        userId: authenticatedUser.id.toString(),
-                        userChoice: "enrolled",
-                    });
-                    authenticatedUser.courses.push(course.id);
-                    yield updateUserInDatabase(authenticatedUser);
-                    yield updateCourse(course);
-                    showMessageBox("You have successfully enrolled in the course", "success");
-                }
-                initializeCourses();
-            }
-        }));
-        initializeCourses();
+        loadHomePage();
     }
     if (location.hash === "#addCourse") {
         if (authenticatedUser.role !== "admin") {
@@ -185,103 +133,10 @@ const hashChange = () => __awaiter(void 0, void 0, void 0, function* () {
             location.href = "/pages/home.html";
             return;
         }
-        // Add course form elements *left side*
-        addCourseFormName = addCourseForm.querySelector("#course-name-input");
-        addCourseFormDescription = addCourseForm.querySelector("#course-description-input");
-        addCourseFormImage = addCourseForm.querySelector("#course-image-input");
-        addCourseFormInstructor = addCourseForm.querySelector("#course-instructor-input");
-        addCourseFormPrice = addCourseForm.querySelector("#course-price-input");
-        addCourseFormStartDate = addCourseForm.querySelector("#course-start-date-input");
-        addCourseFormEndDate = addCourseForm.querySelector("#course-end-date-input");
-        addCourseFormLocation1 = addCourseForm.querySelector("#course-checkbox-1");
-        addCourseFormLocation2 = addCourseForm.querySelector("#course-checkbox-2");
-        // Add event listeners to the form elements to update the preview card when the user types in the form.
-        addCourseFormName.addEventListener("input", () => {
-            updatePreviewCard(addCourseFormName, coursePreviewName);
-        });
-        addCourseFormDescription.addEventListener("input", () => {
-            updatePreviewCard(addCourseFormDescription, coursePreviewDescription);
-        });
-        addCourseFormImage.addEventListener("input", () => {
-            updatePreviewCard(addCourseFormImage, coursePreviewImage);
-        });
-        addCourseFormInstructor.addEventListener("input", () => {
-            updatePreviewCard(addCourseFormInstructor, coursePreviewInstructor);
-        });
-        addCourseFormPrice.addEventListener("input", () => {
-            updatePreviewCard(addCourseFormPrice, coursePreviewPrice);
-        });
-        addCourseFormStartDate.addEventListener("input", () => {
-            updatePreviewCard(addCourseFormStartDate, coursePreviewDate);
-        });
-        addCourseFormEndDate.addEventListener("input", () => {
-            updatePreviewCard(addCourseFormEndDate, coursePreviewDate);
-        });
-        addCourseFormLocation1.addEventListener("change", () => {
-            updatePreviewCard(addCourseFormLocation1, coursePreviewLocation);
-        });
-        addCourseFormLocation2.addEventListener("change", () => {
-            updatePreviewCard(addCourseFormLocation2, coursePreviewLocation);
-        });
-        //  Preview card elements *right side*
-        previewContainer = document.querySelector(".preview-container");
-        coursePreviewImage = previewContainer.querySelector(".course-preview-image");
-        coursePreviewName = previewContainer.querySelector(".course-preview-name");
-        coursePreviewDescription = previewContainer.querySelector(".course-preview-description");
-        coursePreviewInstructor = previewContainer.querySelector(".course-preview-instructor");
-        coursePreviewPrice = previewContainer.querySelector(".course-preview-price");
-        coursePreviewDate = previewContainer.querySelector(".course-preview-date");
-        coursePreviewLocation = previewContainer.querySelector(".course-preview-location");
-        // Set the text content of the page elements.
-        setTextContent(homeTitle, "Add Course");
-        setTextContent(homeDescription, "Fill in the details of the course below and click the 'Add Course' button to add the course to the list of courses.");
-        // Hide the cards container and show the add course form.
-        cardsContainer.classList.add("hidden");
-        document.querySelector(".add-course-container").classList.remove("hidden");
-        document.querySelector(".main-content-title").classList.add("hidden");
-        setRandomImage(); // Set a random image when the page is loaded.
-        // Add event listener to the image checkbox to enable or disable the image input.
-        const imageCheckbox = addCourseForm.querySelector("#image-checkbox");
-        const courseImageInput = document.querySelector("#course-image-input");
-        imageCheckbox === null || imageCheckbox === void 0 ? void 0 : imageCheckbox.addEventListener("change", () => {
-            const isChecked = imageCheckbox.checked;
-            courseImageInput.disabled = isChecked;
-            courseImageInput.classList.toggle("bg-gray-100", isChecked);
-            if (isChecked)
-                setRandomImage();
-        });
-        // Add event listener to the add course form to submit the form.
-        addCourseForm.addEventListener("submit", (event) => __awaiter(void 0, void 0, void 0, function* () {
-            event.preventDefault();
-            // // Check if one of the locations is selected.
-            // if (
-            //   addCourseFormLocation1.checked === false &&
-            //   addCourseFormLocation2.checked === false
-            // ) {
-            //   showMessageBox("Please select at least one location.", "error");
-            //   return;
-            // }
-            const locations = [];
-            let enteredLocations = "";
-            if (addCourseFormLocation1.checked)
-                locations.push("Campus");
-            if (addCourseFormLocation2.checked)
-                locations.push("Online");
-            enteredLocations = locations.join(" & ");
-            enteredCourseData.name = addCourseFormName.value;
-            enteredCourseData.description = addCourseFormDescription.value;
-            enteredCourseData.location = enteredLocations;
-            enteredCourseData.instructor = addCourseFormInstructor.value;
-            enteredCourseData.startDate = addCourseFormStartDate.value;
-            enteredCourseData.endDate = addCourseFormEndDate.value;
-            enteredCourseData.students = [];
-            enteredCourseData.image = addCourseFormImage.value;
-            enteredCourseData.price = parseFloat(addCourseFormPrice.value);
-            yield addCourse(enteredCourseData);
-            showMessageBox("Course added successfully", "success");
-            addCourseForm.reset();
-            setRandomImage();
-        }));
+        loadAddCoursePage();
+    }
+    if (location.hash === "#profile") {
+        loadProfilePage();
     }
 });
 function getValidImage() {
@@ -408,3 +263,206 @@ export const showEnrolledStudents = (students, course) => {
     // console.log(studentsInformationList);
     // studentsInformationTitle.textContent = `Enrolled Students in ${course.name}`;
 };
+const loadAddCoursePage = () => __awaiter(void 0, void 0, void 0, function* () {
+    document.querySelector(".add-course-container").classList.remove("hidden");
+    // Add course form elements *left side*
+    addCourseFormName = addCourseForm.querySelector("#course-name-input");
+    addCourseFormDescription = addCourseForm.querySelector("#course-description-input");
+    addCourseFormImage = addCourseForm.querySelector("#course-image-input");
+    addCourseFormInstructor = addCourseForm.querySelector("#course-instructor-input");
+    addCourseFormPrice = addCourseForm.querySelector("#course-price-input");
+    addCourseFormStartDate = addCourseForm.querySelector("#course-start-date-input");
+    addCourseFormEndDate = addCourseForm.querySelector("#course-end-date-input");
+    addCourseFormLocation1 = addCourseForm.querySelector("#course-checkbox-1");
+    addCourseFormLocation2 = addCourseForm.querySelector("#course-checkbox-2");
+    // Add event listeners to the form elements to update the preview card when the user types in the form.
+    addCourseFormName.addEventListener("input", () => {
+        updatePreviewCard(addCourseFormName, coursePreviewName);
+    });
+    addCourseFormDescription.addEventListener("input", () => {
+        updatePreviewCard(addCourseFormDescription, coursePreviewDescription);
+    });
+    addCourseFormImage.addEventListener("input", () => {
+        updatePreviewCard(addCourseFormImage, coursePreviewImage);
+    });
+    addCourseFormInstructor.addEventListener("input", () => {
+        updatePreviewCard(addCourseFormInstructor, coursePreviewInstructor);
+    });
+    addCourseFormPrice.addEventListener("input", () => {
+        updatePreviewCard(addCourseFormPrice, coursePreviewPrice);
+    });
+    addCourseFormStartDate.addEventListener("input", () => {
+        updatePreviewCard(addCourseFormStartDate, coursePreviewDate);
+    });
+    addCourseFormEndDate.addEventListener("input", () => {
+        updatePreviewCard(addCourseFormEndDate, coursePreviewDate);
+    });
+    addCourseFormLocation1.addEventListener("change", () => {
+        updatePreviewCard(addCourseFormLocation1, coursePreviewLocation);
+    });
+    addCourseFormLocation2.addEventListener("change", () => {
+        updatePreviewCard(addCourseFormLocation2, coursePreviewLocation);
+    });
+    //  Preview card elements *right side*
+    previewContainer = document.querySelector(".preview-container");
+    coursePreviewImage = previewContainer.querySelector(".course-preview-image");
+    coursePreviewName = previewContainer.querySelector(".course-preview-name");
+    coursePreviewDescription = previewContainer.querySelector(".course-preview-description");
+    coursePreviewInstructor = previewContainer.querySelector(".course-preview-instructor");
+    coursePreviewPrice = previewContainer.querySelector(".course-preview-price");
+    coursePreviewDate = previewContainer.querySelector(".course-preview-date");
+    coursePreviewLocation = previewContainer.querySelector(".course-preview-location");
+    // Set the text content of the page elements.
+    setTextContent(homeTitle, "Add Course");
+    setTextContent(homeDescription, "Fill in the details of the course below and click the 'Add Course' button to add the course to the list of courses.");
+    // Hide the cards container and show the add course form.
+    // cardsContainer.classList.add("hidden");
+    // document.querySelector(".add-course-container")!.classList.remove("hidden");
+    // document.querySelector(".main-content-title")!.classList.add("hidden");
+    setRandomImage(); // Set a random image when the page is loaded.
+    // Add event listener to the image checkbox to enable or disable the image input.
+    const imageCheckbox = addCourseForm.querySelector("#image-checkbox");
+    const courseImageInput = document.querySelector("#course-image-input");
+    imageCheckbox === null || imageCheckbox === void 0 ? void 0 : imageCheckbox.addEventListener("change", () => {
+        const isChecked = imageCheckbox.checked;
+        courseImageInput.disabled = isChecked;
+        courseImageInput.classList.toggle("bg-gray-100", isChecked);
+        if (isChecked)
+            setRandomImage();
+    });
+    // Add event listener to the add course form to submit the form.
+    addCourseForm.addEventListener("submit", (event) => __awaiter(void 0, void 0, void 0, function* () {
+        event.preventDefault();
+        // // Check if one of the locations is selected.
+        // if (
+        //   addCourseFormLocation1.checked === false &&
+        //   addCourseFormLocation2.checked === false
+        // ) {
+        //   showMessageBox("Please select at least one location.", "error");
+        //   return;
+        // }
+        const locations = [];
+        let enteredLocations = "";
+        if (addCourseFormLocation1.checked)
+            locations.push("Campus");
+        if (addCourseFormLocation2.checked)
+            locations.push("Online");
+        enteredLocations = locations.join(" & ");
+        enteredCourseData.name = addCourseFormName.value;
+        enteredCourseData.description = addCourseFormDescription.value;
+        enteredCourseData.location = enteredLocations;
+        enteredCourseData.instructor = addCourseFormInstructor.value;
+        enteredCourseData.startDate = addCourseFormStartDate.value;
+        enteredCourseData.endDate = addCourseFormEndDate.value;
+        enteredCourseData.students = [];
+        enteredCourseData.image = addCourseFormImage.value;
+        enteredCourseData.price = parseFloat(addCourseFormPrice.value);
+        yield addCourse(enteredCourseData);
+        showMessageBox("Course added successfully", "success");
+        addCourseForm.reset();
+        setRandomImage();
+    }));
+});
+// Function that loads the home page.
+const loadHomePage = () => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    (_a = document.querySelector("#main-content")) === null || _a === void 0 ? void 0 : _a.classList.remove("hidden");
+    // Add event listeners to the admin panel buttons
+    cardsContainer.addEventListener("click", (event) => __awaiter(void 0, void 0, void 0, function* () {
+        var _a, _b, _c, _d, _e;
+        const target = event.target;
+        // Check if the clicked element is an admin-panel-button
+        if (target.classList.contains("admin-panel-button")) {
+            (_a = target.nextElementSibling) === null || _a === void 0 ? void 0 : _a.classList.toggle("hidden");
+        }
+        // Check if the clicked element is an admin-panel-edit-button
+        if (target.classList.contains("admin-panel-edit-button")) {
+            // let courseId = target.closest(".course-card")?.getAttribute("course-id");
+            // location.href = `/pages/edit-course.html?id=${courseId}`;
+        }
+        if (target.classList.contains("admin-panel-students-button")) {
+            let courseId = (_b = target.closest(".course-card")) === null || _b === void 0 ? void 0 : _b.getAttribute("course-id");
+            let course = yield fetchCourse(Number(courseId));
+            let students = course.students;
+            let enrolledStudents = [];
+            yield Promise.all(students.map((student) => __awaiter(void 0, void 0, void 0, function* () {
+                let user = yield fetchUser(Number(student.userId));
+                enrolledStudents.push(user);
+            })));
+            // console.log(studentNames);
+            showEnrolledStudents(enrolledStudents, course);
+        }
+        // Check if the clicked element is an admin-panel-delete-button
+        if (target.classList.contains("admin-panel-delete-button")) {
+            let courseId = (_c = target.closest(".course-card")) === null || _c === void 0 ? void 0 : _c.getAttribute("course-id");
+            yield deleteCourse(Number(courseId));
+            showMessageBox("Course deleted successfully", "success");
+            initializeCourses();
+        }
+        if (target.classList.contains("enroll-button")) {
+            let courseId = (_d = target.closest(".course-card")) === null || _d === void 0 ? void 0 : _d.getAttribute("course-id");
+            let course = yield fetchCourse(Number(courseId));
+            let enrollOption = (_e = target.textContent) === null || _e === void 0 ? void 0 : _e.trim();
+            if (enrollOption === "Cancel Enrollment") {
+                course.students = course.students.filter((student) => student.userId !== authenticatedUser.id.toString());
+                authenticatedUser.courses = authenticatedUser.courses.filter((course) => course !== courseId);
+                yield updateUserInDatabase(authenticatedUser);
+                yield updateCourse(course);
+                showMessageBox("You have successfully canceled your enrollment", "success");
+            }
+            else {
+                if (authenticatedUser.address === "" ||
+                    authenticatedUser.phone === "") {
+                    showMessageBox("Please fill in your address and phone number in the profile page before enrolling in a course", "error");
+                    return;
+                }
+                if (course.students.find((student) => student.userId === authenticatedUser.id.toString())) {
+                    showMessageBox("You are already enrolled in this course", "error");
+                    return;
+                }
+                course.students.push({
+                    userId: authenticatedUser.id.toString(),
+                    userChoice: "enrolled",
+                });
+                authenticatedUser.courses.push(course.id);
+                yield updateUserInDatabase(authenticatedUser);
+                yield updateCourse(course);
+                showMessageBox("You have successfully enrolled in the course", "success");
+            }
+            initializeCourses();
+        }
+    }));
+    initializeCourses();
+});
+// Function that loads the profile page.
+const loadProfilePage = () => __awaiter(void 0, void 0, void 0, function* () {
+    let profileSettingsContainer = document.querySelector(".profile-settings-container");
+    let profileSettingsForm = profileSettingsContainer.querySelector(".profile-settings-form");
+    let profileNameInput = profileSettingsForm.querySelector("#profile-name-input");
+    let profileEmailInput = profileSettingsForm.querySelector("#profile-email-input");
+    let profilePhoneInput = profileSettingsForm.querySelector("#profile-phone-input");
+    let profileAddressInput = profileSettingsForm.querySelector("#profile-address-input");
+    let profileRoleInput = profileSettingsForm.querySelector("#profile-role-input");
+    // Set the text content of the page elements.
+    setTextContent(homeTitle, "Profile");
+    setTextContent(homeDescription, "View and update your profile information below.");
+    // Show the profile settings container
+    profileSettingsContainer.classList.remove("hidden");
+    profileNameInput.value = authenticatedUser.name;
+    profileEmailInput.value = authenticatedUser.email;
+    profilePhoneInput.value = authenticatedUser.phone;
+    profileAddressInput.value = authenticatedUser.address;
+    profileRoleInput.value = authenticatedUser.role;
+    // Add event listener to the profile settings form to submit the form.
+    profileSettingsForm.addEventListener("submit", (event) => __awaiter(void 0, void 0, void 0, function* () {
+        event.preventDefault();
+        authenticatedUser.name = profileNameInput.value;
+        authenticatedUser.email = profileEmailInput.value;
+        authenticatedUser.phone = profilePhoneInput.value;
+        authenticatedUser.address = profileAddressInput.value;
+        authenticatedUser.role = profileRoleInput.value;
+        yield updateUserInDatabase(authenticatedUser);
+        showMessageBox("Profile updated successfully", "success");
+        updateText();
+    }));
+});

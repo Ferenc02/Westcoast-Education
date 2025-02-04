@@ -8,7 +8,12 @@
       "instructor": "Instructor 1",
       "startDate": "2022-01-01",
       "endDate": "2022-01-31",
-      "students": [],
+      "students": [
+        {
+          "userId": "2",
+          "userChoice": "enrolled"
+        }
+      ],
       "image": "https://picsum.photos/id/237/200/300",
       "price": 100
     },
@@ -23,6 +28,10 @@
       "students": [
         {
           "userId": "5",
+          "userChoice": "enrolled"
+        },
+        {
+          "userId": "2",
           "userChoice": "enrolled"
         }
       ],
