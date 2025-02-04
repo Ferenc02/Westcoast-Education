@@ -655,9 +655,6 @@
   .h-\[2px\] {
     height: 2px;
   }
-  .h-\[60\%\] {
-    height: 60%;
-  }
   .h-\[70\%\] {
     height: 70%;
   }
@@ -706,9 +703,6 @@
   .w-\[90\%\] {
     width: 90%;
   }
-  .w-\[90\] {
-    width: 90;
-  }
   .w-full {
     width: 100%;
   }
@@ -729,9 +723,6 @@
   }
   .table-auto {
     table-layout: auto;
-  }
-  .table-fixed {
-    table-layout: fixed;
   }
   .scale-90 {
     --tw-scale-x: 90%;
@@ -854,14 +845,6 @@
     border-bottom-style: var(--tw-border-style) !important;
     border-bottom-width: 1px !important;
   }
-  .border-b {
-    border-bottom-style: var(--tw-border-style);
-    border-bottom-width: 1px;
-  }
-  .border-b-2 {
-    border-bottom-style: var(--tw-border-style);
-    border-bottom-width: 2px;
-  }
   .border-b-\[1px\] {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
@@ -961,9 +944,6 @@
   }
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
-  }
-  .py-34 {
-    padding-block: calc(var(--spacing) * 34);
   }
   .pr-8 {
     padding-right: calc(var(--spacing) * 8);
@@ -1470,21 +1450,6 @@
       :where(& > :not(:last-child)) {
         --tw-space-x-reverse: 1;
       }
-    }
-  }
-  .dark\:border-gray-700 {
-    @media (prefers-color-scheme: dark) {
-      border-color: var(--color-gray-700);
-    }
-  }
-  .dark\:bg-gray-700 {
-    @media (prefers-color-scheme: dark) {
-      background-color: var(--color-gray-700);
-    }
-  }
-  .dark\:bg-gray-800 {
-    @media (prefers-color-scheme: dark) {
-      background-color: var(--color-gray-800);
     }
   }
   .dark\:text-gray-400 {

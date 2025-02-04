@@ -1,7 +1,12 @@
-import { signOutUser } from "./authentication.js";
-import { authenticatedUser } from "./app.js";
+import { signOutUser, user } from "./authentication.js";
+import { authenticatedUser, updateUserInDatabase } from "./app.js";
 import showMessageBox from "./errorHandling.js";
-import { addCourse, course, initializeCourses } from "./courses.js";
+import {
+  addCourse,
+  course,
+  initializeCourses,
+  updateCourse,
+} from "./courses.js";
 
 let header: HTMLElement;
 let navbar: HTMLElement;
@@ -34,15 +39,15 @@ let coursePreviewPrice: HTMLElement;
 let coursePreviewDate: HTMLElement;
 let coursePreviewLocation: HTMLElement;
 
-let studentsInformationParent = document.querySelector(
-  ".course-students"
-) as HTMLElement;
-let studentsInformationTitle = studentsInformationParent.querySelector(
-  ".course-students-title"
-) as HTMLElement;
-let studentsInformationList = studentsInformationParent.querySelector(
-  ".course-students-list"
-) as HTMLElement;
+let studentsInformationParent =
+  document.querySelector(".course-students") || undefined;
+
+let studentsInformationTitle =
+  studentsInformationParent?.querySelector(".course-students-title") ||
+  undefined;
+let studentsInformationList =
+  studentsInformationParent?.querySelector(".course-students-list") ||
+  undefined;
 
 let logoutButton = document.querySelector(
   "#logout-button"
@@ -425,12 +430,71 @@ const updatePreviewCard = (
 };
 
 // Function that shows the enrolled students in a course.
+export const showEnrolledStudents = (students: user[], course: course) => {
+  studentsInformationParent!.classList.remove("hidden");
 
-export const showEnrolledStudents = (students: string[], course: course) => {
-  let studentsList = students.join(", ");
+  studentsInformationTitle!.textContent = `Enrolled Students in ${course.name}`;
 
-  console.log(studentsInformationParent);
+  students.forEach((student) => {
+    let column = document.createElement("tr");
+    column.classList.add("border-b-[1px]", "border-gray-200", "bg-white");
+    column.setAttribute("data-student-id", student.id.toString());
 
-  studentsInformationParent.classList.remove("hidden");
-  studentsInformationTitle.textContent = `Enrolled Students in ${course.name}`;
+    let studentColumn = `
+                <td class="py-2">${student.name}</td>
+                <td>
+                  <a href="mailto:${student.email}">${student.email}</a>
+                </td>
+                <td>${student.phone}</td>
+                <td>${student.address}</td>
+                <td>
+                  <button
+                    class="course-students__remove-button cursor-pointer hover:scale-105 transition-transform"
+                  >
+                    ❌
+                  </button>
+                </td>
+              `;
+
+    column.innerHTML = studentColumn;
+
+    studentsInformationList?.appendChild(column);
+  });
+
+  studentsInformationParent?.addEventListener("click", (event) => {
+    const target = event.target as HTMLElement;
+
+    if (target.classList.contains("course-students__remove-button")) {
+      const studentRow = target.closest("tr") as HTMLElement;
+      const studentId = studentRow.getAttribute("data-student-id");
+
+      let currentUserSelected: user;
+
+      currentUserSelected = students.find(
+        (student) => student.id.toString() === studentId
+      )!;
+
+      course.students = course.students.filter(
+        (student) => student.userId !== currentUserSelected.id.toString()
+      );
+
+      currentUserSelected.courses = currentUserSelected.courses.filter(
+        (item) => item !== course.id.toString()
+      );
+
+      // console.log(currentUserSelected.courses);
+
+      updateUserInDatabase(currentUserSelected);
+      updateCourse(course);
+
+      alert("Student removed successfully");
+
+      // studentRow.remove();
+    } else if (target.classList.contains("course-students-button")) {
+      studentsInformationParent?.classList.add("hidden");
+    }
+  });
+
+  // console.log(studentsInformationList);
+  // studentsInformationTitle.textContent = `Enrolled Students in ${course.name}`;
 };

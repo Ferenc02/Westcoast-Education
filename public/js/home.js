@@ -8,9 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { signOutUser } from "./authentication.js";
-import { authenticatedUser } from "./app.js";
+import { authenticatedUser, updateUserInDatabase } from "./app.js";
 import showMessageBox from "./errorHandling.js";
-import { addCourse, initializeCourses } from "./courses.js";
+import { addCourse, initializeCourses, updateCourse, } from "./courses.js";
 let header;
 let navbar;
 let navbarButton;
@@ -37,9 +37,11 @@ let coursePreviewInstructor;
 let coursePreviewPrice;
 let coursePreviewDate;
 let coursePreviewLocation;
-let studentsInformationParent = document.querySelector(".course-students");
-let studentsInformationTitle = studentsInformationParent.querySelector(".course-students-title");
-let studentsInformationList = studentsInformationParent.querySelector(".course-students-list");
+let studentsInformationParent = document.querySelector(".course-students") || undefined;
+let studentsInformationTitle = (studentsInformationParent === null || studentsInformationParent === void 0 ? void 0 : studentsInformationParent.querySelector(".course-students-title")) ||
+    undefined;
+let studentsInformationList = (studentsInformationParent === null || studentsInformationParent === void 0 ? void 0 : studentsInformationParent.querySelector(".course-students-list")) ||
+    undefined;
 let logoutButton = document.querySelector("#logout-button");
 let navbarActive = false;
 let enteredCourseData = {
@@ -295,8 +297,49 @@ const updatePreviewCard = (element, previewElement) => {
 };
 // Function that shows the enrolled students in a course.
 export const showEnrolledStudents = (students, course) => {
-    let studentsList = students.join(", ");
-    console.log(studentsInformationParent);
     studentsInformationParent.classList.remove("hidden");
     studentsInformationTitle.textContent = `Enrolled Students in ${course.name}`;
+    students.forEach((student) => {
+        let column = document.createElement("tr");
+        column.classList.add("border-b-[1px]", "border-gray-200", "bg-white");
+        column.setAttribute("data-student-id", student.id.toString());
+        let studentColumn = `
+                <td class="py-2">${student.name}</td>
+                <td>
+                  <a href="mailto:${student.email}">${student.email}</a>
+                </td>
+                <td>${student.phone}</td>
+                <td>${student.address}</td>
+                <td>
+                  <button
+                    class="course-students__remove-button cursor-pointer hover:scale-105 transition-transform"
+                  >
+                    ❌
+                  </button>
+                </td>
+              `;
+        column.innerHTML = studentColumn;
+        studentsInformationList === null || studentsInformationList === void 0 ? void 0 : studentsInformationList.appendChild(column);
+    });
+    studentsInformationParent === null || studentsInformationParent === void 0 ? void 0 : studentsInformationParent.addEventListener("click", (event) => {
+        const target = event.target;
+        if (target.classList.contains("course-students__remove-button")) {
+            const studentRow = target.closest("tr");
+            const studentId = studentRow.getAttribute("data-student-id");
+            let currentUserSelected;
+            currentUserSelected = students.find((student) => student.id.toString() === studentId);
+            course.students = course.students.filter((student) => student.userId !== currentUserSelected.id.toString());
+            currentUserSelected.courses = currentUserSelected.courses.filter((item) => item !== course.id.toString());
+            // console.log(currentUserSelected.courses);
+            updateUserInDatabase(currentUserSelected);
+            updateCourse(course);
+            alert("Student removed successfully");
+            // studentRow.remove();
+        }
+        else if (target.classList.contains("course-students-button")) {
+            studentsInformationParent === null || studentsInformationParent === void 0 ? void 0 : studentsInformationParent.classList.add("hidden");
+        }
+    });
+    // console.log(studentsInformationList);
+    // studentsInformationTitle.textContent = `Enrolled Students in ${course.name}`;
 };

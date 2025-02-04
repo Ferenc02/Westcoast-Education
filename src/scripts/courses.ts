@@ -1,5 +1,5 @@
 import { authenticatedUser, updateUserInDatabase } from "./app.js";
-import { fetchUser } from "./authentication.js";
+import { fetchUser, user } from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
 import { showEnrolledStudents } from "./home.js";
 
@@ -43,6 +43,7 @@ export const generateCourseCard = (course: course) => {
   `;
 
   let userEnrolled = authenticatedUser.courses.includes(course.id);
+  // console.log(userEnrolled);
 
   let cardElement = `<div course-id="${course.id}"
             class="course-card fade-in flex flex-col w-full bg-white rounded-lg shadow-md p-4 gap-4  transition-transform relative"
@@ -195,18 +196,18 @@ export const initializeCourses = async () => {
 
       let students = course.students;
 
-      let studentNames: string[] = [];
+      let enrolledStudents: user[] = [];
 
       await Promise.all(
         students.map(async (student) => {
           let user = await fetchUser(Number(student.userId));
-          studentNames.push(user.name);
+          enrolledStudents.push(user);
         })
       );
 
-      console.log(studentNames);
+      // console.log(studentNames);
 
-      showEnrolledStudents(studentNames, course);
+      showEnrolledStudents(enrolledStudents, course);
     }
 
     // Check if the clicked element is an admin-panel-delete-button

@@ -35,6 +35,7 @@ export const generateCourseCard = (course) => {
   </div>
   `;
     let userEnrolled = authenticatedUser.courses.includes(course.id);
+    // console.log(userEnrolled);
     let cardElement = `<div course-id="${course.id}"
             class="course-card fade-in flex flex-col w-full bg-white rounded-lg shadow-md p-4 gap-4  transition-transform relative"
           >
@@ -159,13 +160,13 @@ export const initializeCourses = () => __awaiter(void 0, void 0, void 0, functio
             let courseId = (_b = target.closest(".course-card")) === null || _b === void 0 ? void 0 : _b.getAttribute("course-id");
             let course = yield fetchCourse(Number(courseId));
             let students = course.students;
-            let studentNames = [];
+            let enrolledStudents = [];
             yield Promise.all(students.map((student) => __awaiter(void 0, void 0, void 0, function* () {
                 let user = yield fetchUser(Number(student.userId));
-                studentNames.push(user.name);
+                enrolledStudents.push(user);
             })));
-            console.log(studentNames);
-            showEnrolledStudents(studentNames, course);
+            // console.log(studentNames);
+            showEnrolledStudents(enrolledStudents, course);
         }
         // Check if the clicked element is an admin-panel-delete-button
         if (target.classList.contains("admin-panel-delete-button")) {

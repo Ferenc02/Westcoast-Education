@@ -10,10 +10,6 @@
       "endDate": "2022-01-31",
       "students": [
         {
-          "userId": "2",
-          "userChoice": "enrolled"
-        },
-        {
           "userId": "5",
           "userChoice": "enrolled"
         }
@@ -31,11 +27,11 @@
       "endDate": "2025-02-12",
       "students": [
         {
-          "userId": "2",
+          "userId": "5",
           "userChoice": "enrolled"
         },
         {
-          "userId": "5",
+          "userId": "2",
           "userChoice": "enrolled"
         }
       ],
@@ -80,15 +76,15 @@
     },
     {
       "id": "7",
-      "name": "dgfgdgdfgdfg",
-      "description": "fgdgfdgfdgdfg",
-      "location": "Online",
-      "instructor": "dfggfdgfd",
-      "startDate": "2025-01-29",
-      "endDate": "2025-02-20",
+      "name": "Kurs 5",
+      "description": "Detta är en cool kurs",
+      "location": "Campus & Online",
+      "instructor": "Karim",
+      "startDate": "2025-02-07",
+      "endDate": "2025-02-19",
       "students": [],
-      "image": "https://picsum.photos/id/320/600/600",
-      "price": 1112121
+      "image": "https://picsum.photos/id/318/600/600",
+      "price": 6969
     }
   ]
 }

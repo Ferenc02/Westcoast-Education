@@ -20,12 +20,11 @@
       "phone": "",
       "address": "",
       "courses": [
-        "1",
         "2"
       ],
       "role": "admin",
-      "authToken": "k8in3e1w-0h9c-3cz0-b4zw-iqp67hpk8k51",
-      "expiresAt": "2025-02-04T18:05:01.834Z"
+      "authToken": "b8m37pk0-8oe8-jqoq-6cmk-m1qt89y6tb17",
+      "expiresAt": "2025-02-05T11:56:08.889Z"
     },
     {
       "id": "3",
@@ -65,6 +64,18 @@
       "role": "admin",
       "authToken": "dzqo878t-8yk3-dl71-4ry2-65xijyw0qnu0",
       "expiresAt": "2025-02-04T18:02:08.049Z"
+    },
+    {
+      "id": "6",
+      "name": "Karim Mohammed",
+      "email": "mohammed@gmail.com",
+      "password": "e203f9134b37bd9502dca04e1aa1c9b892c2f47825cb9e90a47ea3cf791bd28a",
+      "phone": "",
+      "address": "",
+      "courses": [],
+      "role": "admin",
+      "authToken": "74vnzcuh-el34-p9gi-7yt9-djkcp10s5678",
+      "expiresAt": "2025-02-04T18:39:05.749Z"
     }
   ]
 }
