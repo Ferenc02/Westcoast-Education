@@ -62,7 +62,7 @@ To get started with the project, you can follow the steps below:
    npm run dev
    ```
 
-   This will start all necessary services, including the PostCSS watcher, JSON Server, and TypeScript compiler in parallel mode.
+   This will start all necessary services, including the PostCSS watcher, JSON Server, TypeScript compiler, and HTTP server in parallel mode.
 
 ## Usage
 
@@ -70,5 +70,6 @@ To get started with the project, you can follow the steps below:
 - **Tailwind**: The project uses Tailwind CSS for styling, which is configured in the `postcss.config.mjs` file.
 - **JSON Server**: Serves as a mock API for course data, available at `http://localhost:3000`.
 - **TypeScript**: Watches for changes in TypeScript files and recompiles them as needed and output in `public/js` folder.
+- **HTTP Server**: Serves the project on `http://localhost:8080`.
 
 ---
