@@ -68,7 +68,7 @@ To get started with the project, you can follow the steps below:
 
 - **PostCSS**: Styles are automatically compiled and updated when you modify the `src/styles.css` file or add any Tailwind classes in the html.
 - **Tailwind**: The project uses Tailwind CSS for styling, which is configured in the `postcss.config.mjs` file.
-- **JSON Server**: Serves as a mock API for course data, available at `http://localhost:3000`.
+- **JSON Server**: Serves as a mock API for course data and authentication, available at `http://localhost:3000` and `http://localhost:3001`.
 - **TypeScript**: Watches for changes in TypeScript files and recompiles them as needed and output in `public/js` folder.
 - **HTTP Server**: Serves the project on `http://localhost:8080`.
 
