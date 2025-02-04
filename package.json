@@ -7,6 +7,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
+    "dev:http": "http-server public -o -c-1 -s",
     "dev:styles": "postcss src/styles/app.css -o public/styles/app.css --watch --verbose",
     "dev:server1": "json-server --watch endpoints/db.json",
     "dev:server2": "json-server --watch endpoints/users.json --port 3001",
@@ -21,6 +22,7 @@
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.0.0",
+    "http-server": "^14.1.1",
     "json-server": "^1.0.0-beta.3",
     "tailwindcss": "^4.0.0"
   },

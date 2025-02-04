@@ -20,11 +20,11 @@
       "phone": "",
       "address": "",
       "courses": [
-        "2"
+        "1"
       ],
       "role": "admin",
-      "authToken": "b8m37pk0-8oe8-jqoq-6cmk-m1qt89y6tb17",
-      "expiresAt": "2025-02-05T11:56:08.889Z"
+      "authToken": "64wrzwv3-l06f-8con-r317-igb1y7ckv73k",
+      "expiresAt": "2025-02-05T12:46:13.640Z"
     },
     {
       "id": "3",
@@ -58,7 +58,6 @@
       "phone": "",
       "address": "",
       "courses": [
-        "1",
         "2"
       ],
       "role": "admin",

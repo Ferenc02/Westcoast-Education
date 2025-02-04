@@ -1,9 +1,11 @@
-import { signOutUser, user } from "./authentication.js";
+import { fetchUser, signOutUser, user } from "./authentication.js";
 import { authenticatedUser, updateUserInDatabase } from "./app.js";
 import showMessageBox from "./errorHandling.js";
 import {
   addCourse,
   course,
+  deleteCourse,
+  fetchCourse,
   initializeCourses,
   updateCourse,
 } from "./courses.js";
@@ -141,12 +143,124 @@ const toggleNavbar = () => {
 
 const hashChange = async () => {
   if (location.hash === "") {
+    // Add event listeners to the admin panel buttons
+
+    cardsContainer.addEventListener("click", async (event) => {
+      const target = event.target as HTMLElement;
+
+      // Check if the clicked element is an admin-panel-button
+      if (target.classList.contains("admin-panel-button")) {
+        target.nextElementSibling?.classList.toggle("hidden");
+      }
+
+      // Check if the clicked element is an admin-panel-edit-button
+      if (target.classList.contains("admin-panel-edit-button")) {
+        // let courseId = target.closest(".course-card")?.getAttribute("course-id");
+        // location.href = `/pages/edit-course.html?id=${courseId}`;
+      }
+
+      if (target.classList.contains("admin-panel-students-button")) {
+        let courseId = target
+          .closest(".course-card")
+          ?.getAttribute("course-id");
+
+        let course = await fetchCourse(Number(courseId));
+
+        let students = course.students;
+
+        let enrolledStudents: user[] = [];
+
+        await Promise.all(
+          students.map(async (student) => {
+            let user = await fetchUser(Number(student.userId));
+            enrolledStudents.push(user);
+          })
+        );
+
+        // console.log(studentNames);
+
+        showEnrolledStudents(enrolledStudents, course);
+      }
+
+      // Check if the clicked element is an admin-panel-delete-button
+      if (target.classList.contains("admin-panel-delete-button")) {
+        let courseId = target
+          .closest(".course-card")
+          ?.getAttribute("course-id");
+
+        await deleteCourse(Number(courseId));
+
+        showMessageBox("Course deleted successfully", "success");
+
+        initializeCourses();
+      }
+
+      if (target.classList.contains("enroll-button")) {
+        let courseId = target
+          .closest(".course-card")
+          ?.getAttribute("course-id");
+
+        let course = await fetchCourse(Number(courseId));
+
+        let enrollOption = target.textContent?.trim();
+
+        if (enrollOption === "Cancel Enrollment") {
+          course.students = course.students.filter(
+            (student) => student.userId !== authenticatedUser.id.toString()
+          );
+
+          authenticatedUser.courses = authenticatedUser.courses.filter(
+            (course) => course !== courseId
+          );
+
+          await updateUserInDatabase(authenticatedUser);
+
+          await updateCourse(course);
+
+          showMessageBox(
+            "You have successfully canceled your enrollment",
+            "success"
+          );
+        } else {
+          if (
+            course.students.find(
+              (student) => student.userId === authenticatedUser.id.toString()
+            )
+          ) {
+            showMessageBox("You are already enrolled in this course", "error");
+            return;
+          }
+
+          course.students.push({
+            userId: authenticatedUser.id.toString(),
+            userChoice: "enrolled",
+          });
+
+          authenticatedUser.courses.push(course.id);
+
+          await updateUserInDatabase(authenticatedUser);
+
+          await updateCourse(course);
+
+          showMessageBox(
+            "You have successfully enrolled in the course",
+            "success"
+          );
+        }
+
+        initializeCourses();
+      }
+    });
+
     initializeCourses();
   }
 
   if (location.hash === "#addCourse") {
     if (authenticatedUser.role !== "admin") {
-      alert("You are not authorized to add courses");
+      showMessageBox(
+        "You do not have permission to access this page.",
+        "error"
+      );
       location.href = "/pages/home.html";
       return;
     }
@@ -433,6 +547,8 @@ const updatePreviewCard = (
 export const showEnrolledStudents = (students: user[], course: course) => {
   studentsInformationParent!.classList.remove("hidden");
 
+  studentsInformationList!.innerHTML = "";
+
   studentsInformationTitle!.textContent = `Enrolled Students in ${course.name}`;
 
   students.forEach((student) => {
@@ -487,11 +603,12 @@ export const showEnrolledStudents = (students: user[], course: course) => {
       updateUserInDatabase(currentUserSelected);
       updateCourse(course);
 
-      alert("Student removed successfully");
+      showMessageBox("Student removed successfully", "success");
 
-      // studentRow.remove();
+      studentRow.remove();
     } else if (target.classList.contains("course-students-button")) {
       studentsInformationParent?.classList.add("hidden");
+      location.href = "/pages/home.html";
     }
   });
 

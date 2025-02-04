@@ -8,12 +8,7 @@
       "instructor": "Instructor 1",
       "startDate": "2022-01-01",
       "endDate": "2022-01-31",
-      "students": [
-        {
-          "userId": "5",
-          "userChoice": "enrolled"
-        }
-      ],
+      "students": [],
       "image": "https://picsum.photos/id/237/200/300",
       "price": 100
     },
@@ -28,10 +23,6 @@
       "students": [
         {
           "userId": "5",
-          "userChoice": "enrolled"
-        },
-        {
-          "userId": "2",
           "userChoice": "enrolled"
         }
       ],
@@ -61,30 +52,6 @@
       "students": [],
       "image": "https://picsum.photos/id/292/600/600",
       "price": 85
-    },
-    {
-      "id": "6",
-      "name": "ffghghfhfg",
-      "description": "ghfhfghfg",
-      "location": "Campus & Online",
-      "instructor": "hgfhfgh",
-      "startDate": "2025-02-06",
-      "endDate": "2025-02-22",
-      "students": [],
-      "image": "https://picsum.photos/id/181/600/600",
-      "price": 44
-    },
-    {
-      "id": "7",
-      "name": "Kurs 5",
-      "description": "Detta är en cool kurs",
-      "location": "Campus & Online",
-      "instructor": "Karim",
-      "startDate": "2025-02-07",
-      "endDate": "2025-02-19",
-      "students": [],
-      "image": "https://picsum.photos/id/318/600/600",
-      "price": 6969
     }
   ]
 }

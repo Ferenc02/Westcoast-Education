@@ -7,14 +7,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { authenticatedUser, updateUserInDatabase } from "./app.js";
-import { fetchUser } from "./authentication.js";
+import { authenticatedUser } from "./app.js";
 import showMessageBox from "./errorHandling.js";
-import { showEnrolledStudents } from "./home.js";
 let cardsContainer = document.querySelector(".cards-container");
-let testFunction = () => {
-    alert("test");
-};
 // Function that generates a course card with the course information and appends it to the cards container.
 export const generateCourseCard = (course) => {
     let adminPanel = `
@@ -117,7 +112,7 @@ export const addCourse = (course) => __awaiter(void 0, void 0, void 0, function*
     });
 });
 // Function that deletes a course from the server.
-const deleteCourse = (id) => __awaiter(void 0, void 0, void 0, function* () {
+export const deleteCourse = (id) => __awaiter(void 0, void 0, void 0, function* () {
     if (authenticatedUser.role !== "admin") {
         showMessageBox("You are not authorized to delete courses", "error");
         return;
@@ -143,62 +138,4 @@ export const initializeCourses = () => __awaiter(void 0, void 0, void 0, functio
     courses.forEach((course) => {
         generateCourseCard(course);
     });
-    // Add event listeners to the admin panel buttons
-    cardsContainer.addEventListener("click", (event) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a, _b, _c, _d, _e;
-        const target = event.target;
-        // Check if the clicked element is an admin-panel-button
-        if (target.classList.contains("admin-panel-button")) {
-            (_a = target.nextElementSibling) === null || _a === void 0 ? void 0 : _a.classList.toggle("hidden");
-        }
-        // Check if the clicked element is an admin-panel-edit-button
-        if (target.classList.contains("admin-panel-edit-button")) {
-            // let courseId = target.closest(".course-card")?.getAttribute("course-id");
-            // location.href = `/pages/edit-course.html?id=${courseId}`;
-        }
-        if (target.classList.contains("admin-panel-students-button")) {
-            let courseId = (_b = target.closest(".course-card")) === null || _b === void 0 ? void 0 : _b.getAttribute("course-id");
-            let course = yield fetchCourse(Number(courseId));
-            let students = course.students;
-            let enrolledStudents = [];
-            yield Promise.all(students.map((student) => __awaiter(void 0, void 0, void 0, function* () {
-                let user = yield fetchUser(Number(student.userId));
-                enrolledStudents.push(user);
-            })));
-            // console.log(studentNames);
-            showEnrolledStudents(enrolledStudents, course);
-        }
-        // Check if the clicked element is an admin-panel-delete-button
-        if (target.classList.contains("admin-panel-delete-button")) {
-            let courseId = (_c = target.closest(".course-card")) === null || _c === void 0 ? void 0 : _c.getAttribute("course-id");
-            yield deleteCourse(Number(courseId));
-            alert("Course deleted successfully");
-        }
-        if (target.classList.contains("enroll-button")) {
-            let courseId = (_d = target.closest(".course-card")) === null || _d === void 0 ? void 0 : _d.getAttribute("course-id");
-            let course = yield fetchCourse(Number(courseId));
-            let enrollOption = (_e = target.textContent) === null || _e === void 0 ? void 0 : _e.trim();
-            if (enrollOption === "Cancel Enrollment") {
-                course.students = course.students.filter((student) => student.userId !== authenticatedUser.id.toString());
-                authenticatedUser.courses = authenticatedUser.courses.filter((course) => course !== courseId);
-                yield updateUserInDatabase(authenticatedUser);
-                yield updateCourse(course);
-                alert("You have successfully canceled your enrollment");
-            }
-            else {
-                if (course.students.find((student) => student.userId === authenticatedUser.id.toString())) {
-                    showMessageBox("You are already enrolled in this course", "error");
-                    return;
-                }
-                course.students.push({
-                    userId: authenticatedUser.id.toString(),
-                    userChoice: "enrolled",
-                });
-                authenticatedUser.courses.push(course.id);
-                yield updateUserInDatabase(authenticatedUser);
-                yield updateCourse(course);
-                alert("You have successfully enrolled in the course");
-            }
-        }
-    }));
 });

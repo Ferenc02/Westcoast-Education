@@ -7,10 +7,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { signOutUser } from "./authentication.js";
+import { fetchUser, signOutUser } from "./authentication.js";
 import { authenticatedUser, updateUserInDatabase } from "./app.js";
 import showMessageBox from "./errorHandling.js";
-import { addCourse, initializeCourses, updateCourse, } from "./courses.js";
+import { addCourse, deleteCourse, fetchCourse, initializeCourses, updateCourse, } from "./courses.js";
 let header;
 let navbar;
 let navbarButton;
@@ -114,11 +114,74 @@ const toggleNavbar = () => {
 };
 const hashChange = () => __awaiter(void 0, void 0, void 0, function* () {
     if (location.hash === "") {
+        // Add event listeners to the admin panel buttons
+        cardsContainer.addEventListener("click", (event) => __awaiter(void 0, void 0, void 0, function* () {
+            var _a, _b, _c, _d, _e;
+            const target = event.target;
+            // Check if the clicked element is an admin-panel-button
+            if (target.classList.contains("admin-panel-button")) {
+                (_a = target.nextElementSibling) === null || _a === void 0 ? void 0 : _a.classList.toggle("hidden");
+            }
+            // Check if the clicked element is an admin-panel-edit-button
+            if (target.classList.contains("admin-panel-edit-button")) {
+                // let courseId = target.closest(".course-card")?.getAttribute("course-id");
+                // location.href = `/pages/edit-course.html?id=${courseId}`;
+            }
+            if (target.classList.contains("admin-panel-students-button")) {
+                let courseId = (_b = target
+                    .closest(".course-card")) === null || _b === void 0 ? void 0 : _b.getAttribute("course-id");
+                let course = yield fetchCourse(Number(courseId));
+                let students = course.students;
+                let enrolledStudents = [];
+                yield Promise.all(students.map((student) => __awaiter(void 0, void 0, void 0, function* () {
+                    let user = yield fetchUser(Number(student.userId));
+                    enrolledStudents.push(user);
+                })));
+                // console.log(studentNames);
+                showEnrolledStudents(enrolledStudents, course);
+            }
+            // Check if the clicked element is an admin-panel-delete-button
+            if (target.classList.contains("admin-panel-delete-button")) {
+                let courseId = (_c = target
+                    .closest(".course-card")) === null || _c === void 0 ? void 0 : _c.getAttribute("course-id");
+                yield deleteCourse(Number(courseId));
+                showMessageBox("Course deleted successfully", "success");
+                initializeCourses();
+            }
+            if (target.classList.contains("enroll-button")) {
+                let courseId = (_d = target
+                    .closest(".course-card")) === null || _d === void 0 ? void 0 : _d.getAttribute("course-id");
+                let course = yield fetchCourse(Number(courseId));
+                let enrollOption = (_e = target.textContent) === null || _e === void 0 ? void 0 : _e.trim();
+                if (enrollOption === "Cancel Enrollment") {
+                    course.students = course.students.filter((student) => student.userId !== authenticatedUser.id.toString());
+                    authenticatedUser.courses = authenticatedUser.courses.filter((course) => course !== courseId);
+                    yield updateUserInDatabase(authenticatedUser);
+                    yield updateCourse(course);
+                    showMessageBox("You have successfully canceled your enrollment", "success");
+                }
+                else {
+                    if (course.students.find((student) => student.userId === authenticatedUser.id.toString())) {
+                        showMessageBox("You are already enrolled in this course", "error");
+                        return;
+                    }
+                    course.students.push({
+                        userId: authenticatedUser.id.toString(),
+                        userChoice: "enrolled",
+                    });
+                    authenticatedUser.courses.push(course.id);
+                    yield updateUserInDatabase(authenticatedUser);
+                    yield updateCourse(course);
+                    showMessageBox("You have successfully enrolled in the course", "success");
+                }
+                initializeCourses();
+            }
+        }));
         initializeCourses();
     }
     if (location.hash === "#addCourse") {
         if (authenticatedUser.role !== "admin") {
-            alert("You are not authorized to add courses");
+            showMessageBox("You do not have permission to access this page.", "error");
             location.href = "/pages/home.html";
             return;
         }
@@ -298,6 +361,7 @@ const updatePreviewCard = (element, previewElement) => {
 // Function that shows the enrolled students in a course.
 export const showEnrolledStudents = (students, course) => {
     studentsInformationParent.classList.remove("hidden");
+    studentsInformationList.innerHTML = "";
     studentsInformationTitle.textContent = `Enrolled Students in ${course.name}`;
     students.forEach((student) => {
         let column = document.createElement("tr");
@@ -333,11 +397,12 @@ export const showEnrolledStudents = (students, course) => {
             // console.log(currentUserSelected.courses);
             updateUserInDatabase(currentUserSelected);
             updateCourse(course);
-            alert("Student removed successfully");
-            // studentRow.remove();
+            showMessageBox("Student removed successfully", "success");
+            studentRow.remove();
         }
         else if (target.classList.contains("course-students-button")) {
             studentsInformationParent === null || studentsInformationParent === void 0 ? void 0 : studentsInformationParent.classList.add("hidden");
+            location.href = "/pages/home.html";
         }
     });
     // console.log(studentsInformationList);
