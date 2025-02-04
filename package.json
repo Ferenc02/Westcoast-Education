@@ -15,6 +15,7 @@
     "dev": "npm-run-all -p -l dev:*"
   },
   "scriptsComments": {
+    "dev:http": "Start a local server to serve the static files in the public folder. Previously Live Server was used for this purpose, but it was replaced with http-server since live server has a bug where the pages are updated if you call to the json-server",
     "dev:styles": "Compile Tailwind CSS to CSS and using PostCSS",
     "dev:server": "Start JSON Server to serve the endpoints",
     "dev:ts": "Compile TypeScript to JavaScript and watch for changes",
