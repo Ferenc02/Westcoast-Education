@@ -371,12 +371,15 @@ export const showEnrolledStudents = (students: user[], course: course) => {
   // studentsInformationTitle.textContent = `Enrolled Students in ${course.name}`;
 };
 
-const loadAddCoursePage = async (courseToEdit?: course) => {
+const loadAddCoursePage = async () => {
   let courseToEditId = location.hash.split("=")[2];
-
-  let enteredCourseData: course = await fetchCourse(Number(courseToEditId));
-
   let edit = location.hash.includes("edit=true");
+
+  let enteredCourseData = {} as course;
+
+  if (edit) {
+    enteredCourseData = await fetchCourse(Number(courseToEditId));
+  }
 
   document.querySelector(".add-course-container")!.classList.remove("hidden");
 

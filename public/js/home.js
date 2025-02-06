@@ -276,10 +276,13 @@ export const showEnrolledStudents = (students, course) => {
     // console.log(studentsInformationList);
     // studentsInformationTitle.textContent = `Enrolled Students in ${course.name}`;
 };
-const loadAddCoursePage = (courseToEdit) => __awaiter(void 0, void 0, void 0, function* () {
+const loadAddCoursePage = () => __awaiter(void 0, void 0, void 0, function* () {
     let courseToEditId = location.hash.split("=")[2];
-    let enteredCourseData = yield fetchCourse(Number(courseToEditId));
     let edit = location.hash.includes("edit=true");
+    let enteredCourseData = {};
+    if (edit) {
+        enteredCourseData = yield fetchCourse(Number(courseToEditId));
+    }
     document.querySelector(".add-course-container").classList.remove("hidden");
     // Add course form elements *left side*
     addCourseFormName = addCourseForm.querySelector("#course-name-input");
