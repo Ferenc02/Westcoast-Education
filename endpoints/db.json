@@ -27,10 +27,6 @@
       "endDate": "2025-02-12",
       "students": [
         {
-          "userId": "5",
-          "userChoice": "enrolled"
-        },
-        {
           "userId": "2",
           "userChoice": "enrolled"
         }

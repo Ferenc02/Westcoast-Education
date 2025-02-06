@@ -24,8 +24,8 @@
         "1"
       ],
       "role": "admin",
-      "authToken": "64wrzwv3-l06f-8con-r317-igb1y7ckv73k",
-      "expiresAt": "2025-02-05T12:46:13.640Z"
+      "authToken": "57n7yd5x-8sb3-ffdi-zv81-481nwp7h0sws",
+      "expiresAt": "2025-02-07T12:38:27.718Z"
     },
     {
       "id": "3",
@@ -58,9 +58,7 @@
       "password": "604b6f3038b99e3e4e80259bc3fe9c38a46a2f638853e47e616841b05269eef5",
       "phone": "",
       "address": "",
-      "courses": [
-        "2"
-      ],
+      "courses": [],
       "role": "admin",
       "authToken": "dzqo878t-8yk3-dl71-4ry2-65xijyw0qnu0",
       "expiresAt": "2025-02-04T18:02:08.049Z"

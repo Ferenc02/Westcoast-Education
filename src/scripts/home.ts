@@ -6,6 +6,7 @@ import {
   course,
   deleteCourse,
   fetchCourse,
+  generateCourseCard,
   initializeCourses,
   updateCourse,
 } from "./courses.js";
@@ -142,6 +143,7 @@ const toggleNavbar = () => {
 };
 
 const hashChange = async () => {
+  // This hides all the sections except the first one when the hash changes so I don't have to do it manually for each page. The first section is always top part of the page.
   document
     .querySelector("main")!
     .querySelectorAll("section")
@@ -172,6 +174,10 @@ const hashChange = async () => {
 
   if (location.hash === "#profile") {
     loadProfilePage();
+  }
+
+  if (location.hash === "#myCourses") {
+    loadEnrolledCoursesPage();
   }
 };
 
@@ -709,4 +715,34 @@ const loadProfilePage = async () => {
 
     updateText();
   });
+};
+
+const loadEnrolledCoursesPage = async () => {
+  setTextContent(homeTitle, "My Courses");
+  setTextContent(
+    homeDescription,
+    "View the courses you are enrolled in below."
+  );
+
+  let enrolledCourses = authenticatedUser.courses;
+
+  let courses: course[] = [];
+
+  await Promise.all(
+    enrolledCourses.map(async (courseId) => {
+      let course = await fetchCourse(Number(courseId));
+      courses.push(course);
+    })
+  );
+
+  cardsContainer.innerHTML = "";
+
+  courses.forEach((course) => {
+    let card = generateCourseCard(course);
+    document.querySelector(".enrolled-courses-container")!.innerHTML += card;
+  });
+
+  document
+    .querySelector(".enrolled-courses-container")!
+    .classList.remove("hidden");
 };

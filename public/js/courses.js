@@ -70,7 +70,8 @@ export const generateCourseCard = (course) => {
               <p class="course-location">${course.location}</p>
             </div>
           </div>`;
-    cardsContainer.innerHTML += cardElement;
+    return cardElement;
+    // cardsContainer.innerHTML += cardElement;
     // document.querySelector(".course-card:last-child")?.prepend(adminPanelElement);
 };
 // Function that fetches the courses from the server.
@@ -136,6 +137,7 @@ export const initializeCourses = () => __awaiter(void 0, void 0, void 0, functio
     // Remove the loading spinner after the courses have been fetched.
     cardsContainer.innerHTML = "";
     courses.forEach((course) => {
-        generateCourseCard(course);
+        let coursesCards = generateCourseCard(course);
+        cardsContainer.innerHTML += coursesCards;
     });
 });

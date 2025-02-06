@@ -19,7 +19,7 @@ export interface course {
 let cardsContainer = document.querySelector(".cards-container") as HTMLElement;
 
 // Function that generates a course card with the course information and appends it to the cards container.
-export const generateCourseCard = (course: course) => {
+export const generateCourseCard = (course: course): string => {
   let adminPanel = `
   
   <div class="flex flex-col justify-end items-end bg-white  !text-gray-800">
@@ -85,7 +85,8 @@ export const generateCourseCard = (course: course) => {
             </div>
           </div>`;
 
-  cardsContainer.innerHTML += cardElement;
+  return cardElement;
+  // cardsContainer.innerHTML += cardElement;
 
   // document.querySelector(".course-card:last-child")?.prepend(adminPanelElement);
 };
@@ -167,6 +168,7 @@ export const initializeCourses = async () => {
   cardsContainer.innerHTML = "";
 
   courses.forEach((course) => {
-    generateCourseCard(course);
+    let coursesCards = generateCourseCard(course);
+    cardsContainer.innerHTML += coursesCards;
   });
 };

@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { fetchUser, signOutUser } from "./authentication.js";
 import { authenticatedUser, updateUserInDatabase } from "./app.js";
 import showMessageBox from "./errorHandling.js";
-import { addCourse, deleteCourse, fetchCourse, initializeCourses, updateCourse, } from "./courses.js";
+import { addCourse, deleteCourse, fetchCourse, generateCourseCard, initializeCourses, updateCourse, } from "./courses.js";
 let header;
 let navbar;
 let navbarButton;
@@ -113,6 +113,7 @@ const toggleNavbar = () => {
     navbarActive = !navbarActive;
 };
 const hashChange = () => __awaiter(void 0, void 0, void 0, function* () {
+    // This hides all the sections except the first one when the hash changes so I don't have to do it manually for each page. The first section is always top part of the page.
     document
         .querySelector("main")
         .querySelectorAll("section")
@@ -137,6 +138,9 @@ const hashChange = () => __awaiter(void 0, void 0, void 0, function* () {
     }
     if (location.hash === "#profile") {
         loadProfilePage();
+    }
+    if (location.hash === "#myCourses") {
+        loadEnrolledCoursesPage();
     }
 });
 function getValidImage() {
@@ -465,4 +469,22 @@ const loadProfilePage = () => __awaiter(void 0, void 0, void 0, function* () {
         showMessageBox("Profile updated successfully", "success");
         updateText();
     }));
+});
+const loadEnrolledCoursesPage = () => __awaiter(void 0, void 0, void 0, function* () {
+    setTextContent(homeTitle, "My Courses");
+    setTextContent(homeDescription, "View the courses you are enrolled in below.");
+    let enrolledCourses = authenticatedUser.courses;
+    let courses = [];
+    yield Promise.all(enrolledCourses.map((courseId) => __awaiter(void 0, void 0, void 0, function* () {
+        let course = yield fetchCourse(Number(courseId));
+        courses.push(course);
+    })));
+    cardsContainer.innerHTML = "";
+    courses.forEach((course) => {
+        let card = generateCourseCard(course);
+        document.querySelector(".enrolled-courses-container").innerHTML += card;
+    });
+    document
+        .querySelector(".enrolled-courses-container")
+        .classList.remove("hidden");
 });
