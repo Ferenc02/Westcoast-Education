@@ -169,7 +169,7 @@ const hashChange = async () => {
     loadHomePage(false);
   }
 
-  if (location.hash === "#addCourse") {
+  if (location.hash.includes("#addCourse")) {
     if (authenticatedUser.role !== "admin") {
       showMessageBox(
         "You do not have permission to access this page.",
@@ -371,7 +371,13 @@ export const showEnrolledStudents = (students: user[], course: course) => {
   // studentsInformationTitle.textContent = `Enrolled Students in ${course.name}`;
 };
 
-const loadAddCoursePage = async () => {
+const loadAddCoursePage = async (courseToEdit?: course) => {
+  let courseToEditId = location.hash.split("=")[2];
+
+  let enteredCourseData: course = await fetchCourse(Number(courseToEditId));
+
+  let edit = location.hash.includes("edit=true");
+
   document.querySelector(".add-course-container")!.classList.remove("hidden");
 
   // Add course form elements *left side*
@@ -411,6 +417,72 @@ const loadAddCoursePage = async () => {
     "#course-checkbox-2"
   ) as HTMLInputElement;
 
+  //  Preview card elements *right side*
+  previewContainer = document.querySelector(
+    ".preview-container"
+  ) as HTMLElement;
+
+  coursePreviewImage = previewContainer.querySelector(
+    ".course-preview-image"
+  ) as HTMLImageElement;
+
+  coursePreviewName = previewContainer.querySelector(
+    ".course-preview-name"
+  ) as HTMLElement;
+
+  coursePreviewDescription = previewContainer.querySelector(
+    ".course-preview-description"
+  ) as HTMLElement;
+
+  coursePreviewInstructor = previewContainer.querySelector(
+    ".course-preview-instructor"
+  ) as HTMLElement;
+
+  coursePreviewPrice = previewContainer.querySelector(
+    ".course-preview-price"
+  ) as HTMLElement;
+
+  coursePreviewDate = previewContainer.querySelector(
+    ".course-preview-date"
+  ) as HTMLElement;
+
+  coursePreviewLocation = previewContainer.querySelector(
+    ".course-preview-location"
+  ) as HTMLElement;
+
+  if (edit) {
+    addCourseFormName.value = enteredCourseData.name;
+
+    addCourseFormDescription.value = enteredCourseData.description;
+    addCourseFormImage.value = enteredCourseData.image;
+    addCourseFormInstructor.value = enteredCourseData.instructor;
+    addCourseFormPrice.value = enteredCourseData.price.toString();
+    addCourseFormStartDate.value = enteredCourseData.startDate;
+    addCourseFormEndDate.value = enteredCourseData.endDate;
+
+    if (enteredCourseData.location === "Campus") {
+      addCourseFormLocation1.checked = true;
+    } else if (enteredCourseData.location === "Online") {
+      addCourseFormLocation2.checked = true;
+    }
+
+    document
+      .querySelector("#course-image")!
+      .setAttribute("src", enteredCourseData.image);
+
+    coursePreviewName.textContent = enteredCourseData.name;
+    coursePreviewDescription.textContent = enteredCourseData.description;
+    coursePreviewImage.setAttribute("src", enteredCourseData.image);
+    coursePreviewInstructor.textContent = enteredCourseData.instructor;
+    coursePreviewPrice.textContent = enteredCourseData.price.toString();
+    coursePreviewDate.textContent = `${enteredCourseData.startDate} - ${enteredCourseData.endDate}`;
+    coursePreviewLocation.textContent = enteredCourseData.location
+      .split(" & ")
+      .join(", ");
+
+    addCourseForm.querySelector("button")!.textContent = "Update Course";
+  }
+
   // Add event listeners to the form elements to update the preview card when the user types in the form.
   addCourseFormName.addEventListener("input", () => {
     updatePreviewCard(addCourseFormName, coursePreviewName);
@@ -448,44 +520,13 @@ const loadAddCoursePage = async () => {
     updatePreviewCard(addCourseFormLocation2, coursePreviewLocation);
   });
 
-  //  Preview card elements *right side*
-  previewContainer = document.querySelector(
-    ".preview-container"
-  ) as HTMLElement;
-
-  coursePreviewImage = previewContainer.querySelector(
-    ".course-preview-image"
-  ) as HTMLImageElement;
-
-  coursePreviewName = previewContainer.querySelector(
-    ".course-preview-name"
-  ) as HTMLElement;
-
-  coursePreviewDescription = previewContainer.querySelector(
-    ".course-preview-description"
-  ) as HTMLElement;
-
-  coursePreviewInstructor = previewContainer.querySelector(
-    ".course-preview-instructor"
-  ) as HTMLElement;
-
-  coursePreviewPrice = previewContainer.querySelector(
-    ".course-preview-price"
-  ) as HTMLElement;
-
-  coursePreviewDate = previewContainer.querySelector(
-    ".course-preview-date"
-  ) as HTMLElement;
-
-  coursePreviewLocation = previewContainer.querySelector(
-    ".course-preview-location"
-  ) as HTMLElement;
-
   // Set the text content of the page elements.
-  setTextContent(homeTitle, "Add Course");
+  setTextContent(homeTitle, edit ? "Edit Course" : "Add Course");
   setTextContent(
     homeDescription,
-    "Fill in the details of the course below and click the 'Add Course' button to add the course to the list of courses."
+    edit
+      ? "Edit the course information below."
+      : "Fill in the details of the course below and click the 'Add Course' button to add the course to the list of courses."
   );
 
   // Hide the cards container and show the add course form.
@@ -493,8 +534,9 @@ const loadAddCoursePage = async () => {
   // document.querySelector(".add-course-container")!.classList.remove("hidden");
   // document.querySelector(".main-content-title")!.classList.add("hidden");
 
-  setRandomImage(); // Set a random image when the page is loaded.
-
+  if (!edit) {
+    setRandomImage(); // Set a random image when the page is loaded.
+  }
   // Add event listener to the image checkbox to enable or disable the image input.
   const imageCheckbox = addCourseForm.querySelector(
     "#image-checkbox"
@@ -509,7 +551,9 @@ const loadAddCoursePage = async () => {
     courseImageInput.disabled = isChecked;
     courseImageInput.classList.toggle("bg-gray-100", isChecked);
 
-    if (isChecked) setRandomImage();
+    if (isChecked) {
+      setRandomImage();
+    }
   });
 
   // Add event listener to the add course form to submit the form.
@@ -528,6 +572,12 @@ const loadAddCoursePage = async () => {
 
     const locations = [];
     let enteredLocations = "";
+
+    if (!addCourseFormLocation1.checked && !addCourseFormLocation2.checked) {
+      showMessageBox("Please select at least one location.", "error");
+      return;
+    }
+
     if (addCourseFormLocation1.checked) locations.push("Campus");
     if (addCourseFormLocation2.checked) locations.push("Online");
     enteredLocations = locations.join(" & ");
@@ -538,13 +588,25 @@ const loadAddCoursePage = async () => {
     enteredCourseData.instructor = addCourseFormInstructor.value;
     enteredCourseData.startDate = addCourseFormStartDate.value;
     enteredCourseData.endDate = addCourseFormEndDate.value;
-    enteredCourseData.students = [];
+    enteredCourseData.students =
+      enteredCourseData.students.length === 0 ? [] : enteredCourseData.students;
     enteredCourseData.image = addCourseFormImage.value;
     enteredCourseData.price = parseFloat(addCourseFormPrice.value);
 
-    await addCourse(enteredCourseData);
+    if (edit) {
+      enteredCourseData.id = courseToEditId;
 
-    showMessageBox("Course added successfully", "success");
+      await updateCourse(enteredCourseData);
+
+      showMessageBox("Course updated successfully", "success");
+
+      location.href = "/pages/home.html";
+      return;
+    } else {
+      await addCourse(enteredCourseData);
+
+      showMessageBox("Course added successfully", "success");
+    }
 
     addCourseForm.reset();
 
@@ -573,8 +635,11 @@ const loadHomePage = async (filter: boolean) => {
 
       // Check if the clicked element is an admin-panel-edit-button
       if (target.classList.contains("admin-panel-edit-button")) {
-        // let courseId = target.closest(".course-card")?.getAttribute("course-id");
-        // location.href = `/pages/edit-course.html?id=${courseId}`;
+        let courseToChangeId = target
+          .closest(".course-card")
+          ?.getAttribute("course-id");
+
+        location.href = `#addCourse?edit=true&id=${courseToChangeId}`;
       }
 
       if (target.classList.contains("admin-panel-students-button")) {
@@ -756,19 +821,4 @@ const loadEnrolledCoursesPage = async () => {
   );
 
   await loadHomePage(true);
-};
-
-const filterEnrolledCourses = async () => {
-  let enrolledCourses = authenticatedUser.courses;
-
-  let cards = Array.from(cardsContainer.children);
-
-  cards.forEach((card) => {
-    console.log(card);
-    let courseId = (card as HTMLElement).getAttribute("course-id");
-
-    if (!enrolledCourses.includes(courseId!)) {
-      card.remove();
-    }
-  });
 };
