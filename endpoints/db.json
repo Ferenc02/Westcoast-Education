@@ -46,12 +46,7 @@
       "instructor": "Frank",
       "startDate": "2025-01-28",
       "endDate": "2025-02-20",
-      "students": [
-        {
-          "userId": "8",
-          "userChoice": "enrolled"
-        }
-      ],
+      "students": [],
       "image": "https://picsum.photos/id/572/600/600",
       "price": 589
     },

@@ -1,3 +1,19 @@
+/*
+ * authentication.test.js - Unit Tests for Authentication System
+ *
+ * This file contains **unit tests** for verifying the core functions of the authentication system.
+ * The goal is to ensure that essential authentication-related operations work **as expected**.
+ *
+ * Features:
+ * - **Tests user retrieval**: Ensures that `fetchUser()` correctly fetches a user object.
+ * - **Validates UUID generation**: Checks if `createRandomUUID()` returns a valid non-null UUID.
+ * - **Verifies password hashing**: Ensures that `hashPassword()` produces a hashed password.
+ *
+ * The tests are written using **Vitest**, a fast and lightweight testing framework.
+ * Each function is tested separately to ensure **accuracy and reliability**.
+ *
+ */
+
 import {
   fetchUser,
   createRandomUUID,
