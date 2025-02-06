@@ -24,8 +24,8 @@
         "5"
       ],
       "role": "admin",
-      "authToken": "tecv3w7e-6m5c-w4bk-8cta-8s17n778xua7",
-      "expiresAt": "2025-02-07T18:01:15.777Z"
+      "authToken": "aj7dff4c-y31k-wfh0-8271-80a6sxbftqv7",
+      "expiresAt": "2025-02-07T18:36:41.247Z"
     },
     {
       "id": "3",
@@ -74,6 +74,34 @@
       "role": "admin",
       "authToken": "74vnzcuh-el34-p9gi-7yt9-djkcp10s5678",
       "expiresAt": "2025-02-04T18:39:05.749Z"
+    },
+    {
+      "id": "7",
+      "name": "Test5",
+      "email": "tesssst@gmail.com",
+      "password": "4c108d8d6e2fdb7a8d0afdb272310456f1536480d79953bd5de14cfb8a33a6f5",
+      "phone": "054554054",
+      "address": "dsadsadasdasdsad",
+      "courses": [],
+      "role": "admin",
+      "authToken": "m76fci87-53eq-co24-wo7t-w84rproyf1k1",
+      "expiresAt": "2025-02-07T18:39:14.724Z"
+    },
+    {
+      "id": "8",
+      "name": "dasdsadasdasadasd",
+      "email": "test232@gmail.com",
+      "password": "57d1d71a8b69dd6dcf3b1ab1a61bfe4da06bc9691ce4bef30d70bf154976a2c8",
+      "phone": "0785045454",
+      "address": "anjdnaskdjasn",
+      "courses": [
+        "2",
+        "1",
+        "3"
+      ],
+      "role": "admin",
+      "authToken": "2nqy7reb-ab6j-808l-z614-9izi87ytt3uj",
+      "expiresAt": "2025-02-07T18:41:20.694Z"
     }
   ]
 }
