@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import showMessageBox from "./errorHandling.js";
 export let signUpPage = true;
-let nameField;
 // Function that checks if the user has a valid token in the cookie. If the token is valid, the user will be signed in.
 // If the token is invalid, the user will be signed out.
 //  This is good to implement so that the user doesn't have to sign in every time they visit the website.

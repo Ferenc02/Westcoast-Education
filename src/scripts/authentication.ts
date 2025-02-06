@@ -1,9 +1,6 @@
-import { authenticatedUser, updateUserInDatabase } from "./app.js";
 import showMessageBox from "./errorHandling.js";
 
 export let signUpPage = true;
-
-let nameField: Element;
 
 export interface user {
   id: number;

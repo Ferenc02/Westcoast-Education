@@ -20,11 +20,12 @@
       "phone": "12345468779",
       "address": "Sturegatan 12",
       "courses": [
-        "1"
+        "1",
+        "5"
       ],
       "role": "admin",
-      "authToken": "3v5cu721-s89x-cvmf-9p0f-5ctiqf4b1jw8",
-      "expiresAt": "2025-02-07T15:02:09.590Z"
+      "authToken": "tecv3w7e-6m5c-w4bk-8cta-8s17n778xua7",
+      "expiresAt": "2025-02-07T18:01:15.777Z"
     },
     {
       "id": "3",
