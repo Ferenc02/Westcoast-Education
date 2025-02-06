@@ -153,7 +153,7 @@ export let signUpUser = (formElement) => __awaiter(void 0, void 0, void 0, funct
 // This makes it harder for attackers to crack the password using a dictionary attack.
 // The salt should be unique for each user and should be stored securely. This one is not stored securely and not even unique for each user.
 // So if the salt is found then a hacker can still do a dictionary attack😥
-export let hashPassword = (password) => __awaiter(void 0, void 0, void 0, function* () {
+let hashPassword = (password) => __awaiter(void 0, void 0, void 0, function* () {
     const encoder = new TextEncoder();
     let data = encoder.encode(password);
     //  This is a very bad way to store a salt, it should be unique for each user and stored securely.

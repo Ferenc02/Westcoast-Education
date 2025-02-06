@@ -212,7 +212,7 @@ export let signUpUser = async (formElement: HTMLFormElement) => {
 // The salt should be unique for each user and should be stored securely. This one is not stored securely and not even unique for each user.
 // So if the salt is found then a hacker can still do a dictionary attack😥
 
-let hashPassword = async (password: string): Promise<string> => {
+export let hashPassword = async (password: string): Promise<string> => {
   const encoder = new TextEncoder();
 
   let data = encoder.encode(password);
