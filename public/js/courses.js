@@ -1,3 +1,15 @@
+/*
+ * courses.ts - Course Management System
+ *
+ * This script **handles all course-related functionality**, including:
+ * - **Fetching courses** from the server to be used in other scripts.
+ * - **Adding new courses** to the server.
+ * - **Deleting courses** from the server.
+ * - **Updating course information** on the server.
+ * - **Generating course cards** with relevant information such as name, price, instructor, and start date.
+ *
+ * The course data is retrieved from JSON server (`http://localhost:3000/courses`),
+ */
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,10 +19,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+// ---- imports from other scripts ----
 import { authenticatedUser } from "./app.js";
 import showMessageBox from "./errorHandling.js";
+// ---- DOM elements ----
 let cardsContainer = document.querySelector(".cards-container");
-// Function that generates a course card with the course information and appends it to the cards container.
+// Function that generates a course card with the course information and returns it as a string so it can be used in other functions.
 export const generateCourseCard = (course) => {
     let adminPanel = `
   
@@ -29,8 +43,8 @@ export const generateCourseCard = (course) => {
   </div>
   </div>
   `;
+    // Check if the user is enrolled in the course.
     let userEnrolled = authenticatedUser.courses.includes(course.id);
-    // console.log(userEnrolled);
     let cardElement = `<div course-id="${course.id}"
             class="course-card fade-in flex flex-col w-full bg-white rounded-lg shadow-md p-4 gap-4  transition-transform relative"
           >
@@ -71,8 +85,6 @@ export const generateCourseCard = (course) => {
             </div>
           </div>`;
     return cardElement;
-    // cardsContainer.innerHTML += cardElement;
-    // document.querySelector(".course-card:last-child")?.prepend(adminPanelElement);
 };
 // Function that fetches the courses from the server.
 export const fetchCourses = () => __awaiter(void 0, void 0, void 0, function* () {
