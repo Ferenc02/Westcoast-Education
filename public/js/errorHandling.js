@@ -1,3 +1,20 @@
+/*
+ * errorHandling.ts - Modern Message Box System
+ *
+ * This script serves as an **alternative** to the traditional `alert()`, providing a **modern and stylish** way to display messages.
+ *
+ * Features:
+ * - Supports **two types of messages**: `"error"` and `"success"`, ensuring a clear distinction between different alerts.
+ * - Implements a **dynamic styling system**, where colors, icons, and animations adapt based on the message type.
+ * - Provides an **animated "grow" effect** to make the message box appear smoothly.
+ * - Includes a **click-to-dismiss feature**, allowing users to close the message box by clicking outside or on the button.
+ * - Automatically **assigns classes and icons**, ensuring a consistent look across different alerts.
+ *
+ *
+ * The message box is hidden by default and can be shown by calling the `showMessageBox()` function with the message and type.
+ * I could have created a new message box element each time, but I decided to reuse the same element for simplicity.
+ * One downside of this approach is that the message box have to be added to each html file where it will be used.
+ */
 // Function to show a message box with a message and an icon
 export default function showMessageBox(message, type) {
     let messageBox = document.querySelector(".message-box");
@@ -11,6 +28,7 @@ export default function showMessageBox(message, type) {
     let messageBoxTitle = messageBox.querySelector(".message-box__title");
     let messageBoxText = messageBox.querySelector(".message-box__text");
     let messageBoxButton = messageBox.querySelector(".message-box__button");
+    // The styles are stored in an object for easy access and to not have to repeat the same values
     const styles = {
         error: {
             icon: "cancel",
@@ -27,6 +45,7 @@ export default function showMessageBox(message, type) {
             buttonClass: ["bg-green-500", "hover:bg-green-600"],
         },
     };
+    // Set the attributes and text content of the message box
     messageBox.ariaHidden = "false";
     const selectedStyle = styles[type.toLowerCase()];
     messageBoxIcon.classList.add(selectedStyle.iconClass);

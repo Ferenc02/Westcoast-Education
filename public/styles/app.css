@@ -733,6 +733,9 @@
   .min-w-xs {
     min-width: var(--container-xs);
   }
+  .grow {
+    flex-grow: 1;
+  }
   .table-auto {
     table-layout: auto;
   }
