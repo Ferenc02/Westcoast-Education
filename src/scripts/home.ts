@@ -166,7 +166,7 @@ const hashChange = async () => {
     });
 
   if (location.hash === "") {
-    loadHomePage(false);
+    loadHomePage();
   }
 
   if (location.hash.includes("#addCourse")) {
@@ -615,7 +615,7 @@ const loadAddCoursePage = async (courseToEdit?: course) => {
 };
 
 // Function that loads the home page.
-const loadHomePage = async (filter: boolean) => {
+const loadHomePage = async () => {
   mainContent = document.querySelector("#main-content") as HTMLElement;
   mainContent.classList.remove("hidden");
 
@@ -675,7 +675,7 @@ const loadHomePage = async (filter: boolean) => {
 
         showMessageBox("Course deleted successfully", "success");
 
-        initializeCourses(filter);
+        initializeCourses();
       }
 
       if (target.classList.contains("enroll-button")) {
@@ -742,12 +742,12 @@ const loadHomePage = async (filter: boolean) => {
           );
         }
 
-        initializeCourses(filter);
+        initializeCourses();
       }
     });
   }
 
-  initializeCourses(filter);
+  initializeCourses();
 };
 
 // Function that loads the profile page.
@@ -820,5 +820,7 @@ const loadEnrolledCoursesPage = async () => {
     "View the courses you are enrolled in below."
   );
 
-  await loadHomePage(true);
+  await loadHomePage();
+
+  location.href = "/pages/home.html#myCourses";
 };

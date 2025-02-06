@@ -151,7 +151,9 @@ export const deleteCourse = async (id: number) => {
 };
 
 // Function that fetches the courses from the server and generates course cards for each course.
-export const initializeCourses = async (filter: boolean) => {
+export const initializeCourses = async () => {
+  let filterPage = location.hash === "#myCourses";
+
   // Show a loading spinner while the courses are being fetched.
   cardsContainer.innerHTML = `<div role="status" class="flex items-center gap-4 ">  
     <svg aria-hidden="true" class="text-xl w-16 h-16 text-gray-200 animate-spin dark:text-gray-400 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -170,7 +172,7 @@ export const initializeCourses = async (filter: boolean) => {
   cardsContainer.innerHTML = "";
 
   courses.forEach((course) => {
-    if (filter && !enrolledCourses.includes(course.id)) {
+    if (filterPage && !enrolledCourses.includes(course.id)) {
       return;
     }
 

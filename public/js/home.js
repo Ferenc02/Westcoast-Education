@@ -130,7 +130,7 @@ const hashChange = () => __awaiter(void 0, void 0, void 0, function* () {
         }
     });
     if (location.hash === "") {
-        loadHomePage(false);
+        loadHomePage();
     }
     if (location.hash.includes("#addCourse")) {
         if (authenticatedUser.role !== "admin") {
@@ -427,7 +427,7 @@ const loadAddCoursePage = (courseToEdit) => __awaiter(void 0, void 0, void 0, fu
     }));
 });
 // Function that loads the home page.
-const loadHomePage = (filter) => __awaiter(void 0, void 0, void 0, function* () {
+const loadHomePage = () => __awaiter(void 0, void 0, void 0, function* () {
     mainContent = document.querySelector("#main-content");
     mainContent.classList.remove("hidden");
     if (!cardsContainerEventListenerAdded) {
@@ -466,7 +466,7 @@ const loadHomePage = (filter) => __awaiter(void 0, void 0, void 0, function* () 
                     .closest(".course-card")) === null || _d === void 0 ? void 0 : _d.getAttribute("course-id");
                 yield deleteCourse(Number(courseId));
                 showMessageBox("Course deleted successfully", "success");
-                initializeCourses(filter);
+                initializeCourses();
             }
             if (target.classList.contains("enroll-button")) {
                 let courseId = (_e = target
@@ -499,11 +499,11 @@ const loadHomePage = (filter) => __awaiter(void 0, void 0, void 0, function* () 
                     yield updateCourse(course);
                     showMessageBox("You have successfully enrolled in the course", "success");
                 }
-                initializeCourses(filter);
+                initializeCourses();
             }
         }));
     }
-    initializeCourses(filter);
+    initializeCourses();
 });
 // Function that loads the profile page.
 const loadProfilePage = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -540,5 +540,6 @@ const loadProfilePage = () => __awaiter(void 0, void 0, void 0, function* () {
 const loadEnrolledCoursesPage = () => __awaiter(void 0, void 0, void 0, function* () {
     setTextContent(homeTitle, "My Courses");
     setTextContent(homeDescription, "View the courses you are enrolled in below.");
-    yield loadHomePage(true);
+    yield loadHomePage();
+    location.href = "/pages/home.html#myCourses";
 });
