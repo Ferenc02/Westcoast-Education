@@ -123,7 +123,7 @@ export const deleteCourse = (id) => __awaiter(void 0, void 0, void 0, function* 
     });
 });
 // Function that fetches the courses from the server and generates course cards for each course.
-export const initializeCourses = () => __awaiter(void 0, void 0, void 0, function* () {
+export const initializeCourses = (filter) => __awaiter(void 0, void 0, void 0, function* () {
     // Show a loading spinner while the courses are being fetched.
     cardsContainer.innerHTML = `<div role="status" class="flex items-center gap-4 ">  
     <svg aria-hidden="true" class="text-xl w-16 h-16 text-gray-200 animate-spin dark:text-gray-400 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -134,9 +134,13 @@ export const initializeCourses = () => __awaiter(void 0, void 0, void 0, functio
     <h3>Loading courses...</h3>
 </div>`;
     let courses = yield fetchCourses();
+    let enrolledCourses = authenticatedUser.courses;
     // Remove the loading spinner after the courses have been fetched.
     cardsContainer.innerHTML = "";
     courses.forEach((course) => {
+        if (filter && !enrolledCourses.includes(course.id)) {
+            return;
+        }
         let coursesCards = generateCourseCard(course);
         cardsContainer.innerHTML += coursesCards;
     });

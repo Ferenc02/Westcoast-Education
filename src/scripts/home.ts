@@ -11,9 +11,13 @@ import {
   updateCourse,
 } from "./courses.js";
 
+let cardsContainerEventListenerAdded = false;
+
 let header: HTMLElement;
 let navbar: HTMLElement;
 let navbarButton: HTMLElement;
+
+let mainContent: HTMLElement;
 
 let profileName: HTMLElement;
 let profileRole: HTMLElement;
@@ -41,6 +45,8 @@ let coursePreviewInstructor: HTMLElement;
 let coursePreviewPrice: HTMLElement;
 let coursePreviewDate: HTMLElement;
 let coursePreviewLocation: HTMLElement;
+
+let supportContainer: HTMLElement;
 
 let studentsInformationParent =
   document.querySelector(".course-students") || undefined;
@@ -82,6 +88,10 @@ export const initializeHome = () => {
   homeDescription = document.querySelector(".home-description") as HTMLElement;
   cardsContainer = document.querySelector(".cards-container") as HTMLElement;
   addCourseForm = document.querySelector(".add-course-form") as HTMLFormElement;
+
+  supportContainer = document.querySelector(
+    ".support-container"
+  ) as HTMLElement;
 
   navbarButton?.addEventListener("click", () => {
     toggleNavbar();
@@ -156,7 +166,7 @@ const hashChange = async () => {
     });
 
   if (location.hash === "") {
-    loadHomePage();
+    loadHomePage(false);
   }
 
   if (location.hash === "#addCourse") {
@@ -178,6 +188,14 @@ const hashChange = async () => {
 
   if (location.hash === "#myCourses") {
     loadEnrolledCoursesPage();
+  }
+  if (location.hash === "#support") {
+    setTextContent(homeTitle, "Support");
+    setTextContent(
+      homeDescription,
+      "Support page to help you with any issues."
+    );
+    supportContainer.classList.remove("hidden");
   }
 };
 
@@ -535,123 +553,136 @@ const loadAddCoursePage = async () => {
 };
 
 // Function that loads the home page.
-const loadHomePage = async () => {
-  document.querySelector("#main-content")?.classList.remove("hidden");
+const loadHomePage = async (filter: boolean) => {
+  mainContent = document.querySelector("#main-content") as HTMLElement;
+  mainContent.classList.remove("hidden");
 
-  // Add event listeners to the admin panel buttons
-  cardsContainer.addEventListener("click", async (event) => {
-    const target = event.target as HTMLElement;
+  if (!cardsContainerEventListenerAdded) {
+    cardsContainerEventListenerAdded = true;
 
-    // Check if the clicked element is an admin-panel-button
-    if (target.classList.contains("admin-panel-button")) {
-      target.nextElementSibling?.classList.toggle("hidden");
-    }
+    // Add event listeners to the whole cards container to handle the button clicks.
+    cardsContainer.addEventListener("click", async (event) => {
+      const target = event.target as HTMLElement;
 
-    // Check if the clicked element is an admin-panel-edit-button
-    if (target.classList.contains("admin-panel-edit-button")) {
-      // let courseId = target.closest(".course-card")?.getAttribute("course-id");
-      // location.href = `/pages/edit-course.html?id=${courseId}`;
-    }
+      console.log(target);
 
-    if (target.classList.contains("admin-panel-students-button")) {
-      let courseId = target.closest(".course-card")?.getAttribute("course-id");
-
-      let course = await fetchCourse(Number(courseId));
-
-      let students = course.students;
-
-      let enrolledStudents: user[] = [];
-
-      await Promise.all(
-        students.map(async (student) => {
-          let user = await fetchUser(Number(student.userId));
-          enrolledStudents.push(user);
-        })
-      );
-
-      // console.log(studentNames);
-
-      showEnrolledStudents(enrolledStudents, course);
-    }
-
-    // Check if the clicked element is an admin-panel-delete-button
-    if (target.classList.contains("admin-panel-delete-button")) {
-      let courseId = target.closest(".course-card")?.getAttribute("course-id");
-
-      await deleteCourse(Number(courseId));
-
-      showMessageBox("Course deleted successfully", "success");
-
-      initializeCourses();
-    }
-
-    if (target.classList.contains("enroll-button")) {
-      let courseId = target.closest(".course-card")?.getAttribute("course-id");
-
-      let course = await fetchCourse(Number(courseId));
-
-      let enrollOption = target.textContent?.trim();
-
-      if (enrollOption === "Cancel Enrollment") {
-        course.students = course.students.filter(
-          (student) => student.userId !== authenticatedUser.id.toString()
-        );
-
-        authenticatedUser.courses = authenticatedUser.courses.filter(
-          (course) => course !== courseId
-        );
-
-        await updateUserInDatabase(authenticatedUser);
-
-        await updateCourse(course);
-
-        showMessageBox(
-          "You have successfully canceled your enrollment",
-          "success"
-        );
-      } else {
-        if (
-          authenticatedUser.address === "" ||
-          authenticatedUser.phone === ""
-        ) {
-          showMessageBox(
-            "Please fill in your address and phone number in the profile page before enrolling in a course",
-            "error"
-          );
-          return;
-        }
-
-        if (
-          course.students.find(
-            (student) => student.userId === authenticatedUser.id.toString()
-          )
-        ) {
-          showMessageBox("You are already enrolled in this course", "error");
-          return;
-        }
-
-        course.students.push({
-          userId: authenticatedUser.id.toString(),
-          userChoice: "enrolled",
-        });
-
-        authenticatedUser.courses.push(course.id);
-
-        await updateUserInDatabase(authenticatedUser);
-
-        await updateCourse(course);
-
-        showMessageBox(
-          "You have successfully enrolled in the course",
-          "success"
-        );
+      // Check if the clicked element is an admin-panel-button
+      if (target.classList.contains("admin-panel-button")) {
+        target.nextElementSibling?.classList.toggle("hidden");
       }
 
-      initializeCourses();
-    }
-  });
+      // Check if the clicked element is an admin-panel-edit-button
+      if (target.classList.contains("admin-panel-edit-button")) {
+        // let courseId = target.closest(".course-card")?.getAttribute("course-id");
+        // location.href = `/pages/edit-course.html?id=${courseId}`;
+      }
 
-  initializeCourses();
+      if (target.classList.contains("admin-panel-students-button")) {
+        let courseId = target
+          .closest(".course-card")
+          ?.getAttribute("course-id");
+
+        let course = await fetchCourse(Number(courseId));
+
+        let students = course.students;
+
+        let enrolledStudents: user[] = [];
+
+        await Promise.all(
+          students.map(async (student) => {
+            let user = await fetchUser(Number(student.userId));
+            enrolledStudents.push(user);
+          })
+        );
+
+        // console.log(studentNames);
+
+        showEnrolledStudents(enrolledStudents, course);
+      }
+
+      // Check if the clicked element is an admin-panel-delete-button
+      if (target.classList.contains("admin-panel-delete-button")) {
+        let courseId = target
+          .closest(".course-card")
+          ?.getAttribute("course-id");
+
+        await deleteCourse(Number(courseId));
+
+        showMessageBox("Course deleted successfully", "success");
+
+        initializeCourses(filter);
+      }
+
+      if (target.classList.contains("enroll-button")) {
+        let courseId = target
+          .closest(".course-card")
+          ?.getAttribute("course-id");
+
+        let course = await fetchCourse(Number(courseId));
+
+        let enrollOption = target.textContent?.trim();
+
+        if (enrollOption === "Cancel Enrollment") {
+          course.students = course.students.filter(
+            (student) => student.userId !== authenticatedUser.id.toString()
+          );
+
+          authenticatedUser.courses = authenticatedUser.courses.filter(
+            (course) => course !== courseId
+          );
+
+          await updateUserInDatabase(authenticatedUser);
+
+          await updateCourse(course);
+
+          showMessageBox(
+            "You have successfully canceled your enrollment",
+            "success"
+          );
+        } else {
+          if (
+            authenticatedUser.address === "" ||
+            authenticatedUser.phone === ""
+          ) {
+            showMessageBox(
+              "Please fill in your address and phone number in the profile page before enrolling in a course",
+              "error"
+            );
+            return;
+          }
+
+          if (
+            course.students.find(
+              (student) => student.userId === authenticatedUser.id.toString()
+            )
+          ) {
+            showMessageBox("You are already enrolled in this course", "error");
+            return;
+          }
+
+          course.students.push({
+            userId: authenticatedUser.id.toString(),
+            userChoice: "enrolled",
+          });
+
+          authenticatedUser.courses.push(course.id);
+
+          await updateUserInDatabase(authenticatedUser);
+
+          await updateCourse(course);
+
+          showMessageBox(
+            "You have successfully enrolled in the course",
+            "success"
+          );
+        }
+
+        initializeCourses(filter);
+      }
+    });
+  }
+
+  initializeCourses(filter);
 };
 
 // Function that loads the profile page.
@@ -724,25 +755,20 @@ const loadEnrolledCoursesPage = async () => {
     "View the courses you are enrolled in below."
   );
 
+  await loadHomePage(true);
+};
+
+const filterEnrolledCourses = async () => {
   let enrolledCourses = authenticatedUser.courses;
 
-  let courses: course[] = [];
+  let cards = Array.from(cardsContainer.children);
 
-  await Promise.all(
-    enrolledCourses.map(async (courseId) => {
-      let course = await fetchCourse(Number(courseId));
-      courses.push(course);
-    })
-  );
+  cards.forEach((card) => {
+    console.log(card);
+    let courseId = (card as HTMLElement).getAttribute("course-id");
 
-  cardsContainer.innerHTML = "";
-
-  courses.forEach((course) => {
-    let card = generateCourseCard(course);
-    document.querySelector(".enrolled-courses-container")!.innerHTML += card;
+    if (!enrolledCourses.includes(courseId!)) {
+      card.remove();
+    }
   });
-
-  document
-    .querySelector(".enrolled-courses-container")!
-    .classList.remove("hidden");
 };
