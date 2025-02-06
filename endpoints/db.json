@@ -29,12 +29,7 @@
       "instructor": "John Doe",
       "startDate": "2025-02-01",
       "endDate": "2025-02-12",
-      "students": [
-        {
-          "userId": "8",
-          "userChoice": "enrolled"
-        }
-      ],
+      "students": [],
       "image": "https://picsum.photos/id/109/600/600",
       "price": 65
     },

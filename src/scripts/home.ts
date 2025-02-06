@@ -1,3 +1,18 @@
+/*
+ * home.ts - Core Homepage Functionality
+ *
+ * This script **handles all the necessary logic** for the homepage, including:
+ * - **Initializing the homepage** when loaded.
+ * - **Updating the UI** with user-specific data, such as name and role.
+ * - **Handling navigation events**, ensuring the correct page loads when the URL hash changes.
+ * - **Managing course-related actions**, such as setting images, previewing courses, and showing enrolled students.
+ *
+ * ⚠ **Note**: This script **should have been split into smaller modules**, but due to time constraints,
+ * everything remains in a single file. Ideally, functionalities like user handling, course management, and
+ * navigation should be separated into different files for better maintainability.
+ */
+
+// ---- imports from other scripts ----
 import { fetchUser, signOutUser, user } from "./authentication.js";
 import { authenticatedUser, updateUserInDatabase } from "./app.js";
 import showMessageBox from "./errorHandling.js";
@@ -6,13 +21,15 @@ import {
   course,
   deleteCourse,
   fetchCourse,
-  generateCourseCard,
   initializeCourses,
   updateCourse,
 } from "./courses.js";
 
+// ---- Global variables ----
 let cardsContainerEventListenerAdded = false;
+let navbarActive = false;
 
+// ---- DOM elements ----
 let header: HTMLElement;
 let navbar: HTMLElement;
 let navbarButton: HTMLElement;
@@ -62,23 +79,9 @@ let logoutButton = document.querySelector(
   "#logout-button"
 ) as HTMLButtonElement;
 
-let navbarActive = false;
-
-let enteredCourseData: course = {
-  id: "0",
-  name: "",
-  description: "",
-  location: "",
-  instructor: "",
-  startDate: "",
-  endDate: "",
-  students: [],
-  image: "",
-  price: 0,
-};
-
 // Function to initialize the home page. This function will be called when the home page is loaded in app.ts.
 export const initializeHome = () => {
+  // ---- Get all the necessary DOM elements ----
   header = document.querySelector("header") as HTMLElement;
   navbar = document.querySelector("nav") as HTMLElement;
   navbarButton = document.querySelector("#home-navbar-button") as HTMLElement;
@@ -93,6 +96,7 @@ export const initializeHome = () => {
     ".support-container"
   ) as HTMLElement;
 
+  // Add event listeners to the navbar button and the logout button.
   navbarButton?.addEventListener("click", () => {
     toggleNavbar();
   });
@@ -106,25 +110,20 @@ export const initializeHome = () => {
     if (navbarActive) {
       let x = event.clientX;
 
-      // console.log(event);
-      // console.log(x, y);
-
-      // mouseOutsideNavbar = x > navbar.offsetWidth ? true : false;
-
       if (x > navbar.offsetWidth) {
         toggleNavbar();
       }
     }
   });
 
-  updateText();
+  updateHomePageText();
 
   hashChange();
   window.addEventListener("hashchange", hashChange);
 };
 
-// Function that uupdates all the text in the site to the authenticated user's name and role. This will always be authenticated since the user has to be authenticated to access the home page.
-const updateText = () => {
+// Function that updates all the text in the site to the authenticated user's name and role. This will always be authenticated since the user has to be authenticated to access the home page.
+const updateHomePageText = () => {
   profileName.textContent = authenticatedUser.name;
   profileRole.textContent =
     authenticatedUser.role === "admin" ? "administrator" : "User";
@@ -132,6 +131,7 @@ const updateText = () => {
   homeTitle.textContent = `Welcome, ${authenticatedUser.name}!`;
 };
 
+// Function that toggles the navbar when the navbar button is clicked.
 const toggleNavbar = () => {
   // header?.classList.toggle("hidden");
 
@@ -152,6 +152,7 @@ const toggleNavbar = () => {
   navbarActive = !navbarActive;
 };
 
+// Function that handles the hash change event. This function will be called when the hash changes (when the user navigates to a different page).
 const hashChange = async () => {
   // This hides all the sections except the first one when the hash changes so I don't have to do it manually for each page. The first section is always top part of the page.
   document
@@ -193,12 +194,13 @@ const hashChange = async () => {
     setTextContent(homeTitle, "Support");
     setTextContent(
       homeDescription,
-      "Support page to help you with any issues."
+      "Support page to help you with any issues. Here you can find the roles of the users and the features they have access to."
     );
     supportContainer.classList.remove("hidden");
   }
 };
 
+// Function that fetches a random image from the Picsum API. This function will be used to set a random image as the course image when the checkbox is checked.
 async function getValidImage() {
   let validImage = false;
   let imageUrl = "";
@@ -209,8 +211,8 @@ async function getValidImage() {
     )}/600/600`;
 
     try {
-      const response = await fetch(imageUrl); // Only fetch headers
-      if (response.ok) validImage = true; // Image exists if status is 200
+      const response = await fetch(imageUrl);
+      if (response.ok) validImage = true;
     } catch (error) {}
   }
 
@@ -239,6 +241,7 @@ const setTextContent = (element: HTMLElement, text: string) => {
   element.classList.add("fade-in");
 };
 
+// Function that updates the preview card when the user types in the form.
 const updatePreviewCard = (
   element: HTMLInputElement | HTMLTextAreaElement,
   previewElement: HTMLElement
@@ -293,8 +296,6 @@ const updatePreviewCard = (
     return;
   }
 
-  // previewElement.textContent = element.value;
-
   setTextContent(previewElement, element.value);
 };
 
@@ -332,6 +333,7 @@ export const showEnrolledStudents = (students: user[], course: course) => {
     studentsInformationList?.appendChild(column);
   });
 
+  // Add event listener to the remove button to remove the student from the course.
   studentsInformationParent?.addEventListener("click", (event) => {
     const target = event.target as HTMLElement;
 
@@ -353,8 +355,6 @@ export const showEnrolledStudents = (students: user[], course: course) => {
         (item) => item !== course.id.toString()
       );
 
-      // console.log(currentUserSelected.courses);
-
       updateUserInDatabase(currentUserSelected);
       updateCourse(course);
 
@@ -366,11 +366,9 @@ export const showEnrolledStudents = (students: user[], course: course) => {
       location.href = "/pages/home.html";
     }
   });
-
-  // console.log(studentsInformationList);
-  // studentsInformationTitle.textContent = `Enrolled Students in ${course.name}`;
 };
 
+// Function that loads the add course page.
 const loadAddCoursePage = async () => {
   let courseToEditId = location.hash.split("=")[2];
   let edit = location.hash.includes("edit=true");
@@ -531,11 +529,6 @@ const loadAddCoursePage = async () => {
       ? "Edit the course information below."
       : "Fill in the details of the course below and click the 'Add Course' button to add the course to the list of courses."
   );
-
-  // Hide the cards container and show the add course form.
-  // cardsContainer.classList.add("hidden");
-  // document.querySelector(".add-course-container")!.classList.remove("hidden");
-  // document.querySelector(".main-content-title")!.classList.add("hidden");
 
   if (!edit) {
     setRandomImage(); // Set a random image when the page is loaded.
@@ -812,10 +805,10 @@ const loadProfilePage = async () => {
 
     showMessageBox("Profile updated successfully", "success");
 
-    updateText();
+    updateHomePageText();
   });
 };
-
+// Function that loads the enrolled courses page. (My Courses)
 const loadEnrolledCoursesPage = async () => {
   setTextContent(homeTitle, "My Courses");
   setTextContent(
