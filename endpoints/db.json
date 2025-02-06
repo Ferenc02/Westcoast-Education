@@ -68,6 +68,23 @@
       "students": [],
       "image": "https://picsum.photos/id/257/600/600",
       "price": 6545
+    },
+    {
+      "id": "7",
+      "name": "dsadasdas",
+      "description": "fdsfsdfsdadasdasdasdsadsadfsgdfgdf",
+      "location": "Online",
+      "instructor": "fsdsfsd",
+      "startDate": "2025-02-04",
+      "endDate": "2025-02-19",
+      "students": [
+        {
+          "userId": "8",
+          "userChoice": "enrolled"
+        }
+      ],
+      "image": "https://picsum.photos/id/61/600/600",
+      "price": 65655
     }
   ]
 }

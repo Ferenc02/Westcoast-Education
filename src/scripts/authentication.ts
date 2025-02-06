@@ -216,8 +216,6 @@ export let signUpUser = async (formElement: HTMLFormElement) => {
 
   let postOutput = await postResponse.json();
 
-  console.log(postOutput);
-
   location.href = "/pages/home.html";
 };
 
