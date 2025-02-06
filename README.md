@@ -64,6 +64,14 @@ To get started with the project, you can follow the steps below:
 
    This will start all necessary services, including the PostCSS watcher, JSON Server, TypeScript compiler, and HTTP server in parallel mode.
 
+4. Run vitest to run the test cases:
+
+   ```bash
+   npm run test
+   ```
+
+   This will run the test cases and display the results in the terminal. (Note: The test cases will only run if the JSON Server is running.)
+
 ## Usage
 
 - **PostCSS**: Styles are automatically compiled and updated when you modify the `src/styles.css` file or add any Tailwind classes in the html.
@@ -71,5 +79,6 @@ To get started with the project, you can follow the steps below:
 - **JSON Server**: Serves as a mock API for course data and authentication, available at `http://localhost:3000` and `http://localhost:3001`.
 - **TypeScript**: Watches for changes in TypeScript files and recompiles them as needed and output in `public/js` folder.
 - **HTTP Server**: Serves the project on `http://localhost:8080`.
+- **Vitest**: Runs the test cases and displays the results in the terminal.
 
 ---
