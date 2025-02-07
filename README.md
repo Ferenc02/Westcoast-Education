@@ -89,3 +89,7 @@ To get started with the project, you can follow the steps below:
 ## Note
 
 All newly created users will have administrator privileges by default.
+
+The code is longer than required for the task, but I really enjoyed coding it. I also want to showcase it in my portfolio as a demonstration of my skills.
+
+
