@@ -157,14 +157,6 @@ export const loadAddCoursePage = () => __awaiter(void 0, void 0, void 0, functio
     // Add event listener to the add course form to submit the form.
     addCourseForm.addEventListener("submit", (event) => __awaiter(void 0, void 0, void 0, function* () {
         event.preventDefault();
-        // // Check if one of the locations is selected.
-        // if (
-        //   addCourseFormLocation1.checked === false &&
-        //   addCourseFormLocation2.checked === false
-        // ) {
-        //   showMessageBox("Please select at least one location.", "error");
-        //   return;
-        // }
         const locations = [];
         let enteredLocations = "";
         if (!addCourseFormLocation1.checked && !addCourseFormLocation2.checked) {
