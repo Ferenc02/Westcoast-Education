@@ -1,37 +1,37 @@
 # Project Description
 
-This project is designed to help WestCoast Education modernize its platform for offering educational courses. The platform will be used to manage both traditional classroom courses and new on-demand courses, including the ability to handle booking, searching, and matching students with courses. The platform will also enable communication between students and instructors via email and chat.
+This project is designed to help WestCoast Education modernize its platform for offering educational courses. The platform will be used to manage both traditional classroom courses and new on-demand courses, including the ability to handle booking, searching, and matching students with courses. 
 
 ## Features
+### 📚 Course Management
+- Browse the available courses  
+- View detailed course information (title, duration, price, availability)  
 
-### 1. **Classroom Courses**
+### 📝 Booking System
+- Students can book courses directly from the platform  
+- Secure authentication for booking (login or account creation required)  
 
-- List and display upcoming classroom and distance learning courses.
-- Allow students to book courses and view course details like content, course duration, teacher, and student ratings.
-- Admin features:
-  - Add, update, and delete courses.
-  - Assign teachers to courses and manage teacher information.
-  - Administer students and send communication via email or chat.
-  - View and manage course bookings and confirmations.
+### 🏫 Administration Tools
+- Add, update, and remove courses easily  
+- Manage student enrollments and track bookings  
+- View a list of students registered for each course  
 
-### 2. **On-Demand Courses**
+### 🔐 Authentication & Security
+- Secure login and account creation  
+- Role-based access for administrators and students  
+- Encrypted password storage
 
-- List on-demand, pre-recorded courses available for purchase or through subscription.
-- Allow customers to view course details and preview parts of the course.
-- Manage customer profiles and track purchased courses.
-- Provide course recommendations based on previous course purchases.
 
-### 3. **Booking and Communication**
+![image](https://github.com/user-attachments/assets/e1eefe53-9547-4668-8bd7-f9258107301c)
+![image](https://github.com/user-attachments/assets/e95c89dc-53c9-409d-b492-90a7dbe4a273)
+![image](https://github.com/user-attachments/assets/708df510-9dbb-45c4-af1d-0b428d48a559)
+![image](https://github.com/user-attachments/assets/32386c6b-efeb-4c17-b072-45d4a7823225)
+![image](https://github.com/user-attachments/assets/8fc98798-5a72-4a8c-8a5a-53de082103e4)
+![image](https://github.com/user-attachments/assets/e207afc6-acf5-4a91-b085-631744dbf140)
+![image](https://github.com/user-attachments/assets/c600b59e-5c19-4c68-92e0-5e0532d8f3da)
 
-- Users must have an account to book courses.
-- Automatic confirmation and reminder emails will be sent upon course booking.
-- If a course is canceled (e.g., fewer than 5 students enrolled), automatic notifications and refunds will be sent to students.
 
-## Goals
 
-- Create a modern, responsive web platform to manage both classroom and on-demand courses.
-- Provide easy-to-use interfaces for both students and administrators.
-- Integrate communication tools for student-teacher interaction and for course-related notifications.
 
 ## Technologies Used
 
@@ -39,6 +39,7 @@ This project is designed to help WestCoast Education modernize its platform for 
 - **Backend**: JSON Server for mock data handling.
 - **Database**: Mock database using JSON Server to simulate a backend service.
 - **Node.js**: npm-run-all for running multiple scripts concurrently.
+- **Testing**: Vitest for unit testing and test-driven development (TDD)  
 
 ## Installation and Setup
 
@@ -82,3 +83,6 @@ To get started with the project, you can follow the steps below:
 - **Vitest**: Runs the test cases and displays the results in the terminal.
 
 ---
+## Note
+
+All newly created users will have administrator privileges by default.
