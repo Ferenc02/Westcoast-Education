@@ -167,6 +167,7 @@ export const loadAddCoursePage = async () => {
   }
 
   // Add event listeners to the form elements to update the preview card when the user types in the form.
+  // I could have put all the event listeners in an array and looped through them, but I wanted to keep the code more readable and make it easier to manage.
   addCourseFormName.addEventListener("input", () => {
     updatePreviewCard(addCourseFormName, coursePreviewName);
   });
