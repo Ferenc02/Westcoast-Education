@@ -1,3 +1,24 @@
+/*
+ * app.ts - The core Entry point of the application.
+ *
+ * Inspired by frameworks like React and Svelte, this file serves as the central hub
+ * where authentication, navigation, and app initialization are handled.
+ *
+ *
+ * It ensures that:
+ * - The correct page is displayed based on the user's authentication status.
+ * - User authentication is validated on startup.
+ * - Navigation and UI elements are dynamically controlled.
+ * - User state is managed across different pages.
+ * - Event listeners are set up for login, signup, and toggling UI elements.
+ *
+ * The app starts by calling `initializeApp()`, which checks if the user is authenticated
+ * and redirects them accordingly. It also handles form submissions, button clicks, and
+ * initializes the home page.
+ *
+ * This file acts as the **highest-level controller** of the application, similar to `App.tsx` in React
+ * or `App.svelte` in Svelte, managing the core logic and state flow of the project.
+ */
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,11 +28,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+// ---- Import from other script files ----
 import { validateUser, signUpUser, signUpPage, loginUser, toggleSignUp, } from "./authentication.js";
 import showMessageBox from "./errorHandling.js";
 import { initializeHome } from "./home.js";
+// ---- Global variables ----
 export let authenticatedUser;
 export let currentPage = window.location.pathname;
+// Function that checks if an object is empty. I noticed that I was using this function in multiple places so I decided to create a function for it.
 function isEmpty(obj) {
     return Object.keys(obj).length === 0;
 }
@@ -20,7 +44,7 @@ function isEmpty(obj) {
 export let updateUserInDatabase = (userInformation) => __awaiter(void 0, void 0, void 0, function* () {
     let checkUserLoggedIn = yield validateUser();
     // Added this check to make sure that no other than user can change their own details.
-    //
+    // Not the most secure way since a user can change the user id in the browser and change someone else's details.
     if (isEmpty(checkUserLoggedIn)) {
         showMessageBox("User not logged in", "error");
         return;
@@ -33,17 +57,19 @@ export let updateUserInDatabase = (userInformation) => __awaiter(void 0, void 0,
         body: JSON.stringify(userInformation),
     });
 });
+// Function that initializes the app. This function checks if the user is authenticated and redirects them accordingly.
 let initializeApp = () => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
     authenticatedUser = (yield validateUser());
-    console.log(authenticatedUser);
     //  Redirect to the home page if the user is already logged in.
     if (currentPage.includes("login.html") && !isEmpty(authenticatedUser)) {
         location.href = "/pages/home.html";
     }
+    // Redirect to the login page if the user is not logged in.
     if (currentPage.includes("home.html") && isEmpty(authenticatedUser)) {
         location.href = "/pages/login.html#login";
     }
+    // Event listeners for the login page.
     if (currentPage.includes("login.html")) {
         let formElement = document.querySelector(".authentication-form");
         formElement === null || formElement === void 0 ? void 0 : formElement.addEventListener("submit", (event) => {
@@ -59,6 +85,7 @@ let initializeApp = () => __awaiter(void 0, void 0, void 0, function* () {
             toggleSignUp(formElement);
         });
     }
+    // Event listener for the page if the user is not logged in.
     if (location.pathname == "/") {
         (_b = document.querySelector("#navbar-toggle")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
             var _a;
@@ -66,23 +93,15 @@ let initializeApp = () => __awaiter(void 0, void 0, void 0, function* () {
                 .querySelector("#navbar-default")) === null || _a === void 0 ? void 0 : _a.classList.toggle("show-mobile-nav");
         });
     }
+    // Tried many different ways to make the login sequence work,
+    // but I noticed that this was the easiest way to make it work without needing to change other parts of the code.
     if (location.hash === "#login") {
         (_c = document.querySelector(".login-button")) === null || _c === void 0 ? void 0 : _c.click();
     }
+    // Initialize the home page
     if (location.href.includes("home.html")) {
         initializeHome();
     }
 });
+// Call the initializeApp function to start the app.
 initializeApp();
-// updateUserInDatabase({
-//   id: "2",
-//   name: "hacked :(",
-//   email: "admin@gmail.com",
-//   password: "604b6f3038b99e3e4e80259bc3fe9c38a46a2f638853e47e616841b05269eef5",
-//   phone: "",
-//   address: "",
-//   courses: [],
-//   role: "user",
-//   authToken: "j4f3p6dr-4yv8-nl19-7z7k-y61dpf3j8zus",
-//   expiresAt: "2025-01-28T12:37:18.466Z",
-// });

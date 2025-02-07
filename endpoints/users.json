@@ -20,11 +20,12 @@
       "phone": "12345468779",
       "address": "Sturegatan 12",
       "courses": [
-        "1"
+        "1",
+        "5"
       ],
       "role": "admin",
-      "authToken": "3v5cu721-s89x-cvmf-9p0f-5ctiqf4b1jw8",
-      "expiresAt": "2025-02-07T15:02:09.590Z"
+      "authToken": "ltog07ga-j43c-3k91-yt8b-nvz8372iut7g",
+      "expiresAt": "2025-02-07T19:38:43.934Z"
     },
     {
       "id": "3",
@@ -73,6 +74,32 @@
       "role": "admin",
       "authToken": "74vnzcuh-el34-p9gi-7yt9-djkcp10s5678",
       "expiresAt": "2025-02-04T18:39:05.749Z"
+    },
+    {
+      "id": "7",
+      "name": "Test5",
+      "email": "tesssst@gmail.com",
+      "password": "4c108d8d6e2fdb7a8d0afdb272310456f1536480d79953bd5de14cfb8a33a6f5",
+      "phone": "054554054",
+      "address": "dsadsadasdasdsad",
+      "courses": [],
+      "role": "admin",
+      "authToken": "m76fci87-53eq-co24-wo7t-w84rproyf1k1",
+      "expiresAt": "2025-02-07T18:39:14.724Z"
+    },
+    {
+      "id": "8",
+      "name": "dasdsadasdasadasd",
+      "email": "test232@gmail.com",
+      "password": "57d1d71a8b69dd6dcf3b1ab1a61bfe4da06bc9691ce4bef30d70bf154976a2c8",
+      "phone": "0785045454",
+      "address": "anjdnaskdjasn",
+      "courses": [
+        "7"
+      ],
+      "role": "admin",
+      "authToken": "2nqy7reb-ab6j-808l-z614-9izi87ytt3uj",
+      "expiresAt": "2025-02-07T18:41:20.694Z"
     }
   ]
 }
