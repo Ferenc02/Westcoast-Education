@@ -146,6 +146,10 @@ export const loadAddCoursePage = () => __awaiter(void 0, void 0, void 0, functio
     // Add event listener to the image checkbox to enable or disable the image input.
     const imageCheckbox = addCourseForm.querySelector("#image-checkbox");
     const courseImageInput = document.querySelector("#course-image-input");
+    if (addCourseFormImage.value.includes("picsum")) {
+        imageCheckbox.checked = true;
+        courseImageInput.disabled = true;
+    }
     imageCheckbox === null || imageCheckbox === void 0 ? void 0 : imageCheckbox.addEventListener("change", () => {
         const isChecked = imageCheckbox.checked;
         courseImageInput.disabled = isChecked;

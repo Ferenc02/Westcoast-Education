@@ -1,86 +1,166 @@
 {
   "courses": [
     {
-      "id": "1",
-      "name": "Course 1",
-      "description": "This is course 1 :)",
-      "location": "Online",
-      "instructor": "Instructor 1",
-      "startDate": "2022-01-01",
-      "endDate": "2022-01-31",
+      "id": "2",
+      "name": "Ethereum Smart Contracts & Solidity",
+      "description": "Learn how to develop and deploy smart contracts on the Ethereum blockchain using Solidity. Understand the fundamentals of decentralized applications (DApps) and blockchain security.",
+      "location": "Campus & Online",
+      "instructor": "Ferenc Puskás",
+      "startDate": "2025-03-02",
+      "endDate": "2025-04-22",
       "students": [
         {
           "userId": "2",
           "userChoice": "enrolled"
-        }
-      ],
-      "image": "https://picsum.photos/id/237/200/300",
-      "price": 100
-    },
-    {
-      "id": "2",
-      "name": "Javascript for beginners",
-      "description": "Javascript is fun! :D",
-      "location": "Campus",
-      "instructor": "John Doe",
-      "startDate": "2025-02-01",
-      "endDate": "2025-02-12",
-      "students": [],
-      "image": "https://picsum.photos/id/109/600/600",
-      "price": 65
-    },
-    {
-      "id": "3",
-      "name": "Java is also very fun",
-      "description": "Java is an interesting programming language to learn. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam harum iure sint cumque quibusdam cum accusantium assumenda aspernatur qui iste, labore eos consequuntur placeat rem, officiis ab quaerat id tenetur.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam harum iure sint cumque quibusdam cum accusantium assumenda aspernatur qui iste, labore eos consequuntur placeat rem, officiis ab quaerat id tenetur.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam harum iure sint cumque quibusdam cum accusantium assumenda aspernatur qui iste, labore eos consequuntur placeat rem, officiis ab quaerat id tenetur.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam harum iure sint cumque quibusdam cum accusantium assumenda aspernatur qui iste, labore eos consequuntur placeat rem, officiis ab quaerat id tenetur.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam harum iure sint cumque quibusdam cum accusantium assumenda aspernatur qui iste, labore eos consequuntur placeat rem, officiis ab quaerat id tenetur.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam harum iure sint cumque quibusdam cum accusantium assumenda aspernatur qui iste, labore eos consequuntur placeat rem, officiis ab quaerat id tenetur.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam harum iure sint cumque quibusdam cum accusantium assumenda aspernatur qui iste, labore eos consequuntur placeat rem, officiis ab quaerat id tenetur.",
-      "location": "Campus & Online",
-      "instructor": "Frank",
-      "startDate": "2025-01-28",
-      "endDate": "2025-02-20",
-      "students": [],
-      "image": "https://picsum.photos/id/572/600/600",
-      "price": 589
-    },
-    {
-      "id": "5",
-      "name": "last test",
-      "description": "testttttttt",
-      "location": "Campus & Online",
-      "instructor": "sadssadasd",
-      "startDate": "2025-01-30",
-      "endDate": "2025-02-28",
-      "students": [],
-      "image": "https://picsum.photos/id/292/600/600",
-      "price": 85
-    },
-    {
-      "id": "5",
-      "name": "Hiii",
-      "description": "hihihihih",
-      "location": "Campus & Online",
-      "instructor": "Je",
-      "startDate": "2025-02-04",
-      "endDate": "2025-02-18",
-      "students": [],
-      "image": "https://picsum.photos/id/257/600/600",
-      "price": 6545
-    },
-    {
-      "id": "7",
-      "name": "dsadasdas",
-      "description": "fdsfsdfsdadasdasdasdsadsadfsgdfgdf",
-      "location": "Online",
-      "instructor": "fsdsfsd",
-      "startDate": "2025-02-04",
-      "endDate": "2025-02-19",
-      "students": [
+        },
         {
-          "userId": "8",
+          "userId": "3",
+          "userChoice": "enrolled"
+        },
+        {
+          "userId": "4",
+          "userChoice": "enrolled"
+        },
+        {
+          "userId": "5",
+          "userChoice": "enrolled"
+        },
+        {
+          "userId": "6",
           "userChoice": "enrolled"
         }
       ],
-      "image": "https://picsum.photos/id/61/600/600",
-      "price": 65655
+      "image": "https://cdn.corporatefinanceinstitute.com/assets/AdobeStock_130264817-1024x683.jpeg",
+      "price": 250
+    },
+    {
+      "id": "3",
+      "name": "Full-Stack Web Development with JavaScript",
+      "description": "Master front-end and back-end web development with modern JavaScript frameworks. Learn how to build dynamic and interactive websites using HTML, CSS, JavaScript, Node.js, and Express.",
+      "location": "Online",
+      "instructor": "Lars Johansson",
+      "startDate": "2025-02-20",
+      "endDate": "2025-03-06",
+      "students": [
+        {
+          "userId": "2",
+          "userChoice": "enrolled"
+        },
+        {
+          "userId": "3",
+          "userChoice": "enrolled"
+        },
+        {
+          "userId": "4",
+          "userChoice": "enrolled"
+        },
+        {
+          "userId": "6",
+          "userChoice": "enrolled"
+        }
+      ],
+      "image": "https://miro.medium.com/v2/resize:fit:1200/1*LyZcwuLWv2FArOumCxobpA.png",
+      "price": 329
+    },
+    {
+      "id": "4",
+      "name": "DeFi & Blockchain Finance",
+      "description": "Explore the world of decentralized finance (DeFi), including liquidity pools, staking, lending, and yield farming. Learn how smart contracts revolutionize traditional finance.",
+      "location": "Campus & Online",
+      "instructor": "Satoshi Nakamoto",
+      "startDate": "2025-05-30",
+      "endDate": "2025-07-07",
+      "students": [
+        {
+          "userId": "3",
+          "userChoice": "enrolled"
+        },
+        {
+          "userId": "4",
+          "userChoice": "enrolled"
+        },
+        {
+          "userId": "5",
+          "userChoice": "enrolled"
+        },
+        {
+          "userId": "6",
+          "userChoice": "enrolled"
+        }
+      ],
+      "image": "https://images.ctfassets.net/q5ulk4bp65r7/2iGfrmsBPsMyFSLzqntkYS/8e01d6ccefcdf8c4e7b41640033d11ad/Coinbase_wallet__DeFi_tutorial.png",
+      "price": 856
+    },
+    {
+      "id": "5",
+      "name": "Modern Frontend Development with React",
+      "description": "Dive into React.js and learn how to build scalable, high-performance web applications. Cover state management, hooks, context API, and component-based design.",
+      "location": "Online",
+      "instructor": "Mark Zuckerberg",
+      "startDate": "2025-07-31",
+      "endDate": "2025-08-20",
+      "students": [
+        {
+          "userId": "4",
+          "userChoice": "enrolled"
+        },
+        {
+          "userId": "5",
+          "userChoice": "enrolled"
+        },
+        {
+          "userId": "6",
+          "userChoice": "enrolled"
+        }
+      ],
+      "image": "https://cdn.hashnode.com/res/hashnode/image/upload/v1603797780927/S6loCK6fY.png",
+      "price": 199
+    },
+    {
+      "id": "6",
+      "name": "Responsive Web Design & Tailwind CSS",
+      "description": "Create visually stunning and highly responsive websites using modern CSS techniques and Tailwind CSS. Learn about Flexbox, Grid, and dark mode implementation.",
+      "location": "Campus",
+      "instructor": "Tailwind Labs",
+      "startDate": "2025-02-11",
+      "endDate": "2025-02-21",
+      "students": [
+        {
+          "userId": "2",
+          "userChoice": "enrolled"
+        },
+        {
+          "userId": "3",
+          "userChoice": "enrolled"
+        },
+        {
+          "userId": "4",
+          "userChoice": "enrolled"
+        }
+      ],
+      "image": "https://miro.medium.com/v2/resize:fit:1400/1*__f27S-qQF2CAASt5bOwqg.png",
+      "price": 541
+    },
+    {
+      "id": "7",
+      "name": "Web Performance Optimization & SEO",
+      "description": "Learn how to improve website performance, optimize images, implement lazy loading, and follow SEO best practices to rank higher on search engines.",
+      "location": "Online",
+      "instructor": "Google",
+      "startDate": "2025-03-20",
+      "endDate": "2025-04-01",
+      "students": [
+        {
+          "userId": "2",
+          "userChoice": "enrolled"
+        },
+        {
+          "userId": "4",
+          "userChoice": "enrolled"
+        }
+      ],
+      "image": "https://picsum.photos/id/329/600/600",
+      "price": 38
     }
   ]
 }

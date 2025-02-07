@@ -62,7 +62,7 @@ export const generateCourseCard = (course: course): string => {
             <img
               src="${course.image}"
               alt="course 1"
-              class="max-h-60 object-cover rounded-lg object-center"
+              class="h-52 object-cover rounded-lg object-center"
             />
             <h3 class="text-lg font-semibold text-gray-900 capitalize subpixel-antialiased">
               ${course.name}

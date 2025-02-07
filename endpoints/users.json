@@ -2,104 +2,101 @@
   "users": [
     {
       "id": "1",
-      "name": "John Doe",
-      "email": "",
-      "password": "",
-      "phone": "",
-      "address": "",
-      "courses": [],
-      "role": "admin",
-      "authToken": "",
-      "tokenExpiresAt": ""
-    },
-    {
-      "id": "2",
       "name": "admin",
       "email": "admin@gmail.com",
       "password": "604b6f3038b99e3e4e80259bc3fe9c38a46a2f638853e47e616841b05269eef5",
       "phone": "12345468779",
       "address": "Sturegatan 12",
-      "courses": [
-        "1",
-        "5"
-      ],
+      "courses": [],
       "role": "admin",
-      "authToken": "ltog07ga-j43c-3k91-yt8b-nvz8372iut7g",
-      "expiresAt": "2025-02-07T19:38:43.934Z"
+      "authToken": "lz1df90n-076p-sqne-33z3-9pey3gny18av",
+      "expiresAt": "2025-02-08T12:09:20.393Z"
+    },
+    {
+      "id": "2",
+      "name": "Lars Johansson",
+      "email": "lars.johansson@gmail.com",
+      "password": "cae5c487c20b0837894901accd88f742f1ebe3e9d34f30297b1bafe7eb4d0999",
+      "phone": "0723456789",
+      "address": "Drottninggatan 45",
+      "courses": [
+        "3",
+        "2",
+        "7",
+        "6"
+      ],
+      "role": "user",
+      "authToken": "9uy839ha-atmn-n7bq-5ru8-5i0y108mqzy2",
+      "expiresAt": "2025-02-08T11:48:15.005Z"
     },
     {
       "id": "3",
-      "name": "Johnny",
-      "email": "hi@gmail.com",
-      "password": "8eca0b1447cc32830a544aa4afb15606d5f32855816f9630b697c9ccc6c1e599",
-      "phone": "",
-      "address": "",
-      "courses": [],
+      "name": "Emma Karlsson",
+      "email": "emma.karlsson@hotmail.com",
+      "password": "ac90205aedf76b807441000b4d281009d6d835004c909cf37d6f9d5524f92fa7",
+      "phone": "0769876543",
+      "address": "Vasagatan 12",
+      "courses": [
+        "2",
+        "6",
+        "4",
+        "3"
+      ],
       "role": "user",
-      "authToken": "9moddm2h-u17j-9h4y-17f6-say29rl93lib",
-      "expiresAt": "2025-01-28T15:43:44.200Z"
+      "authToken": "gx8t79q3-01a8-qooe-tki1-r91x2efl39gv",
+      "expiresAt": "2025-02-08T12:03:33.109Z"
     },
     {
       "id": "4",
-      "name": "Frank",
-      "email": "frank@gmail.com",
-      "password": "604b6f3038b99e3e4e80259bc3fe9c38a46a2f638853e47e616841b05269eef5",
-      "phone": "",
-      "address": "",
-      "courses": [],
-      "role": "admin",
-      "authToken": "pvtt9l8g-e77y-3hv1-44az-o4j33nl32mlb",
-      "expiresAt": "2025-02-01T14:29:02.494Z"
+      "name": "Oskar Bergström",
+      "email": "oskar.bergstrom@yahoo.com",
+      "password": "d8ca3e9ca0c61fffbc7d6b51eff1caef06abf6951d04b1b1d2b2c677dfa2c7e8",
+      "phone": "0701122334",
+      "address": "Kungsgatan 78",
+      "courses": [
+        "7",
+        "2",
+        "5",
+        "4",
+        "3",
+        "6"
+      ],
+      "role": "user",
+      "authToken": "wlpg0gn6-hppy-7997-82u1-9fvp8kpt93tx",
+      "expiresAt": "2025-02-08T12:06:09.870Z"
     },
     {
       "id": "5",
-      "name": "Joe Smith",
-      "email": "joe@gmail.com",
-      "password": "604b6f3038b99e3e4e80259bc3fe9c38a46a2f638853e47e616841b05269eef5",
-      "phone": "",
-      "address": "",
-      "courses": [],
-      "role": "admin",
-      "authToken": "dzqo878t-8yk3-dl71-4ry2-65xijyw0qnu0",
-      "expiresAt": "2025-02-04T18:02:08.049Z"
+      "name": "Sofia Lindgren",
+      "email": "sofia.lindgren@outlook.com",
+      "password": "14ccf36c20a4c64e7c02ae1a57b6d62feb6546e94034e0708b3682c152a9088a",
+      "phone": "0734567890",
+      "address": "Birger Jarlsgatan 22",
+      "courses": [
+        "5",
+        "4",
+        "2"
+      ],
+      "role": "user",
+      "authToken": "9ak780mw-80sm-13y4-jv3h-qbfrfia152fu",
+      "expiresAt": "2025-02-08T12:07:32.185Z"
     },
     {
       "id": "6",
-      "name": "Karim Mohammed",
-      "email": "mohammed@gmail.com",
-      "password": "e203f9134b37bd9502dca04e1aa1c9b892c2f47825cb9e90a47ea3cf791bd28a",
-      "phone": "",
-      "address": "",
-      "courses": [],
-      "role": "admin",
-      "authToken": "74vnzcuh-el34-p9gi-7yt9-djkcp10s5678",
-      "expiresAt": "2025-02-04T18:39:05.749Z"
-    },
-    {
-      "id": "7",
-      "name": "Test5",
-      "email": "tesssst@gmail.com",
-      "password": "4c108d8d6e2fdb7a8d0afdb272310456f1536480d79953bd5de14cfb8a33a6f5",
-      "phone": "054554054",
-      "address": "dsadsadasdasdsad",
-      "courses": [],
-      "role": "admin",
-      "authToken": "m76fci87-53eq-co24-wo7t-w84rproyf1k1",
-      "expiresAt": "2025-02-07T18:39:14.724Z"
-    },
-    {
-      "id": "8",
-      "name": "dasdsadasdasadasd",
-      "email": "test232@gmail.com",
-      "password": "57d1d71a8b69dd6dcf3b1ab1a61bfe4da06bc9691ce4bef30d70bf154976a2c8",
-      "phone": "0785045454",
-      "address": "anjdnaskdjasn",
+      "name": "Erik Sundström",
+      "email": "erik.sundstrom@live.se",
+      "password": "698a9e5dc5cca798590226097647d816a4f6b7e79e537cf1955706f6c258278a",
+      "phone": "0729988776",
+      "address": "Sveavägen 30",
       "courses": [
-        "7"
+        "4",
+        "3",
+        "2",
+        "5"
       ],
       "role": "admin",
-      "authToken": "2nqy7reb-ab6j-808l-z614-9izi87ytt3uj",
-      "expiresAt": "2025-02-07T18:41:20.694Z"
+      "authToken": "s8738rr7-a9i8-ww01-ql0t-3igweqo2l8bt",
+      "expiresAt": "2025-02-08T12:08:07.288Z"
     }
   ]
 }

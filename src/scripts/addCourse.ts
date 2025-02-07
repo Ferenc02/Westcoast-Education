@@ -223,6 +223,11 @@ export const loadAddCoursePage = async () => {
     "#course-image-input"
   ) as HTMLInputElement;
 
+  if (addCourseFormImage.value.includes("picsum")) {
+    imageCheckbox.checked = true;
+    courseImageInput.disabled = true;
+  }
+
   imageCheckbox?.addEventListener("change", () => {
     const isChecked = imageCheckbox.checked;
 
