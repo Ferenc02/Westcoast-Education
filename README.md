@@ -65,7 +65,10 @@ To get started with the project, you can follow the steps below:
 
    This will start all necessary services, including the PostCSS watcher, JSON Server, TypeScript compiler, and HTTP server in parallel mode.
 
-4. Run vitest to run the test cases:
+   If there are errors related to styles, install the latest Microsoft Visual C++ Redistributable:
+   https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170
+
+5. Run vitest to run the test cases:
 
    ```bash
    npm run test
